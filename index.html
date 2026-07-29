@@ -14,11 +14,11 @@
   --ink: #16323a;
   --ink-soft: #47646b;
   --line: #d7e6e6;
-  --rail: #0f7a72;      /* signal teal - the "wire" */
-  --rail-bright: #17b3a3;
-  --spark: #ff8a4c;     /* coral spark - travels the wire, CTAs */
-  --spark-dark: #e56d2f;
-  --volt: #ffcf4d;      /* amber - highlights / remember boxes */
+  --rail: #0095d9;      /* Stella Maris blue - the "wire" */
+  --rail-bright: #3fb6ea;
+  --spark: #c9962e;     /* college gold - travels the wire, CTAs */
+  --spark-dark: #a97a1c;
+  --volt: #f2c96b;      /* warm gold - highlights / remember boxes */
   --wrong: #e0503a;
   --right: #1f9d63;
   --station-shadow: 0 6px 0 rgba(15,122,114,0.18);
@@ -32,11 +32,11 @@
   --ink: #eaf6f5;
   --ink-soft: #9fc2c0;
   --line: #1f3d40;
-  --rail: #2bd4c2;
-  --rail-bright: #5be8d8;
-  --spark: #ffab73;
-  --spark-dark: #ff8a4c;
-  --volt: #ffd873;
+  --rail: #3fb6ea;
+  --rail-bright: #7dd0f5;
+  --spark: #e0b45c;
+  --spark-dark: #c9962e;
+  --volt: #f2c96b;
   --station-shadow: 0 6px 0 rgba(43,212,194,0.15);
 }
 *{box-sizing:border-box;}
@@ -87,6 +87,11 @@ img,svg{max-width:100%;}
 .unit-sub{font-size:12.5px; font-weight:700; color:var(--rail); text-transform:uppercase; letter-spacing:.04em; margin:0 6px 12px;}
 
 .stationlist{list-style:none; margin:0; padding:0; position:relative;}
+.groupheader{
+  font-size:11.5px; font-weight:800; letter-spacing:.05em; color:var(--ink-soft);
+  text-transform:uppercase; margin:16px 0 6px 6px; padding-top:8px;
+}
+.groupheader:first-child{margin-top:0;}
 .stationlist::before{
   content:"";
   position:absolute; left:19px; top:6px; bottom:6px; width:4px;
@@ -332,7 +337,7 @@ details.more .more-inner{padding:16px 20px;}
   <!-- ============ SIDE RAIL NAV ============ -->
   <nav class="railnav" id="railnav" aria-label="Unit navigation">
     <div class="brand">
-      <div class="brand-badge">🛰️</div>
+      <div class="brand-badge">🎓</div>
       <div class="brand-text">
         <div class="t1">SMC</div>
         <div class="t2">Study More Confidently</div>
