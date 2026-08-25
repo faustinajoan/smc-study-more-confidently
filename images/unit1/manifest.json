@@ -1,0 +1,392 @@
+[
+  {
+    "slug": "network-components-diagram",
+    "file": "network-components-diagram.jpg",
+    "caption": "Two computers linked by a cable illustrating sender, receiver, and transmission medium",
+    "page": 6
+  },
+  {
+    "slug": "nic-cable-connector-photos",
+    "file": "nic-cable-connector-photos.png",
+    "caption": "Photos of a NIC card, CAT5 cable, and RJ45 connector",
+    "page": 9
+  },
+  {
+    "slug": "sample-enterprise-network-diagram",
+    "file": "sample-enterprise-network-diagram.jpg",
+    "caption": "Network diagram showing router, firewall, switch, server, workstations, and Wi-Fi devices",
+    "page": 12
+  },
+  {
+    "slug": "ascii-unicode-table",
+    "file": "ascii-unicode-table.jpg",
+    "caption": "Table comparing ASCII and Unicode character encoding",
+    "page": 15
+  },
+  {
+    "slug": "binary-decimal-conversion-table",
+    "file": "binary-decimal-conversion-table.jpg",
+    "caption": "Table showing conversion of numbers to binary representation",
+    "page": 16
+  },
+  {
+    "slug": "grayscale-pixel-encoding",
+    "file": "grayscale-pixel-encoding.jpg",
+    "caption": "2-bit grayscale image showing pixel values 00, 01, 10, 11",
+    "page": 18
+  },
+  {
+    "slug": "rgb-ycm-color-model",
+    "file": "rgb-ycm-color-model.jpg",
+    "caption": "Diagram of RGB and YCM color models for image pixels",
+    "page": 19
+  },
+  {
+    "slug": "adc-dac-audio-diagram",
+    "file": "adc-dac-audio-diagram.jpg",
+    "caption": "Diagram of audio signal conversion via ADC and DAC",
+    "page": 20
+  },
+  {
+    "slug": "video-frame-sequence",
+    "file": "video-frame-sequence.jpg",
+    "caption": "Sequence of discrete image frames used to create video motion",
+    "page": 21
+  },
+  {
+    "slug": "data-flow-modes-diagram",
+    "file": "data-flow-modes-diagram.png",
+    "caption": "Diagrams of simplex, half-duplex, and full-duplex data flow",
+    "page": 22
+  },
+  {
+    "slug": "car-buying-analogy-diagram",
+    "file": "car-buying-analogy-diagram.png",
+    "caption": "Car-buying analogy illustrating performance, reliability, and security",
+    "page": 24
+  },
+  {
+    "slug": "network-performance-gauge-chart",
+    "file": "network-performance-gauge-chart.jpg",
+    "caption": "Gauge chart illustrating network performance measurement",
+    "page": 27
+  },
+  {
+    "slug": "throughput-expectation-diagram",
+    "file": "throughput-expectation-diagram.jpg",
+    "caption": "Speedometer-style diagram comparing throughput and customer expectation",
+    "page": 28
+  },
+  {
+    "slug": "point-to-point-multipoint-diagram",
+    "file": "point-to-point-multipoint-diagram.jpg",
+    "caption": "Diagrams contrasting point-to-point and multipoint connections",
+    "page": 31
+  },
+  {
+    "slug": "mesh-topology-diagram",
+    "file": "mesh-topology-diagram.jpg",
+    "caption": "Diagram of mesh network topology with fully interconnected nodes",
+    "page": 34
+  },
+  {
+    "slug": "star-topology-diagram",
+    "file": "star-topology-diagram.jpg",
+    "caption": "Diagram of star network topology with a central hub",
+    "page": 37
+  },
+  {
+    "slug": "bus-topology-diagram",
+    "file": "bus-topology-diagram.jpg",
+    "caption": "Diagram of bus network topology with backbone cable and drop lines",
+    "page": 40
+  },
+  {
+    "slug": "ring-topology-diagram",
+    "file": "ring-topology-diagram.jpg",
+    "caption": "Diagram of ring network topology with repeater nodes",
+    "page": 43
+  },
+  {
+    "slug": "lan-past-vs-today-diagram",
+    "file": "lan-past-vs-today-diagram.jpg",
+    "caption": "Diagrams comparing older bus-based LANs to modern switch-based LANs",
+    "page": 48
+  },
+  {
+    "slug": "wan-diagrams",
+    "file": "wan-diagrams.jpg",
+    "caption": "Diagrams of point-to-point WAN and switched WAN",
+    "page": 50
+  },
+  {
+    "slug": "internetwork-diagram",
+    "file": "internetwork-diagram.jpg",
+    "caption": "Diagram of an internetwork connecting LAN-WAN-LAN",
+    "page": 51
+  },
+  {
+    "slug": "switching-diagram",
+    "file": "switching-diagram.jpg",
+    "caption": "Diagram of a switched network with modems, routers, and switches",
+    "page": 52
+  },
+  {
+    "slug": "circuit-switched-network-diagram",
+    "file": "circuit-switched-network-diagram.jpg",
+    "caption": "Diagram of a circuit-switched network with users A through D",
+    "page": 54
+  },
+  {
+    "slug": "packet-switched-network-diagram",
+    "file": "packet-switched-network-diagram.jpg",
+    "caption": "Diagram of a packet-switched network with users A through D",
+    "page": 56
+  },
+  {
+    "slug": "packet-routing-diagram",
+    "file": "packet-routing-diagram.png",
+    "caption": "Diagram of colored packets being routed across nodes A through H",
+    "page": 57
+  },
+  {
+    "slug": "internet-backbone-diagram",
+    "file": "internet-backbone-diagram.jpg",
+    "caption": "Diagram of Internet backbones, provider networks, and peering points",
+    "page": 59
+  },
+  {
+    "slug": "how-internet-works-infographic",
+    "file": "how-internet-works-infographic.jpg",
+    "caption": "Infographic showing how data packets travel across the Internet",
+    "page": 60
+  },
+  {
+    "slug": "circuit-switching-history-routing-diagram",
+    "file": "circuit-switching-history-routing-diagram.jpg",
+    "caption": "Historic circuit-switching photo alongside a packet-routing-through-WAN diagram",
+    "page": 62
+  },
+  {
+    "slug": "arpanet-imp-graphic",
+    "file": "arpanet-imp-graphic.jpg",
+    "caption": "Graphic depicting ARPANET and the Interface Message Processor (IMP)",
+    "page": 64
+  },
+  {
+    "slug": "stanford-ucla-first-login-map",
+    "file": "stanford-ucla-first-login-map.jpg",
+    "caption": "Illustration of the first ARPANET login attempt between Stanford and UCLA",
+    "page": 65
+  },
+  {
+    "slug": "ncp-four-node-network-diagram",
+    "file": "ncp-four-node-network-diagram.jpg",
+    "caption": "Diagram of the original 4-node ARPANET (Stanford, UCLA, UCSB, Utah) using NCP",
+    "page": 66
+  },
+  {
+    "slug": "1971-network-expansion-map",
+    "file": "1971-network-expansion-map.jpg",
+    "caption": "World map showing ARPANET's expanded locations in 1971",
+    "page": 67
+  },
+  {
+    "slug": "tomlinson-email-at-symbol-graphic",
+    "file": "tomlinson-email-at-symbol-graphic.jpg",
+    "caption": "Graphic illustrating Ray Tomlinson's invention of network email and the @ symbol",
+    "page": 68
+  },
+  {
+    "slug": "cerf-kahn-internetting-project",
+    "file": "cerf-kahn-internetting-project.jpg",
+    "caption": "Photo of Vint Cerf and Bob Kahn with the 1972 Internetting Project graphic",
+    "page": 69
+  },
+  {
+    "slug": "tcp-development-graphic",
+    "file": "tcp-development-graphic.jpg",
+    "caption": "Graphic depicting the 1973 development of TCP with Cerf and Kahn",
+    "page": 70
+  },
+  {
+    "slug": "1981-vintage-tv-ad-screenshot",
+    "file": "1981-vintage-tv-ad-screenshot.jpg",
+    "caption": "Vintage television advertisement screenshot from 1981",
+    "page": 73
+  },
+  {
+    "slug": "nsfnet-backbone-diagram",
+    "file": "nsfnet-backbone-diagram.jpg",
+    "caption": "Diagram of the 1986 NSFNET backbone connecting five supercomputer centers",
+    "page": 76
+  },
+  {
+    "slug": "ansnet-us-map",
+    "file": "ansnet-us-map.jpg",
+    "caption": "Map of the ANSNET high-speed backbone across the United States",
+    "page": 78
+  },
+  {
+    "slug": "netscape-navigator-screenshot",
+    "file": "netscape-navigator-screenshot.jpg",
+    "caption": "Screenshot of the Netscape Navigator web browser",
+    "page": 79
+  },
+  {
+    "slug": "server-based-vs-p2p-diagram",
+    "file": "server-based-vs-p2p-diagram.jpg",
+    "caption": "Diagrams comparing server-based and peer-to-peer network models, with photo of Tim Berners-Lee",
+    "page": 80
+  },
+  {
+    "slug": "submarine-cable-cross-section",
+    "file": "submarine-cable-cross-section.jpg",
+    "caption": "3D rendered cross-section of a submarine fiber-optic cable",
+    "page": 82
+  },
+  {
+    "slug": "cable-stations-india-map",
+    "file": "cable-stations-india-map.jpg",
+    "caption": "Map of submarine cable landing stations in India",
+    "page": 84
+  },
+  {
+    "slug": "rfc-lifecycle-diagram",
+    "file": "rfc-lifecycle-diagram.jpg",
+    "caption": "Circular diagram of the RFC standards process lifecycle",
+    "page": 85
+  },
+  {
+    "slug": "maturity-levels-flowchart",
+    "file": "maturity-levels-flowchart.jpg",
+    "caption": "Flowchart of Internet standard maturity levels",
+    "page": 86
+  },
+  {
+    "slug": "internet-administration-org-chart",
+    "file": "internet-administration-org-chart.jpg",
+    "caption": "Organizational chart of ISOC, IAB, IETF, and IRTF",
+    "page": 89
+  },
+  {
+    "slug": "maria-ann-layering-analogy",
+    "file": "maria-ann-layering-analogy.jpg",
+    "caption": "Three-layer postal-mail analogy illustrating protocol layering",
+    "page": 91
+  },
+  {
+    "slug": "logical-connection-diagram",
+    "file": "logical-connection-diagram.jpg",
+    "caption": "Diagram of logical connections between corresponding protocol layers",
+    "page": 93
+  },
+  {
+    "slug": "layered-architecture-diagram",
+    "file": "layered-architecture-diagram.jpg",
+    "caption": "Diagram of the 5-layer TCP/IP architecture with linked systems A, B, C",
+    "page": 95
+  },
+  {
+    "slug": "physical-layer-diagram",
+    "file": "physical-layer-diagram.jpg",
+    "caption": "Diagram of bit transmission at the physical layer",
+    "page": 98
+  },
+  {
+    "slug": "data-link-frame-encapsulation-diagram",
+    "file": "data-link-frame-encapsulation-diagram.jpg",
+    "caption": "Diagram of frame encapsulation at the data-link layer",
+    "page": 99
+  },
+  {
+    "slug": "data-link-hop-to-hop-diagram",
+    "file": "data-link-hop-to-hop-diagram.jpg",
+    "caption": "Diagram of hop-to-hop delivery at the data-link layer",
+    "page": 100
+  },
+  {
+    "slug": "network-layer-packet-encapsulation-diagram",
+    "file": "network-layer-packet-encapsulation-diagram.jpg",
+    "caption": "Diagram of packet encapsulation at the network layer",
+    "page": 101
+  },
+  {
+    "slug": "congestion-control-funnel-diagram",
+    "file": "congestion-control-funnel-diagram.jpg",
+    "caption": "Funnel and bucket diagram illustrating congestion control",
+    "page": 106
+  },
+  {
+    "slug": "routing-table-diagram",
+    "file": "routing-table-diagram.jpg",
+    "caption": "Diagram of routing tables at Router A and Router B",
+    "page": 108
+  },
+  {
+    "slug": "transport-layer-segment-diagram",
+    "file": "transport-layer-segment-diagram.jpg",
+    "caption": "Diagram of segment encapsulation at the transport layer",
+    "page": 111
+  },
+  {
+    "slug": "tcp-stream-of-bytes-diagram",
+    "file": "tcp-stream-of-bytes-diagram.jpg",
+    "caption": "Diagram of TCP's logical stream-of-bytes connection",
+    "page": 113
+  },
+  {
+    "slug": "tcp-circular-buffer-diagram",
+    "file": "tcp-circular-buffer-diagram.jpg",
+    "caption": "Diagram of TCP's circular send/receive buffer mechanism",
+    "page": 114
+  },
+  {
+    "slug": "application-layer-message-diagram",
+    "file": "application-layer-message-diagram.jpg",
+    "caption": "Diagram of application-layer protocols (X.500, FTAM, X.400) exchanging messages",
+    "page": 117
+  },
+  {
+    "slug": "encapsulation-decapsulation-layered-diagram",
+    "file": "encapsulation-decapsulation-layered-diagram.jpg",
+    "caption": "Layered diagram of encapsulation and decapsulation across the protocol stack",
+    "page": 120
+  },
+  {
+    "slug": "udp-ip-frame-header-diagram",
+    "file": "udp-ip-frame-header-diagram.jpg",
+    "caption": "Diagram of UDP, IP, and frame header encapsulation",
+    "page": 121
+  },
+  {
+    "slug": "addressing-names-layers-table",
+    "file": "addressing-names-layers-table.jpg",
+    "caption": "Table of packet names, layers, and address types",
+    "page": 122
+  },
+  {
+    "slug": "addressing-port-logical-physical-diagram",
+    "file": "addressing-port-logical-physical-diagram.jpg",
+    "caption": "Diagram of port, logical, and physical addressing across layers",
+    "page": 123
+  },
+  {
+    "slug": "multiplexing-demultiplexing-diagram",
+    "file": "multiplexing-demultiplexing-diagram.jpg",
+    "caption": "Diagram of multiplexing and demultiplexing for FTP, HTTP, DNS, and SNMP",
+    "page": 124
+  },
+  {
+    "slug": "osi-vs-tcpip-comparison-diagram",
+    "file": "osi-vs-tcpip-comparison-diagram.jpg",
+    "caption": "Side-by-side comparison diagram of the OSI and TCP/IP models",
+    "page": 126
+  },
+  {
+    "slug": "osi-seven-layer-diagram",
+    "file": "osi-seven-layer-diagram.jpg",
+    "caption": "Diagram describing the purpose of each of the OSI model's seven layers",
+    "page": 127
+  }
+]
