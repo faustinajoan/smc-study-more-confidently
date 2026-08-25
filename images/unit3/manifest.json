@@ -1,0 +1,488 @@
+[
+  {
+    "slug": "node-to-node-delivery",
+    "file": "node-to-node-delivery.jpg",
+    "caption": "Hop-to-hop delivery diagram showing data-link and physical layers acting between each pair of nodes along a path",
+    "page": 3
+  },
+  {
+    "slug": "node-link-topology",
+    "file": "node-link-topology.png",
+    "caption": "Nodes and links abstraction of a small part of the Internet, showing LANs connected by point-to-point networks",
+    "page": 4
+  },
+  {
+    "slug": "dll-services-block-diagram",
+    "file": "dll-services-block-diagram.jpg",
+    "caption": "Block diagram of data-link layer services: packetizing, addressing, flow control, error control, and media access control",
+    "page": 5
+  },
+  {
+    "slug": "framing-encapsulation-example",
+    "file": "framing-encapsulation-example.png",
+    "caption": "Datagram encapsulated into different frame types as it crosses two different link types from source to destination",
+    "page": 7
+  },
+  {
+    "slug": "frame-structure-header-trailer",
+    "file": "frame-structure-header-trailer.png",
+    "caption": "Basic frame structure showing header, encapsulated packet, and trailer added by the data-link layer",
+    "page": 9
+  },
+  {
+    "slug": "link-categories-broadcast-vs-p2p",
+    "file": "link-categories-broadcast-vs-p2p.png",
+    "caption": "Diagram contrasting a broadcast (multipoint) link with a point-to-point (unicast) link",
+    "page": 13
+  },
+  {
+    "slug": "dll-sublayers-broadcast-vs-p2p",
+    "file": "dll-sublayers-broadcast-vs-p2p.jpg",
+    "caption": "Data-link sublayers for a broadcast link (with MAC sublayer) versus a point-to-point link",
+    "page": 14
+  },
+  {
+    "slug": "framing-bits-to-frames",
+    "file": "framing-bits-to-frames.jpg",
+    "caption": "Diagram showing a raw bit stream at the physical layer being packed into discrete frames at the data-link layer",
+    "page": 16
+  },
+  {
+    "slug": "flag-delimited-frame-structure",
+    "file": "flag-delimited-frame-structure.jpg",
+    "caption": "Character-oriented frame structure with a Flag byte marking the start and end of the frame",
+    "page": 21
+  },
+  {
+    "slug": "byte-stuffing-basic-example",
+    "file": "byte-stuffing-basic-example.jpg",
+    "caption": "Byte stuffing example: an ESC byte is inserted before a FLAG byte that appears as data",
+    "page": 22
+  },
+  {
+    "slug": "byte-stuffing-esc-flag-example",
+    "file": "byte-stuffing-esc-flag-example.jpg",
+    "caption": "Extended byte-stuffing example handling both an ESC byte and a FLAG byte occurring as data",
+    "page": 23
+  },
+  {
+    "slug": "byte-stuffing-unstuffing-frame",
+    "file": "byte-stuffing-unstuffing-frame.jpg",
+    "caption": "Full frame view of byte stuffing on send and byte unstuffing on receive, with extra bytes highlighted",
+    "page": 24
+  },
+  {
+    "slug": "bit-oriented-framing-flag",
+    "file": "bit-oriented-framing-flag.png",
+    "caption": "Bit-oriented frame structure using the 8-bit flag pattern 01111110 as a delimiter",
+    "page": 25
+  },
+  {
+    "slug": "bit-stuffing-example",
+    "file": "bit-stuffing-example.png",
+    "caption": "Bit stuffing example: an extra 0 is inserted after five consecutive 1s to avoid mimicking the flag pattern",
+    "page": 26
+  },
+  {
+    "slug": "bit-stuffing-unstuffing-frame",
+    "file": "bit-stuffing-unstuffing-frame.jpg",
+    "caption": "Full frame view of bit stuffing on send and bit unstuffing on receive, with the two extra bits highlighted",
+    "page": 27
+  },
+  {
+    "slug": "flow-control-producer-diagram",
+    "file": "flow-control-producer-diagram.png",
+    "caption": "Producer/consumer diagram showing frames pushed from sender to receiver with a flow-control feedback path",
+    "page": 28
+  },
+  {
+    "slug": "fsm-notation-diagram",
+    "file": "fsm-notation-diagram.jpg",
+    "caption": "Generic finite-state-machine notation diagram (State I/State II with events and actions) used for protocol descriptions",
+    "page": 38
+  },
+  {
+    "slug": "simple-protocol-node-diagram",
+    "file": "simple-protocol-node-diagram.jpg",
+    "caption": "Simple protocol block diagram showing network and data-link sublayers at sending and receiving nodes",
+    "page": 39
+  },
+  {
+    "slug": "simple-protocol-timing-diagram",
+    "file": "simple-protocol-timing-diagram.jpg",
+    "caption": "Timing diagram of the Simple protocol showing packets and frames flowing from sender to receiver with no flow/error control",
+    "page": 39
+  },
+  {
+    "slug": "fsm-simple-protocol",
+    "file": "fsm-simple-protocol.jpg",
+    "caption": "Finite state machine for the Simple protocol at the sending and receiving nodes",
+    "page": 40
+  },
+  {
+    "slug": "stop-and-wait-protocol-diagram",
+    "file": "stop-and-wait-protocol-diagram.png",
+    "caption": "Stop-and-Wait protocol diagram showing Frame/CRC and ACK/CRC exchange with a timer at the sender",
+    "page": 42
+  },
+  {
+    "slug": "fsm-stop-and-wait",
+    "file": "fsm-stop-and-wait.jpg",
+    "caption": "Finite state machine for the Stop-and-Wait protocol at sending (Ready/Blocking) and receiving nodes",
+    "page": 43
+  },
+  {
+    "slug": "stop-and-wait-lost-frame-issue",
+    "file": "stop-and-wait-lost-frame-issue.jpg",
+    "caption": "Stop-and-Wait timing diagram showing lost frame/ACK scenarios that motivate adding sequence numbers",
+    "page": 44
+  },
+  {
+    "slug": "stop-and-wait-arq-sequence-numbers",
+    "file": "stop-and-wait-arq-sequence-numbers.jpg",
+    "caption": "Stop-and-Wait ARQ timing diagram with Frame 0/1 sequence numbers handling lost frames and duplicate ACKs",
+    "page": 45
+  },
+  {
+    "slug": "piggybacking-diagram",
+    "file": "piggybacking-diagram.png",
+    "caption": "Piggybacking sequence diagram showing data and ACK combined in messages between Host A and Host B",
+    "page": 46
+  },
+  {
+    "slug": "single-bit-vs-burst-error",
+    "file": "single-bit-vs-burst-error.png",
+    "caption": "Comparison diagram of a single-bit error versus a burst error across a bit sequence",
+    "page": 50
+  },
+  {
+    "slug": "redundancy-check-diagram",
+    "file": "redundancy-check-diagram.jpg",
+    "caption": "Redundancy-check diagram showing sender generating function and receiver checking function for accept/reject",
+    "page": 53
+  },
+  {
+    "slug": "block-coding-encoder-decoder",
+    "file": "block-coding-encoder-decoder.png",
+    "caption": "Block coding diagram showing dataword-to-codeword encoding at the sender and checking/decoding at the receiver",
+    "page": 59
+  },
+  {
+    "slug": "block-coding-corruption-scenarios-table",
+    "file": "block-coding-corruption-scenarios-table.jpg",
+    "caption": "Dataword/codeword table for a simple block code with worked corruption-detection scenarios",
+    "page": 61
+  },
+  {
+    "slug": "crc-dataword-codeword-table",
+    "file": "crc-dataword-codeword-table.jpg",
+    "caption": "Table of 4-bit datawords mapped to their CRC codewords",
+    "page": 63
+  },
+  {
+    "slug": "crc-encoder-decoder-block-diagram",
+    "file": "crc-encoder-decoder-block-diagram.png",
+    "caption": "CRC encoder/decoder block diagram showing generator, divisor, syndrome, and decision logic",
+    "page": 64
+  },
+  {
+    "slug": "crc-encoder-worked-example",
+    "file": "crc-encoder-worked-example.png",
+    "caption": "Worked example of CRC encoding: binary division of a dataword by a divisor to produce the remainder/codeword",
+    "page": 65
+  },
+  {
+    "slug": "and-xor-gate-truth-tables",
+    "file": "and-xor-gate-truth-tables.png",
+    "caption": "AND and XOR logic gate symbols with truth tables, used for CRC binary division (multiply=AND, subtract=XOR)",
+    "page": 66
+  },
+  {
+    "slug": "crc-decoder-worked-example-uncorrupted",
+    "file": "crc-decoder-worked-example-uncorrupted.png",
+    "caption": "Worked CRC decoder example showing an uncorrupted codeword producing a zero syndrome and accepted dataword",
+    "page": 67
+  },
+  {
+    "slug": "crc-decoder-worked-example-corrupted",
+    "file": "crc-decoder-worked-example-corrupted.png",
+    "caption": "Worked CRC decoder example showing a corrupted codeword producing a non-zero syndrome and discarded dataword",
+    "page": 68
+  },
+  {
+    "slug": "checksum-block-diagram",
+    "file": "checksum-block-diagram.jpg",
+    "caption": "Checksum block diagram showing generator at the sender and checker at the receiver over a message plus checksum",
+    "page": 70
+  },
+  {
+    "slug": "checksum-ones-complement-wraparound",
+    "file": "checksum-ones-complement-wraparound.jpg",
+    "caption": "Worked example of wrapping a value larger than 4 bits using one's complement addition for the checksum",
+    "page": 74
+  },
+  {
+    "slug": "checksum-sender-side-diagram",
+    "file": "checksum-sender-side-diagram.jpg",
+    "caption": "Sender-side diagram showing data values, initialized checksum, sum, and actual checksum forming the outgoing packet",
+    "page": 76
+  },
+  {
+    "slug": "checksum-receiver-side-diagram",
+    "file": "checksum-receiver-side-diagram.jpg",
+    "caption": "Receiver-side diagram showing the received checksum, recomputed sum, and calculated checksum confirming uncorrupted data",
+    "page": 79
+  },
+  {
+    "slug": "internet-checksum-procedure-table",
+    "file": "internet-checksum-procedure-table.png",
+    "caption": "Step-by-step table of the Internet checksum procedure at the sender and receiver",
+    "page": 80
+  },
+  {
+    "slug": "checksum-algorithm-flowchart",
+    "file": "checksum-algorithm-flowchart.png",
+    "caption": "Flowchart of the checksum algorithm using two's complement addition and one's complement conversion",
+    "page": 81
+  },
+  {
+    "slug": "fletcher-adler-checksum-flowcharts",
+    "file": "fletcher-adler-checksum-flowcharts.png",
+    "caption": "Flowcharts of the Fletcher checksum and Adler checksum algorithms",
+    "page": 83
+  },
+  {
+    "slug": "multiple-access-protocols-taxonomy",
+    "file": "multiple-access-protocols-taxonomy.png",
+    "caption": "Taxonomy tree of multiple-access protocols: random-access, controlled-access, and channelization families",
+    "page": 86
+  },
+  {
+    "slug": "pure-aloha-frame-transmission-timing",
+    "file": "pure-aloha-frame-transmission-timing.jpg",
+    "caption": "Timing diagram of four stations sending frames in Pure ALOHA, showing overlapping collision durations",
+    "page": 94
+  },
+  {
+    "slug": "pure-aloha-protocol-flowchart",
+    "file": "pure-aloha-protocol-flowchart.png",
+    "caption": "Flowchart of the Pure ALOHA protocol procedure including timeout, backoff, and retransmission limit",
+    "page": 102
+  },
+  {
+    "slug": "pure-aloha-vulnerable-time-diagram",
+    "file": "pure-aloha-vulnerable-time-diagram.jpg",
+    "caption": "Diagram of overlapping frame transmissions (A, B, C) illustrating the vulnerable time window in Pure ALOHA",
+    "page": 103
+  },
+  {
+    "slug": "pure-aloha-vulnerable-time-2tfr",
+    "file": "pure-aloha-vulnerable-time-2tfr.jpg",
+    "caption": "Diagram showing Pure ALOHA's vulnerable time equal to twice the frame transmission time (2 x Tfr)",
+    "page": 104
+  },
+  {
+    "slug": "slotted-aloha-frame-timing",
+    "file": "slotted-aloha-frame-timing.jpg",
+    "caption": "Timing diagram of Slotted ALOHA showing four stations sending frames only at the start of time slots",
+    "page": 108
+  },
+  {
+    "slug": "slotted-aloha-vulnerable-time",
+    "file": "slotted-aloha-vulnerable-time.jpg",
+    "caption": "Diagram showing Slotted ALOHA's vulnerable time reduced to one frame transmission time (Tfr)",
+    "page": 109
+  },
+  {
+    "slug": "csma-wireless-topology",
+    "file": "csma-wireless-topology.jpg",
+    "caption": "Simple diagram of a shared wireless medium with an access point and three PCs used to illustrate CSMA",
+    "page": 112
+  },
+  {
+    "slug": "csma-collision-signal-propagation",
+    "file": "csma-collision-signal-propagation.jpg",
+    "caption": "Diagram of overlapping signal propagation from two stations, showing that CSMA reduces but cannot eliminate collisions",
+    "page": 113
+  },
+  {
+    "slug": "csma-vulnerable-time-diagram",
+    "file": "csma-vulnerable-time-diagram.jpg",
+    "caption": "Diagram showing CSMA's vulnerable time equal to the propagation time as a frame reaches distant stations",
+    "page": 114
+  },
+  {
+    "slug": "csma-1-persistent-method",
+    "file": "csma-1-persistent-method.jpg",
+    "caption": "Flowchart and timing diagram for the 1-persistent CSMA channel-access method",
+    "page": 116
+  },
+  {
+    "slug": "csma-nonpersistent-method",
+    "file": "csma-nonpersistent-method.jpg",
+    "caption": "Flowchart and timing diagram for the nonpersistent CSMA channel-access method",
+    "page": 117
+  },
+  {
+    "slug": "csma-p-persistent-flowchart",
+    "file": "csma-p-persistent-flowchart.jpg",
+    "caption": "Flowchart for the p-persistent CSMA channel-access method",
+    "page": 118
+  },
+  {
+    "slug": "csma-p-persistent-timing",
+    "file": "csma-p-persistent-timing.jpg",
+    "caption": "Timing diagram illustrating p-persistent CSMA sensing, slot waiting, and probabilistic sending",
+    "page": 119
+  },
+  {
+    "slug": "csma-cd-collision-detection-timing",
+    "file": "csma-cd-collision-detection-timing.jpg",
+    "caption": "Timing diagram of CSMA/CD showing collision of the first bits between two stations and subsequent abortion",
+    "page": 120
+  },
+  {
+    "slug": "csma-cd-collision-abortion-diagram",
+    "file": "csma-cd-collision-abortion-diagram.jpg",
+    "caption": "CSMA/CD timing diagram showing collision occurring mid-transmission and both stations detecting and aborting",
+    "page": 121
+  },
+  {
+    "slug": "csma-cd-procedure-flowchart",
+    "file": "csma-cd-procedure-flowchart.jpg",
+    "caption": "CSMA/CD procedure flowchart showing persistence, transmit/receive, collision detection, and jamming signal steps",
+    "page": 124
+  },
+  {
+    "slug": "csma-cd-energy-level-diagram",
+    "file": "csma-cd-energy-level-diagram.jpg",
+    "caption": "Energy-level diagram distinguishing normal transmission, an abnormal collision signal, and idle (zero) periods",
+    "page": 125
+  },
+  {
+    "slug": "csma-ca-interframe-space",
+    "file": "csma-ca-interframe-space.jpg",
+    "caption": "Diagram of the interframe space (IFS) a station waits after sensing an idle channel before transmitting in CSMA/CA",
+    "page": 128
+  },
+  {
+    "slug": "csma-ca-contention-window",
+    "file": "csma-ca-contention-window.jpg",
+    "caption": "Diagram of the CSMA/CA contention window following the interframe space, sized by binary exponential backoff",
+    "page": 129
+  },
+  {
+    "slug": "csma-ca-procedure-flowchart",
+    "file": "csma-ca-procedure-flowchart.jpg",
+    "caption": "CSMA/CA procedure flowchart showing carrier sense, contention window, RTS/CTS handshake, and ACK timeout",
+    "page": 131
+  },
+  {
+    "slug": "csma-ca-frame-exchange-timeline",
+    "file": "csma-ca-frame-exchange-timeline.jpg",
+    "caption": "Frame exchange timeline for CSMA/CA showing DIFS, RTS, CTS, SIFS, data, ACK, and NAV among stations",
+    "page": 132
+  },
+  {
+    "slug": "controlled-access-reservation-method",
+    "file": "controlled-access-reservation-method.jpg",
+    "caption": "Diagram of the reservation method showing a reservation frame preceding data frames from multiple stations",
+    "page": 135
+  },
+  {
+    "slug": "polling-select-function-diagram",
+    "file": "polling-select-function-diagram.jpg",
+    "caption": "Sequence diagram of the Select function used by a primary device to send data to a secondary device",
+    "page": 137
+  },
+  {
+    "slug": "polling-poll-function-diagram",
+    "file": "polling-poll-function-diagram.jpg",
+    "caption": "Sequence diagram of the Poll function used by a primary device to solicit data from secondary devices",
+    "page": 138
+  },
+  {
+    "slug": "token-passing-logical-ring-topologies",
+    "file": "token-passing-logical-ring-topologies.jpg",
+    "caption": "Diagrams of physical, dual, bus, and star ring topologies used to implement a logical ring for token passing",
+    "page": 140
+  },
+  {
+    "slug": "fdma-frequency-division-diagram",
+    "file": "fdma-frequency-division-diagram.jpg",
+    "caption": "FDMA diagram showing four stations assigned separate frequency bands within a shared common channel",
+    "page": 142
+  },
+  {
+    "slug": "tdma-time-division-diagram",
+    "file": "tdma-time-division-diagram.jpg",
+    "caption": "TDMA diagram showing four stations assigned separate time slots within a shared common channel",
+    "page": 143
+  },
+  {
+    "slug": "cdma-encoding-diagram",
+    "file": "cdma-encoding-diagram.jpg",
+    "caption": "CDMA diagram showing four stations' coded data combined on a shared channel and recovered via correlation with a station's code",
+    "page": 146
+  },
+  {
+    "slug": "cdma-chip-sequences-table",
+    "file": "cdma-chip-sequences-table.jpg",
+    "caption": "Table of four orthogonal chip sequences (C1-C4) assigned to CDMA stations",
+    "page": 147
+  },
+  {
+    "slug": "cdma-scalar-multiplication-example",
+    "file": "cdma-scalar-multiplication-example.jpg",
+    "caption": "Worked example of multiplying a CDMA chip sequence by a scalar",
+    "page": 148
+  },
+  {
+    "slug": "cdma-inner-product-equal-sequences",
+    "file": "cdma-inner-product-equal-sequences.jpg",
+    "caption": "Worked example of the inner product of two equal CDMA chip sequences yielding N",
+    "page": 149
+  },
+  {
+    "slug": "cdma-inner-product-different-sequences",
+    "file": "cdma-inner-product-different-sequences.jpg",
+    "caption": "Worked example of the inner product of two different CDMA chip sequences yielding zero",
+    "page": 150
+  },
+  {
+    "slug": "cdma-sequence-addition-example",
+    "file": "cdma-sequence-addition-example.jpg",
+    "caption": "Worked example of adding two CDMA chip sequences element by element",
+    "page": 151
+  },
+  {
+    "slug": "cdma-data-bit-encoding",
+    "file": "cdma-data-bit-encoding.jpg",
+    "caption": "Encoding rule mapping data bit 0 to -1, data bit 1 to +1, and silence to 0 in CDMA",
+    "page": 152
+  },
+  {
+    "slug": "cdma-encoding-decoding-example",
+    "file": "cdma-encoding-decoding-example.jpg",
+    "caption": "Full worked CDMA example showing four stations encoding bits with chip sequences and one station decoding via inner product",
+    "page": 153
+  },
+  {
+    "slug": "cdma-signal-level-waveforms",
+    "file": "cdma-signal-level-waveforms.jpg",
+    "caption": "Waveform diagrams showing CDMA signal levels on the channel and recovery of a station's bit via inner product summing",
+    "page": 154
+  },
+  {
+    "slug": "cdma-walsh-table-sequence-generation",
+    "file": "cdma-walsh-table-sequence-generation.jpg",
+    "caption": "Walsh table construction rules and generation of W2 and W4 matrices for CDMA chip sequences",
+    "page": 155
+  },
+  {
+    "slug": "ieee-802-llc-mac-layering-diagram",
+    "file": "ieee-802-llc-mac-layering-diagram.jpg",
+    "caption": "Diagram comparing the OSI/TCP-IP data-link layer to the IEEE 802 split into LLC and technology-specific MAC/physical layers",
+    "page": 160
+  }
+]
