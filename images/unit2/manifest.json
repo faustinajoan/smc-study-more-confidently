@@ -1,0 +1,542 @@
+[
+  {
+    "slug": "network-topology-protocol-stack",
+    "file": "network-topology-protocol-stack.jpg",
+    "caption": "Example internetwork topology (ISPs, routers, LAN/WAN switches) with each host's TCP/IP protocol stack highlighting the physical layer",
+    "page": 2
+  },
+  {
+    "slug": "analog-vs-digital-clock",
+    "file": "analog-vs-digital-clock.jpg",
+    "caption": "Analog clock (continuous hands) vs digital clock display (discrete values), illustrating analog vs digital data",
+    "page": 4
+  },
+  {
+    "slug": "mp3-adc-dac-diagram",
+    "file": "mp3-adc-dac-diagram.jpg",
+    "caption": "MP3 player recording/playback path showing ADC, DSP, memory, and DAC converting between analog sound and digital bits",
+    "page": 6
+  },
+  {
+    "slug": "amplitude-loudness-sine-wave",
+    "file": "amplitude-loudness-sine-wave.jpg",
+    "caption": "Sine wave labeled with amplitude axis (loudest to quietest) illustrating amplitude as signal intensity",
+    "page": 8
+  },
+  {
+    "slug": "bird-sound-frequency-example",
+    "file": "bird-sound-frequency-example.jpg",
+    "caption": "Low-frequency vs high-frequency sound wave example (gentle vs rapid bird chirps) showing frequency as rate of change",
+    "page": 10
+  },
+  {
+    "slug": "digital-signal-bit-waveform",
+    "file": "digital-signal-bit-waveform.jpg",
+    "caption": "Digital square-wave signal representing a binary bit sequence (0100110001 1)",
+    "page": 11
+  },
+  {
+    "slug": "periodic-analog-vs-digital-signal",
+    "file": "periodic-analog-vs-digital-signal.jpg",
+    "caption": "Side-by-side graphs of a periodic analog signal (sine wave) and a periodic digital signal (on/off square wave)",
+    "page": 12
+  },
+  {
+    "slug": "digital-signal-levels-bitrate",
+    "file": "digital-signal-levels-bitrate.jpg",
+    "caption": "Two-level vs four-level digital signal waveforms illustrating how signal levels relate to bit rate (log2 L bits per level)",
+    "page": 15
+  },
+  {
+    "slug": "bit-rate-bit-interval-diagram",
+    "file": "bit-rate-bit-interval-diagram.jpg",
+    "caption": "Digital signal waveform labeled with bit intervals, illustrating bit rate as bits sent per second",
+    "page": 16
+  },
+  {
+    "slug": "video-bitrate-example",
+    "file": "video-bitrate-example.jpg",
+    "caption": "Video bitrate illustration comparing high vs low bitrate quality with a worked example of 65,000,000 bits/second",
+    "page": 17
+  },
+  {
+    "slug": "bit-length-worked-example",
+    "file": "bit-length-worked-example.jpg",
+    "caption": "Bit length diagram with worked calculation: bit interval x propagation speed = 25,000 km bit length",
+    "page": 18
+  },
+  {
+    "slug": "signal-decomposition-harmonics",
+    "file": "signal-decomposition-harmonics.jpg",
+    "caption": "Decomposition of a composite periodic signal into its fundamental (f) and harmonic (3f) sine-wave components with labeled peak amplitudes",
+    "page": 25
+  },
+  {
+    "slug": "frequency-domain-spikes",
+    "file": "frequency-domain-spikes.jpg",
+    "caption": "Frequency-domain plot showing amplitude spikes at frequencies f, 3f, and 9f",
+    "page": 26
+  },
+  {
+    "slug": "square-wave-single-sinusoid-approx",
+    "file": "square-wave-single-sinusoid-approx.jpg",
+    "caption": "Square wave approximated by a single sinusoidal wave overlay",
+    "page": 29
+  },
+  {
+    "slug": "square-wave-more-harmonics-approx",
+    "file": "square-wave-more-harmonics-approx.jpg",
+    "caption": "Square wave approximation refined with additional harmonics, showing ripple effect as it converges toward the ideal square shape",
+    "page": 31
+  },
+  {
+    "slug": "baseband-transmission-diagram",
+    "file": "baseband-transmission-diagram.jpg",
+    "caption": "Baseband transmission diagram: a digital signal sent directly over a channel between two computers without conversion to analog",
+    "page": 37
+  },
+  {
+    "slug": "bandwidth-requirements-harmonics-table",
+    "file": "bandwidth-requirements-harmonics-table.jpg",
+    "caption": "Table of bandwidth requirements at different bit rates using 1, 3, or 5 harmonics (B=n/2, 3n/2, 5n/2)",
+    "page": 45
+  },
+  {
+    "slug": "broadband-transmission-diagram",
+    "file": "broadband-transmission-diagram.jpg",
+    "caption": "Broadband transmission diagram showing digital-to-analog conversion, transmission over a bandpass channel, and analog-to-digital conversion at the receiver",
+    "page": 47
+  },
+  {
+    "slug": "bandwidth-delay-product-example1",
+    "file": "bandwidth-delay-product-example1.jpg",
+    "caption": "Bandwidth-delay product example: 1 bps bandwidth and 5 s delay filling the link with 5 bits over time",
+    "page": 55
+  },
+  {
+    "slug": "bandwidth-delay-product-example2",
+    "file": "bandwidth-delay-product-example2.jpg",
+    "caption": "Bandwidth-delay product example: 5 bps bandwidth and 5 s delay filling the link with 25 bits over time",
+    "page": 56
+  },
+  {
+    "slug": "jitter-packet-delay-diagram",
+    "file": "jitter-packet-delay-diagram.png",
+    "caption": "Diagram illustrating jitter: packets A, B, C, D arriving with uneven spacing due to varying network delays",
+    "page": 58
+  },
+  {
+    "slug": "transmission-modes-tree",
+    "file": "transmission-modes-tree.jpg",
+    "caption": "Tree diagram of transmission modes: Parallel vs Serial (Asynchronous, Synchronous, Isochronous)",
+    "page": 59
+  },
+  {
+    "slug": "parallel-transmission-diagram",
+    "file": "parallel-transmission-diagram.jpg",
+    "caption": "Parallel transmission diagram showing 8 bits sent simultaneously over 8 separate lines",
+    "page": 60
+  },
+  {
+    "slug": "serial-transmission-diagram",
+    "file": "serial-transmission-diagram.jpg",
+    "caption": "Serial transmission diagram showing 8 bits sent one after another over a single line via parallel/serial converters",
+    "page": 61
+  },
+  {
+    "slug": "asynchronous-transmission-framing",
+    "file": "asynchronous-transmission-framing.jpg",
+    "caption": "Asynchronous transmission diagram showing start/stop bits framing each data unit with gaps between them",
+    "page": 62
+  },
+  {
+    "slug": "synchronous-transmission-framing",
+    "file": "synchronous-transmission-framing.jpg",
+    "caption": "Synchronous transmission diagram showing continuous bit frames sent without start/stop bits or gaps",
+    "page": 63
+  },
+  {
+    "slug": "multiplexing-vs-no-multiplexing",
+    "file": "multiplexing-vs-no-multiplexing.jpg",
+    "caption": "Comparison diagram of unmultiplexed point-to-point links vs a multiplexed link using MUX/DEMUX",
+    "page": 65
+  },
+  {
+    "slug": "mux-demux-n-channel-diagram",
+    "file": "mux-demux-n-channel-diagram.jpg",
+    "caption": "Diagram of n input lines multiplexed into one link with n channels, then demultiplexed to n output lines",
+    "page": 67
+  },
+  {
+    "slug": "multiplexing-types-tree",
+    "file": "multiplexing-types-tree.jpg",
+    "caption": "Tree diagram of multiplexing types: Frequency-Division (analog), Wavelength-Division (analog), Time-Division (digital)",
+    "page": 68
+  },
+  {
+    "slug": "carrier-signal-modulation-waveforms",
+    "file": "carrier-signal-modulation-waveforms.jpg",
+    "caption": "Waveforms showing an input modulating wave, a carrier wave, and the resulting modulated signal",
+    "page": 69
+  },
+  {
+    "slug": "fdm-multiplexing-process",
+    "file": "fdm-multiplexing-process.jpg",
+    "caption": "FDM multiplexing process diagram showing three channels modulated onto different carrier frequencies and combined",
+    "page": 71
+  },
+  {
+    "slug": "fdm-demultiplexing-process",
+    "file": "fdm-demultiplexing-process.jpg",
+    "caption": "FDM demultiplexing process diagram showing filters and demodulators recovering individual channels",
+    "page": 73
+  },
+  {
+    "slug": "analog-carrier-system-hierarchy",
+    "file": "analog-carrier-system-hierarchy.jpg",
+    "caption": "Analog carrier system (FDM) hierarchy diagram: groups, supergroups, master groups, and jumbo groups with channel counts and bandwidths",
+    "page": 74
+  },
+  {
+    "slug": "wdm-glass-prism-diagram",
+    "file": "wdm-glass-prism-diagram.jpg",
+    "caption": "WDM diagram showing multiple colored light wavelengths combined and split using glass prisms",
+    "page": 78
+  },
+  {
+    "slug": "wdm-mux-demux-wavelengths",
+    "file": "wdm-mux-demux-wavelengths.jpg",
+    "caption": "WDM transmitter/receiver diagram with individually colored wavelengths (lambda1-lambda4) combined by a MUX and split by a DEMUX over a single fiber pair",
+    "page": 79
+  },
+  {
+    "slug": "tdm-time-slot-diagram",
+    "file": "tdm-time-slot-diagram.jpg",
+    "caption": "TDM diagram showing four input lines' time slots interleaved by a MUX and separated by a DEMUX",
+    "page": 80
+  },
+  {
+    "slug": "synchronous-tdm-frames",
+    "file": "synchronous-tdm-frames.jpg",
+    "caption": "Synchronous TDM diagram showing three input devices' data multiplexed into time slots across successive frames",
+    "page": 82
+  },
+  {
+    "slug": "tdm-interleaving-rotating-switches",
+    "file": "tdm-interleaving-rotating-switches.jpg",
+    "caption": "Diagram of synchronized rotating switches performing interleaving in synchronous TDM",
+    "page": 83
+  },
+  {
+    "slug": "multilevel-multiplexing-example",
+    "file": "multilevel-multiplexing-example.jpg",
+    "caption": "Multilevel multiplexing example combining 20+20 kbps and three 40 kbps lines into a 160 kbps output",
+    "page": 85
+  },
+  {
+    "slug": "pulse-stuffing-example",
+    "file": "pulse-stuffing-example.png",
+    "caption": "Pulse stuffing example padding a 46 kbps input up to 50 kbps to match other lines",
+    "page": 87
+  },
+  {
+    "slug": "digital-signal-hierarchy-ds-levels",
+    "file": "digital-signal-hierarchy-ds-levels.png",
+    "caption": "Digital Signal (DS) service hierarchy diagram and table showing DS-0 through DS-4 rates and voice-channel counts",
+    "page": 90
+  },
+  {
+    "slug": "t1-frame-structure-diagram",
+    "file": "t1-frame-structure-diagram.jpg",
+    "caption": "T-1 frame structure diagram showing 24 channels plus a framing bit forming a 193-bit frame at 8000 frames/second",
+    "page": 92
+  },
+  {
+    "slug": "tdm-empty-slots-wasted",
+    "file": "tdm-empty-slots-wasted.jpg",
+    "caption": "TDM illustration showing empty time slots being wasted when input lines are idle",
+    "page": 93
+  },
+  {
+    "slug": "statistical-vs-synchronous-tdm",
+    "file": "statistical-vs-synchronous-tdm.jpg",
+    "caption": "Side-by-side comparison diagram of synchronous TDM vs statistical TDM frame structures",
+    "page": 95
+  },
+  {
+    "slug": "transmission-media-types-tree",
+    "file": "transmission-media-types-tree.jpg",
+    "caption": "Tree diagram of transmission media types: guided (twisted pair, coaxial, fiber) and unguided (radio waves, microwaves, infrared)",
+    "page": 99
+  },
+  {
+    "slug": "twisted-pair-cable-diagram",
+    "file": "twisted-pair-cable-diagram.jpg",
+    "caption": "Twisted-pair cable diagram and photo showing insulator and twisted conductor wires",
+    "page": 101
+  },
+  {
+    "slug": "utp-vs-stp-cable-photo",
+    "file": "utp-vs-stp-cable-photo.png",
+    "caption": "Photo comparison of unshielded twisted-pair (UTP) and shielded twisted-pair (STP) cable",
+    "page": 102
+  },
+  {
+    "slug": "rj45-connector-photo",
+    "file": "rj45-connector-photo.jpg",
+    "caption": "Photo of an RJ45 connector used to terminate twisted-pair cable",
+    "page": 103
+  },
+  {
+    "slug": "twisted-pair-attenuation-graph",
+    "file": "twisted-pair-attenuation-graph.jpg",
+    "caption": "Twisted-pair cable performance graph showing attenuation vs frequency for different wire gauges",
+    "page": 104
+  },
+  {
+    "slug": "coaxial-cable-cross-section",
+    "file": "coaxial-cable-cross-section.jpg",
+    "caption": "Coaxial cable cross-section diagram and photo showing inner conductor, insulator, shield, and plastic cover",
+    "page": 106
+  },
+  {
+    "slug": "bnc-connector-photo",
+    "file": "bnc-connector-photo.jpg",
+    "caption": "Photos of BNC (Bayonet Neill-Concelman) connectors used with coaxial cable",
+    "page": 107
+  },
+  {
+    "slug": "coaxial-cable-attenuation-graph",
+    "file": "coaxial-cable-attenuation-graph.jpg",
+    "caption": "Coaxial cable performance graph showing attenuation vs frequency for thin and thick coaxial cables",
+    "page": 108
+  },
+  {
+    "slug": "fiber-optic-core-cladding-reflection",
+    "file": "fiber-optic-core-cladding-reflection.jpg",
+    "caption": "Fiber-optic cable diagram showing core, cladding, and insulation layers alongside light-reflection paths including a 'lost ray'",
+    "page": 113
+  },
+  {
+    "slug": "fiber-propagation-modes-tree",
+    "file": "fiber-propagation-modes-tree.jpg",
+    "caption": "Tree diagram of fiber-optic propagation modes: Multimode (Step index, Graded index) and Single mode",
+    "page": 114
+  },
+  {
+    "slug": "single-mode-vs-multimode-fiber",
+    "file": "single-mode-vs-multimode-fiber.jpg",
+    "caption": "Comparison diagram of light paths in multimode fiber (multiple zig-zag paths) vs single-mode fiber (one straight path)",
+    "page": 115
+  },
+  {
+    "slug": "fiber-modes-pulse-comparison",
+    "file": "fiber-modes-pulse-comparison.jpg",
+    "caption": "Comparison diagram of multimode step-index, multimode graded-index, and single-mode fiber showing how each affects pulse distortion from source to destination",
+    "page": 119
+  },
+  {
+    "slug": "fiber-cable-composition-kevlar",
+    "file": "fiber-cable-composition-kevlar.jpg",
+    "caption": "Fiber-optic cable composition diagram (outer jacket, Kevlar strands, plastic buffer, cladding, core) with a photo of Kevlar-reinforced cable",
+    "page": 120
+  },
+  {
+    "slug": "fiber-optic-connector-types",
+    "file": "fiber-optic-connector-types.jpg",
+    "caption": "Photos of ST, SC, and MTRJ fiber-optic connector types",
+    "page": 121
+  },
+  {
+    "slug": "fiber-optic-loss-wavelength-graph",
+    "file": "fiber-optic-loss-wavelength-graph.jpg",
+    "caption": "Fiber-optic performance graph showing signal loss (dB/km) vs wavelength (nm), including the loss peak near 1400 nm",
+    "page": 122
+  },
+  {
+    "slug": "electromagnetic-spectrum-chart",
+    "file": "electromagnetic-spectrum-chart.jpg",
+    "caption": "Electromagnetic spectrum chart showing radio, microwave, infrared, visible, UV, X-ray, and gamma ray bands with wavelength and frequency scales",
+    "page": 126
+  },
+  {
+    "slug": "wave-propagation-methods-diagram",
+    "file": "wave-propagation-methods-diagram.jpg",
+    "caption": "Diagram of ground-wave, sky-wave, and line-of-sight propagation methods relative to Earth's curvature and the ionosphere",
+    "page": 127
+  },
+  {
+    "slug": "frequency-bands-table",
+    "file": "frequency-bands-table.jpg",
+    "caption": "Table of frequency bands (VLF through EHF) with their ranges, propagation types, and applications",
+    "page": 128
+  },
+  {
+    "slug": "omnidirectional-vs-directional-antenna",
+    "file": "omnidirectional-vs-directional-antenna.jpg",
+    "caption": "Illustration comparing omnidirectional antenna radiation pattern to a focused directional antenna beam",
+    "page": 130
+  },
+  {
+    "slug": "microwave-relay-line-of-sight",
+    "file": "microwave-relay-line-of-sight.jpg",
+    "caption": "Diagram of a main microwave tower and relay stations spaced along a line-of-sight path over the Earth's curvature",
+    "page": 132
+  },
+  {
+    "slug": "parabolic-horn-antenna-photos",
+    "file": "parabolic-horn-antenna-photos.jpg",
+    "caption": "Photos of a parabolic dish antenna and a horn antenna, examples of unidirectional microwave antennas",
+    "page": 134
+  },
+  {
+    "slug": "network-switch-devices-diagram",
+    "file": "network-switch-devices-diagram.jpg",
+    "caption": "Diagram of a network switch connecting a desktop computer, laptop, printer, and database server",
+    "page": 138
+  },
+  {
+    "slug": "network-switch-hardware-photo",
+    "file": "network-switch-hardware-photo.jpg",
+    "caption": "Photo of a physical network switch with cables connected to multiple computers",
+    "page": 139
+  },
+  {
+    "slug": "switching-methods-tree",
+    "file": "switching-methods-tree.jpg",
+    "caption": "Tree diagram of switching methods: Circuit switching, Packet switching (Virtual-circuit/Datagram), and Message switching",
+    "page": 140
+  },
+  {
+    "slug": "circuit-switching-example",
+    "file": "circuit-switching-example.jpg",
+    "caption": "Circuit switching example showing telephones connected through a chain of circuit switches",
+    "page": 141
+  },
+  {
+    "slug": "circuit-switching-mesh-network",
+    "file": "circuit-switching-mesh-network.jpg",
+    "caption": "Mesh network diagram of five switching nodes connecting four end-system (DTE) pairs",
+    "page": 142
+  },
+  {
+    "slug": "packet-switching-node-network",
+    "file": "packet-switching-node-network.png",
+    "caption": "Packet switching diagram showing a color-coded message split into packets routed through a mesh of nodes from Host 1 to Host 2",
+    "page": 143
+  },
+  {
+    "slug": "circuit-switching-setup-delay",
+    "file": "circuit-switching-setup-delay.jpg",
+    "caption": "Timeline diagram illustrating circuit-switching setup delay as the sum of request and acknowledgment propagation/transfer times",
+    "page": 153
+  },
+  {
+    "slug": "circuit-switching-transfer-delay",
+    "file": "circuit-switching-transfer-delay.jpg",
+    "caption": "Timeline diagram illustrating circuit-switching data transfer delay (propagation time plus transmission time)",
+    "page": 154
+  },
+  {
+    "slug": "circuit-switching-teardown-delay",
+    "file": "circuit-switching-teardown-delay.jpg",
+    "caption": "Timeline diagram illustrating circuit-switching teardown delay for a receiver-initiated disconnection",
+    "page": 155
+  },
+  {
+    "slug": "routing-table-switch-diagram",
+    "file": "routing-table-switch-diagram.jpg",
+    "caption": "Diagram of a switch's routing table mapping destination addresses to output ports",
+    "page": 159
+  },
+  {
+    "slug": "datagram-network-delay-diagram",
+    "file": "datagram-network-delay-diagram.jpg",
+    "caption": "Timeline diagram of datagram network delay showing three transmission times, propagation delays, and waiting times at switches",
+    "page": 161
+  },
+  {
+    "slug": "virtual-circuit-network-diagram",
+    "file": "virtual-circuit-network-diagram.jpg",
+    "caption": "Virtual-circuit network diagram showing four end systems connected through a mesh of switches",
+    "page": 162
+  },
+  {
+    "slug": "vci-addressing-diagram",
+    "file": "vci-addressing-diagram.jpg",
+    "caption": "Diagram showing a frame's Virtual-Circuit Identifier (VCI) being translated as it passes through a switch",
+    "page": 164
+  },
+  {
+    "slug": "virtual-circuit-setup-phase",
+    "file": "virtual-circuit-setup-phase.jpg",
+    "caption": "Virtual-circuit setup phase diagram showing VCI tables being built at three switches along the path from A to B",
+    "page": 165
+  },
+  {
+    "slug": "virtual-circuit-acknowledgment-phase",
+    "file": "virtual-circuit-acknowledgment-phase.jpg",
+    "caption": "Virtual-circuit acknowledgment phase diagram showing VCI tables completed in the reverse direction from B to A",
+    "page": 166
+  },
+  {
+    "slug": "virtual-circuit-data-transfer-phase",
+    "file": "virtual-circuit-data-transfer-phase.jpg",
+    "caption": "Virtual-circuit data-transfer phase diagram showing data relabeled with different VCIs as it passes through each switch",
+    "page": 167
+  },
+  {
+    "slug": "virtual-circuit-delay-diagram",
+    "file": "virtual-circuit-delay-diagram.jpg",
+    "caption": "Timeline diagram of virtual-circuit network delay showing one-time setup and teardown delays plus transmission time",
+    "page": 170
+  },
+  {
+    "slug": "crossbar-switch-diagram-photo",
+    "file": "crossbar-switch-diagram-photo.jpg",
+    "caption": "Crossbar switch diagram with labeled crosspoints, alongside a photo of physical crossbar switch hardware",
+    "page": 173
+  },
+  {
+    "slug": "multistage-switch-diagram",
+    "file": "multistage-switch-diagram.jpg",
+    "caption": "Multistage space-division switch diagram (three crossbar stages) with the crosspoints formula and an example routed connection",
+    "page": 174
+  },
+  {
+    "slug": "time-slot-interchange-diagram",
+    "file": "time-slot-interchange-diagram.jpg",
+    "caption": "Time-division switching diagram showing a Time-Slot Interchange (TSI) using RAM and a control unit to reorder time slots",
+    "page": 176
+  },
+  {
+    "slug": "tst-switch-architecture",
+    "file": "tst-switch-architecture.png",
+    "caption": "Time-Space-Time (TST) switch architecture diagram combining time-stage and space-stage switching elements",
+    "page": 178
+  },
+  {
+    "slug": "packet-switch-structure-diagram",
+    "file": "packet-switch-structure-diagram.jpg",
+    "caption": "Diagram of a packet switch's four components: input ports, output ports, routing processor, and switching fabric",
+    "page": 179
+  },
+  {
+    "slug": "input-output-port-structure",
+    "file": "input-output-port-structure.jpg",
+    "caption": "Diagram of input port and output port internal structure (physical-layer processor, data-link-layer processor, queue)",
+    "page": 182
+  },
+  {
+    "slug": "banyan-switch-routing-diagram",
+    "file": "banyan-switch-routing-diagram.jpg",
+    "caption": "Crossbar and banyan switch fabric diagrams, including a worked example routing input 1 to output 6 using destination address bits",
+    "page": 183
+  },
+  {
+    "slug": "batcher-banyan-switch-diagram",
+    "file": "batcher-banyan-switch-diagram.jpg",
+    "caption": "Batcher-Banyan switch diagram showing a Batcher sorting stage and trap module added before the banyan switch to prevent internal collisions",
+    "page": 184
+  }
+]
