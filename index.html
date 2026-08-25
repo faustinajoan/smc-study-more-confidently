@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SMC — Study More Confidently | Unit 1: Basic Computer Concepts &amp; Network Models</title>
+<title>SMC — Study More Confidently | CN55: Units 1–3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -258,6 +258,37 @@ details.more .more-inner{padding:16px 20px;}
   background:var(--bg); border:2px solid var(--line); border-radius:999px; padding:8px 16px; font-size:14.5px; font-weight:600;
 }
 
+/* real PDF-extracted figure cards */
+.figure{
+  background:var(--bg-panel); border:2px solid var(--line); border-radius:var(--radius);
+  padding:14px 14px 12px; margin:20px 0; text-align:center;
+}
+.figure img{
+  display:block; margin:0 auto; max-width:100%; height:auto; border-radius:10px;
+  background:#fff; padding:8px; border:1px solid var(--line);
+}
+.figure-cap{
+  margin-top:10px; font-size:14px; color:var(--ink-soft); font-weight:600; line-height:1.4;
+  max-width:60ch; margin-left:auto; margin-right:auto;
+}
+.figure-cap .src-tag{
+  display:inline-block; margin-top:6px; font-size:11px; font-weight:700; letter-spacing:.03em;
+  text-transform:uppercase; color:var(--rail); background:rgba(0,149,217,.1); padding:2px 9px; border-radius:999px;
+}
+.figure-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin:20px 0;}
+.figure-grid .figure{margin:0;}
+.figure.small img{max-width:420px;}
+
+/* frame anatomy bar (Unit 3 — framing, byte/bit stuffing) */
+.framebar{display:flex; flex-wrap:wrap; gap:5px; margin:18px 0; font-size:13px; font-weight:700; text-align:center; align-items:stretch;}
+.frameseg{flex:1 1 60px; min-width:56px; padding:14px 6px; border-radius:10px; color:#fff; background:var(--ink-soft); display:flex; align-items:center; justify-content:center;}
+.frameseg .sub{display:block; font-weight:400; font-size:11px; opacity:.85; margin-top:2px;}
+.frameseg.flag{background:var(--volt); color:#3a2a00;}
+.frameseg.data{background:var(--bg-panel); color:var(--ink); border:2px solid var(--line);}
+.frameseg.stuffed{background:var(--wrong); color:#fff; box-shadow:0 0 0 3px var(--volt) inset;}
+.frameseg.ok{background:var(--right);}
+.framebar-label{font-size:12.5px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.03em; margin:14px 0 4px;}
+
 /* MCQ */
 .quiz-card{background:var(--bg-panel); border:2px solid var(--line); border-radius:var(--radius); padding:22px 24px; margin-bottom:18px;}
 .quiz-q{font-weight:700; margin-bottom:12px; font-size:17.5px;}
@@ -343,7 +374,7 @@ details.more .more-inner{padding:16px 20px;}
         <div class="t2">Study More Confidently</div>
       </div>
     </div>
-    <div class="unit-sub">Unit 1 · Network Basics</div>
+    <div class="unit-sub">CN55 · Units 1–3</div>
     <ul class="stationlist" id="stationlist"></ul>
     <div class="railnav-foot">
       <button class="toolbtn" id="darkToggle" type="button">🌙 <span>Dark mode</span></button>
@@ -368,7 +399,7 @@ details.more .more-inner{padding:16px 20px;}
       <!-- Stations injected by JS -->
     </div>
 
-    <p class="pagefoot">Built for CN55 · Unit 1 — Basic Computer Concepts &amp; Network Models · Based on Forouzan, <em>Data Communications and Networking</em>, explained in simple original words.</p>
+    <p class="pagefoot">Built for CN55 · Units 1–3 — Network Basics, the Physical Layer &amp; the Data-Link Layer · Based on Forouzan, <em>Data Communications and Networking</em>, explained in simple original words.</p>
   </div>
 </div>
 
