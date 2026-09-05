@@ -35,12 +35,29 @@ const STATIONS = [
   { id:"pswitching",  icon:"🔗", label:"Circuit & Packet Switching", kind:"topic", group:"unit2" },
   { id:"quiz2",       icon:"🧠", label:"Unit 2 Quiz", kind:"quiz", group:"unit2", quizId:"quiz2" },
 
+  { id:"dlbasics",    icon:"🔗", label:"Data Link Layer Basics", kind:"topic", group:"unit3" },
+  { id:"framing",     icon:"🧩", label:"Framing", kind:"topic", group:"unit3" },
+  { id:"flowerror",   icon:"🛡️", label:"Flow & Error Control Basics", kind:"topic", group:"unit3" },
+  { id:"arqprotocols",icon:"🔁", label:"Protocols: Simple, Stop-and-Wait & Beyond", kind:"topic", group:"unit3" },
+  { id:"errortypes",  icon:"⚡", label:"Error Types & Redundancy", kind:"topic", group:"unit3" },
+  { id:"blockcrc",    icon:"🧮", label:"Block Coding & CRC", kind:"topic", group:"unit3" },
+  { id:"checksum",    icon:"➕", label:"Checksum", kind:"topic", group:"unit3" },
+  { id:"macbasics",   icon:"🚦", label:"Media Access Control Basics", kind:"topic", group:"unit3" },
+  { id:"aloha",       icon:"📻", label:"ALOHA", kind:"topic", group:"unit3" },
+  { id:"csmacd",      icon:"👂", label:"CSMA & CSMA/CD", kind:"topic", group:"unit3" },
+  { id:"csmaca",      icon:"📶", label:"CSMA/CA", kind:"topic", group:"unit3" },
+  { id:"controlled",  icon:"🎫", label:"Controlled Access", kind:"topic", group:"unit3" },
+  { id:"channelization",icon:"🎚️", label:"Channelization: FDMA, TDMA & CDMA", kind:"topic", group:"unit3" },
+  { id:"ethernet",     icon:"🔌", label:"Ethernet & IEEE Standards", kind:"topic", group:"unit3" },
+  { id:"quiz3",        icon:"🧠", label:"Unit 3 Quiz", kind:"quiz", group:"unit3", quizId:"quiz3" },
+
   { id:"summary",     icon:"📄", label:"Summary & Download", kind:"summary" },
 ];
 
 const GROUP_META = {
   unit1: { title:"Unit 1 · Network Basics", eyebrow:"UNIT 1" },
   unit2: { title:"Unit 2 · Physical Layer", eyebrow:"UNIT 2" },
+  unit3: { title:"Unit 3 · Data Link Layer & MAC", eyebrow:"UNIT 3" },
 };
 
 /* ---------- helper builders ---------- */
@@ -58,15 +75,15 @@ CONTENT.home = `
     <div class="hero-cables">🛰️</div>
     <span class="eyebrow" style="background:rgba(28,18,6,.18);">SMC PORTAL</span>
     <h1>Study More Confidently</h1>
-    <p>Welcome to SMC! We'll travel station by station through two units of Computer Networks — one small idea at a time, with pictures, examples, and quick checks along the way.</p>
+    <p>Welcome to SMC! We'll travel station by station through three units of Computer Networks — one small idea at a time, with pictures, examples, and quick checks along the way.</p>
     <div class="stat-row">
-      <div class="stat-pill">🧩 2 Units</div>
+      <div class="stat-pill">🧩 3 Units</div>
       <div class="stat-pill">🧠 A quiz after each unit</div>
       <div class="stat-pill">📥 Downloadable notes</div>
     </div>
   </div>
 
-  ${explain(`<p>This page is your travel guide. Every station explains <strong>one idea only</strong>, with a real-life comparison and a short "Remember" box so it's easy to recall later.</p>`)}
+  ${explain(`<p>This page is your travel guide. Every station explains <strong>one idea only</strong>, with a real-life comparison, an original diagram where it helps, and a short "Remember" box so it's easy to recall later.</p>`)}
 
   <h3 style="margin-top:26px;">Unit 1 · Basic Computer Concepts &amp; Network Models</h3>
   <div class="route-preview">
@@ -82,6 +99,13 @@ CONTENT.home = `
     `).join("")}
   </div>
 
+  <h3 style="margin-top:26px;">Unit 3 · Data Link Layer &amp; MAC</h3>
+  <div class="route-preview">
+    ${STATIONS.filter(s=>s.group==="unit3" && s.kind==="topic").map(s=>`
+      <div class="route-item"><span class="emoji">${s.icon}</span>${s.label}</div>
+    `).join("")}
+  </div>
+
   ${more("🎒 Tips for using this page","<p>Use the ⬅️➡️ buttons at the bottom of each page, or tap any station on the left. Tap boxes and diagrams — they are clickable! Turn on <strong>Dark mode</strong>, <strong>High Contrast</strong>, adjust <strong>Text size</strong>, or turn on <strong>Easy-read spacing</strong> from the side menu if that helps you read more comfortably.</p>")}
 `;
 
@@ -92,6 +116,30 @@ CONTENT.network = `
   `)}
 
   ${analogy(`<p>A railway network connects many stations. A road network connects many cities. In the same way, a computer network connects many devices so that information can travel between them.</p>`)}
+
+  <div class="imgcard">
+    <svg viewBox="0 0 400 180">
+      <g stroke="var(--rail)" stroke-width="2.5" fill="none">
+        <line x1="200" y1="90" x2="60" y2="35"/>
+        <line x1="200" y1="90" x2="340" y2="35"/>
+        <line x1="200" y1="90" x2="60" y2="145"/>
+        <line x1="200" y1="90" x2="340" y2="145"/>
+      </g>
+      <circle cx="200" cy="90" r="22" fill="var(--spark)"/>
+      <text x="200" y="95" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">Switch</text>
+      <g>
+        <rect x="30" y="15" width="60" height="40" rx="6" fill="var(--rail)"/>
+        <text x="60" y="39" text-anchor="middle" font-size="20">💻</text>
+        <rect x="310" y="15" width="60" height="40" rx="6" fill="var(--rail)"/>
+        <text x="340" y="39" text-anchor="middle" font-size="20">🖥️</text>
+        <rect x="30" y="125" width="60" height="40" rx="6" fill="var(--rail)"/>
+        <text x="60" y="149" text-anchor="middle" font-size="20">📱</text>
+        <rect x="310" y="125" width="60" height="40" rx="6" fill="var(--rail)"/>
+        <text x="340" y="149" text-anchor="middle" font-size="20">🖨️</text>
+      </g>
+    </svg>
+    <p class="imgcaption">Four different devices — a laptop, desktop, phone, and printer — all connected through a central switch. This is a small computer network.</p>
+  </div>
 
   <h3>The 5 pieces every communication needs</h3>
   <p>Whenever two devices "talk", five things must be present. Tap each one below to find out what it does.</p>
@@ -199,6 +247,27 @@ CONTENT.devices = `
   </div>
 
   ${analogy(`<p>Hosts are like the people at a party — they're the ones actually talking. Connecting devices are like the doors and hallways that let people move between rooms so conversations can happen.</p>`)}
+
+  <div class="imgcard">
+    <svg viewBox="0 0 380 110">
+      <rect x="15" y="15" width="90" height="35" rx="6" fill="var(--rail)"/><text x="60" y="37" text-anchor="middle" font-size="18">💻</text>
+      <rect x="15" y="60" width="90" height="35" rx="6" fill="var(--rail)"/><text x="60" y="82" text-anchor="middle" font-size="18">📱</text>
+      <text x="60" y="108" text-anchor="middle" font-size="10" font-weight="700" fill="var(--rail)">Hosts</text>
+
+      <rect x="150" y="38" width="80" height="35" rx="18" fill="var(--spark)"/><text x="190" y="60" text-anchor="middle" font-size="18">🌐</text>
+      <text x="190" y="90" text-anchor="middle" font-size="10" font-weight="700" fill="var(--spark)">Router / Switch</text>
+
+      <rect x="275" y="15" width="90" height="35" rx="6" fill="var(--rail)"/><text x="320" y="37" text-anchor="middle" font-size="18">🖥️</text>
+      <rect x="275" y="60" width="90" height="35" rx="6" fill="var(--rail)"/><text x="320" y="82" text-anchor="middle" font-size="18">🖨️</text>
+      <text x="320" y="108" text-anchor="middle" font-size="10" font-weight="700" fill="var(--rail)">Hosts</text>
+
+      <g stroke="var(--ink-soft)" stroke-width="2">
+        <line x1="105" y1="32" x2="150" y2="50"/><line x1="105" y1="77" x2="150" y2="60"/>
+        <line x1="230" y1="50" x2="275" y2="32"/><line x1="230" y1="60" x2="275" y2="77"/>
+      </g>
+    </svg>
+    <p class="imgcaption">Hosts (laptops, phones, desktops, printers) do the actual communicating. Connecting devices like routers and switches sit in between, directing traffic without being the source or destination themselves.</p>
+  </div>
 
   ${remember(["Host = a device a person uses directly","Connecting device = links devices/networks together (router, switch, modem)","Devices connect using wired or wireless transmission media"])}
 
@@ -425,6 +494,31 @@ CONTENT.lanwan = `
 
   ${analogy(`<p>A LAN is like the road network inside a single college campus. A WAN is like the national highway system connecting entire cities and states. When many such road networks link up, you get one giant connected system — an internetwork.</p>`)}
 
+  <div class="imgcard">
+    <svg viewBox="0 0 420 160">
+      <g stroke="var(--rail)" stroke-width="2" fill="none">
+        <circle cx="90" cy="80" r="10" fill="var(--rail)"/>
+        <circle cx="60" cy="50" r="8" fill="var(--rail)"/><circle cx="120" cy="50" r="8" fill="var(--rail)"/>
+        <circle cx="60" cy="110" r="8" fill="var(--rail)"/><circle cx="120" cy="110" r="8" fill="var(--rail)"/>
+        <line x1="90" y1="80" x2="60" y2="50"/><line x1="90" y1="80" x2="120" y2="50"/>
+        <line x1="90" y1="80" x2="60" y2="110"/><line x1="90" y1="80" x2="120" y2="110"/>
+      </g>
+      <text x="90" y="145" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">LAN (one campus)</text>
+
+      <line x1="150" y1="80" x2="270" y2="80" stroke="var(--spark)" stroke-width="3" stroke-dasharray="6 4"/>
+
+      <g stroke="var(--rail)" stroke-width="2" fill="none">
+        <circle cx="330" cy="80" r="10" fill="var(--spark)"/>
+        <circle cx="290" cy="40" r="8" fill="var(--rail)"/><circle cx="370" cy="40" r="8" fill="var(--rail)"/>
+        <circle cx="290" cy="120" r="8" fill="var(--rail)"/><circle cx="370" cy="120" r="8" fill="var(--rail)"/>
+        <line x1="330" y1="80" x2="290" y2="40"/><line x1="330" y1="80" x2="370" y2="40"/>
+        <line x1="330" y1="80" x2="290" y2="120"/><line x1="330" y1="80" x2="370" y2="120"/>
+      </g>
+      <text x="330" y="145" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">Another LAN (elsewhere)</text>
+    </svg>
+    <p class="imgcaption">Two separate LANs, each built around their own switch/router, joined together by a WAN link (dashed line) — together they form one internetwork.</p>
+  </div>
+
   ${remember(["LAN = small area, connects hosts directly","WAN = large area, connects connecting devices","Internetwork = two or more networks joined together"])}
 `;
 
@@ -443,6 +537,27 @@ CONTENT.switching = `
   </div>
 
   ${analogy(`<p>Circuit switching is like booking a private cab for your entire trip — the same car and route is reserved just for you. Packet switching is like sending each part of your luggage in separate parcels, which might even take slightly different routes, but all arrive at the same destination address.</p>`)}
+
+  <div class="imgcard">
+    <svg viewBox="0 0 420 130">
+      <text x="105" y="15" text-anchor="middle" font-size="11" font-weight="700" fill="var(--rail)">Circuit Switching — one fixed path</text>
+      <circle cx="30" cy="50" r="12" fill="var(--rail)"/><text x="30" y="55" text-anchor="middle" font-size="10" fill="#fff">A</text>
+      <circle cx="105" cy="30" r="10" fill="var(--ink-soft)"/><circle cx="105" cy="70" r="10" fill="var(--ink-soft)"/>
+      <circle cx="180" cy="50" r="12" fill="var(--rail)"/><text x="180" y="55" text-anchor="middle" font-size="10" fill="#fff">B</text>
+      <path d="M30,50 L105,30 L180,50" stroke="var(--rail)" stroke-width="3" fill="none"/>
+      <text x="105" y="100" text-anchor="middle" font-size="9" fill="var(--ink-soft)">Every bit follows this SAME reserved path</text>
+
+      <text x="330" y="15" text-anchor="middle" font-size="11" font-weight="700" fill="var(--spark)">Packet Switching — independent paths</text>
+      <circle cx="250" cy="50" r="12" fill="var(--spark)"/><text x="250" y="55" text-anchor="middle" font-size="10" fill="#fff">A</text>
+      <circle cx="330" cy="25" r="10" fill="var(--ink-soft)"/><circle cx="330" cy="50" r="10" fill="var(--ink-soft)"/><circle cx="330" cy="75" r="10" fill="var(--ink-soft)"/>
+      <circle cx="405" cy="50" r="12" fill="var(--spark)"/><text x="405" y="55" text-anchor="middle" font-size="10" fill="#fff">B</text>
+      <path d="M250,50 L330,25 L405,50" stroke="var(--spark)" stroke-width="2" stroke-dasharray="4 3" fill="none"/>
+      <path d="M250,50 L330,50 L405,50" stroke="var(--spark)" stroke-width="2" stroke-dasharray="4 3" fill="none"/>
+      <path d="M250,50 L330,75 L405,50" stroke="var(--spark)" stroke-width="2" stroke-dasharray="4 3" fill="none"/>
+      <text x="330" y="100" text-anchor="middle" font-size="9" fill="var(--ink-soft)">Different packets can take DIFFERENT routes</text>
+    </svg>
+    <p class="imgcaption">Circuit switching locks in one path for the whole conversation. Packet switching lets each packet find its own way through the network's routers.</p>
+  </div>
 
   ${remember(["Circuit switching → one dedicated path, reserved for the whole session","Packet switching → data split into packets, sent independently, reassembled at destination"])}
 
@@ -509,6 +624,37 @@ CONTENT.layers = `
 
   <p style="margin-top:16px;"><strong>TCP</strong> is connection-oriented — it first sets up a logical connection before sending data, and provides flow, error, and congestion control. <strong>UDP</strong> is connectionless — it just sends data without setting up a connection first, which makes it faster but less reliable — good for short messages where speed matters more than guaranteed delivery.</p>
 
+  <div class="imgcard">
+    <svg viewBox="0 0 420 130">
+      <g font-size="11" fill="var(--ink)" font-weight="700">
+        <rect x="10" y="10" width="400" height="20" rx="4" fill="none" stroke="var(--line)" stroke-width="2"/>
+        <text x="210" y="24" text-anchor="middle">DATA (Application layer message)</text>
+
+        <rect x="10" y="38" width="400" height="20" rx="4" fill="none" stroke="var(--line)" stroke-width="2"/>
+        <rect x="10" y="38" width="35" height="20" rx="4" fill="var(--rail)"/>
+        <text x="27" y="52" text-anchor="middle" font-size="9" fill="#fff">TCP</text>
+        <text x="230" y="52" text-anchor="middle" font-weight="400">DATA</text>
+
+        <rect x="10" y="66" width="400" height="20" rx="4" fill="none" stroke="var(--line)" stroke-width="2"/>
+        <rect x="10" y="66" width="35" height="20" rx="4" fill="var(--rail)"/>
+        <text x="27" y="80" text-anchor="middle" font-size="9" fill="#fff">TCP</text>
+        <rect x="45" y="66" width="35" height="20" fill="var(--spark)"/>
+        <text x="62" y="80" text-anchor="middle" font-size="9" fill="#fff">IP</text>
+        <text x="245" y="80" text-anchor="middle" font-weight="400">DATA</text>
+
+        <rect x="10" y="94" width="400" height="20" rx="4" fill="none" stroke="var(--line)" stroke-width="2"/>
+        <rect x="10" y="94" width="35" height="20" fill="var(--rail)"/>
+        <text x="27" y="108" text-anchor="middle" font-size="9" fill="#fff">TCP</text>
+        <rect x="45" y="94" width="35" height="20" fill="var(--spark)"/>
+        <text x="62" y="108" text-anchor="middle" font-size="9" fill="#fff">IP</text>
+        <rect x="80" y="94" width="35" height="20" rx="4" fill="var(--volt)"/>
+        <text x="97" y="108" text-anchor="middle" font-size="9">Frame</text>
+        <text x="260" y="108" text-anchor="middle" font-weight="400">DATA</text>
+      </g>
+    </svg>
+    <p class="imgcaption">Encapsulation: as data moves down the layers, each one wraps the data with its own header — a TCP header, then an IP header, then a frame header — like nesting envelopes inside envelopes.</p>
+  </div>
+
   ${more("🔎 Want to know more? Encapsulation","<p>As data travels down the layers on the sender's side, each layer adds its own header — this is called <strong>encapsulation</strong>. On the receiver's side, each layer removes its matching header as data moves up — this is <strong>decapsulation</strong>.</p>")}
 
   ${more("🔎 Want to know more? The OSI Model","<p>The <strong>OSI Model</strong> (Open Systems Interconnection), defined by ISO, is a similar 7-layer reference model. It splits TCP/IP's Application layer into 3 separate layers (Application, Presentation, Session) and keeps the rest similar. It's mostly used today as a teaching/reference model to understand networking concepts.</p>")}
@@ -535,6 +681,17 @@ CONTENT.signals = `
   </div>
 
   ${analogy(`<p>Analog is like a water tap you can open smoothly to any amount — a little, a lot, or anywhere in between. Digital is like a light switch — it's either ON or OFF, with nothing "in between" that counts.</p>`)}
+
+  <div class="imgcard">
+    <svg viewBox="0 0 420 130">
+      <text x="10" y="16" font-size="11" font-weight="700" fill="var(--rail)">Analog signal (smooth wave)</text>
+      <path d="M10,45 Q35,15 60,45 T110,45 T160,45 T210,45" stroke="var(--rail)" stroke-width="3" fill="none"/>
+
+      <text x="10" y="80" font-size="11" font-weight="700" fill="var(--spark)">Digital signal (only two levels)</text>
+      <path d="M10,110 L10,95 L45,95 L45,110 L80,110 L80,95 L115,95 L115,110 L150,110 L150,95 L185,95 L185,110 L210,110" stroke="var(--spark)" stroke-width="3" fill="none"/>
+    </svg>
+    <p class="imgcaption">An analog signal glides smoothly between values, like the top wave. A digital signal jumps only between fixed levels (here, just "high" and "low"), like the bottom one.</p>
+  </div>
 
   <h3>Periodic vs Nonperiodic Signals</h3>
   <p>A <strong>periodic signal</strong> repeats the same pattern again and again over equal time frames. One full repeat is called a <strong>cycle</strong>. A <strong>nonperiodic signal</strong> keeps changing without ever repeating a pattern.</p>
@@ -685,6 +842,25 @@ CONTENT.multiplexing = `
 
   ${analogy(`<p>Think of a school van that picks up many students (many-to-one, like a MUX) from different houses on one route, and then drops each one off at their own individual school (one-to-many, like a DEMUX) — one van (the link) serves many students, and each student's individual "ride" is like a channel.</p>`)}
 
+  <div class="imgcard">
+    <svg viewBox="0 0 380 130">
+      <text x="90" y="15" text-anchor="middle" font-size="11" font-weight="700" fill="var(--rail)">FDM — split by frequency</text>
+      <rect x="20" y="25" width="140" height="20" fill="var(--rail)"/><text x="90" y="39" text-anchor="middle" font-size="9" fill="#fff">Signal 1 — Frequency Band A</text>
+      <rect x="20" y="48" width="140" height="20" fill="var(--spark)"/><text x="90" y="62" text-anchor="middle" font-size="9" fill="#fff">Signal 2 — Frequency Band B</text>
+      <rect x="20" y="71" width="140" height="20" fill="var(--volt)"/><text x="90" y="85" text-anchor="middle" font-size="9">Signal 3 — Frequency Band C</text>
+      <text x="90" y="105" text-anchor="middle" font-size="9" fill="var(--ink-soft)">All sent at once, sharing time,</text>
+      <text x="90" y="117" text-anchor="middle" font-size="9" fill="var(--ink-soft)">each on its own frequency band</text>
+
+      <text x="290" y="15" text-anchor="middle" font-size="11" font-weight="700" fill="var(--spark)">TDM — split by time</text>
+      <rect x="220" y="25" width="45" height="66" fill="var(--rail)"/><text x="242" y="60" text-anchor="middle" font-size="9" fill="#fff" transform="rotate(-90 242 60)">Slot 1</text>
+      <rect x="265" y="25" width="45" height="66" fill="var(--spark)"/><text x="287" y="60" text-anchor="middle" font-size="9" fill="#fff" transform="rotate(-90 287 60)">Slot 2</text>
+      <rect x="310" y="25" width="45" height="66" fill="var(--volt)"/><text x="332" y="60" text-anchor="middle" font-size="9" transform="rotate(-90 332 60)">Slot 3</text>
+      <text x="287" y="105" text-anchor="middle" font-size="9" fill="var(--ink-soft)">Each signal gets the FULL frequency</text>
+      <text x="287" y="117" text-anchor="middle" font-size="9" fill="var(--ink-soft)">band, but only during its own time slot</text>
+    </svg>
+    <p class="imgcaption">FDM gives every signal its own frequency "lane" running simultaneously. TDM gives every signal the whole "lane" but only for its own turn in time.</p>
+  </div>
+
   <div class="tabbar" id="muxTabs">
     <button class="tabbtn active" data-tab="fdm">📻 FDM</button>
     <button class="tabbtn" data-tab="wdm">💡 WDM</button>
@@ -776,12 +952,27 @@ CONTENT.media = `
     <div class="card">
       <p><strong>Guided medium.</strong> Two insulated copper wires twisted around each other — one carries the signal, the other acts as a ground reference; the receiver reads the difference between them.</p>
       <p>Uses the <strong>RJ45</strong> connector. Common in telephone lines and DSL connections for voice and data.</p>
+      <div class="imgcard">
+        <svg viewBox="0 0 200 60">
+          <path d="M20,30 Q40,10 60,30 T100,30 T140,30 T180,30" stroke="var(--rail)" stroke-width="4" fill="none"/>
+          <path d="M20,30 Q40,50 60,30 T100,30 T140,30 T180,30" stroke="var(--spark)" stroke-width="4" fill="none"/>
+        </svg>
+        <p class="imgcaption">Two wires twisted around each other — the twisting helps cancel out electrical interference.</p>
+      </div>
     </div>
   </div>
   <div class="tabpanel" data-tab="coax">
     <div class="card">
       <p><strong>Guided medium.</strong> A central copper conductor wrapped in insulation, a metal shield, and an outer jacket. Uses the <strong>BNC connector</strong>.</p>
       <p>Historically carried up to 10,000 voice signals on analog telephone networks, and up to 600 Mbps on digital networks.</p>
+      <div class="imgcard">
+        <svg viewBox="0 0 200 100">
+          <circle cx="100" cy="50" r="45" fill="none" stroke="var(--line)" stroke-width="10"/>
+          <circle cx="100" cy="50" r="32" fill="var(--bg-panel)" stroke="var(--rail)" stroke-width="3"/>
+          <circle cx="100" cy="50" r="8" fill="var(--spark)"/>
+        </svg>
+        <p class="imgcaption">Cross-section: a central copper core (center), surrounded by insulation, then a braided metal shield (outer ring) that blocks interference.</p>
+      </div>
     </div>
   </div>
   <div class="tabpanel" data-tab="fiber">
@@ -790,6 +981,16 @@ CONTENT.media = `
       <p><strong>Advantages:</strong> very high bandwidth, very little signal loss, immune to electrical interference, corrosion-resistant, lightweight, and hard to "tap" secretly.</p>
       <p><strong>Disadvantages:</strong> expensive, tricky to install/maintain, and light can only travel in one direction per fiber.</p>
       <p>Used for backbone networks and standards like <strong>SONET</strong>.</p>
+      <div class="imgcard">
+        <svg viewBox="0 0 220 70">
+          <rect x="10" y="15" width="200" height="40" rx="18" fill="none" stroke="var(--line)" stroke-width="8"/>
+          <rect x="10" y="30" width="200" height="10" fill="var(--volt)"/>
+          <path d="M15,35 L50,25 L85,45 L120,25 L155,45 L195,30" stroke="var(--spark)" stroke-width="2" fill="none" stroke-dasharray="3 2"/>
+        </svg>
+        <p class="imgcaption">Light (dashed path) bounces along inside the core (yellow), reflecting off the cladding (outer ring) so it never escapes.</p>
+      </div>
+    </div>
+  </div>
     </div>
   </div>
   <div class="tabpanel" data-tab="radio">
@@ -875,6 +1076,28 @@ const QUIZZES = {
     {q:"Which guided transmission medium sends signals as pulses of light?", opts:["Twisted-pair cable","Coaxial cable","Fiber-optic cable","Radio waves"], a:2},
     {q:"In circuit switching, network resources are reserved:", opts:["Only when data is actually being sent","For the entire duration of the connection","Never","Only during teardown"], a:1},
   ],
+  quiz3: [
+    {q:"The Data Link Layer's communication is best described as:", opts:["Host-to-host","Node-to-node","Process-to-process","End-to-end only"], a:1},
+    {q:"An intermediate router's Data Link Layer must:", opts:["Only encapsulate","Only decapsulate","Both decapsulate AND re-encapsulate","Do nothing"], a:2},
+    {q:"Fixed-size frames are also called:", opts:["Packets","Cells","Segments","Datagrams"], a:1},
+    {q:"Byte stuffing inserts an extra:", opts:["Flag byte","ESC byte","CRC byte","Address byte"], a:1},
+    {q:"Bit stuffing inserts an extra 0 after how many consecutive 1s?", opts:["Three","Four","Five","Six"], a:2},
+    {q:"Which protocol has NEITHER flow nor error control?", opts:["Stop-and-Wait","Simple Protocol","Go-Back-N","Selective-Repeat"], a:1},
+    {q:"In Go-Back-N, if a frame is lost, the sender resends:", opts:["Only that one frame","That frame and every frame after it","The entire session from scratch","Nothing, it waits"], a:1},
+    {q:"Which error type affects only ONE bit in the data unit?", opts:["Burst error","Single-bit error","Redundancy error","Checksum error"], a:1},
+    {q:"Which is generally harder to achieve: error detection or error correction?", opts:["Detection","Correction","They are equally hard","Neither is hard"], a:1},
+    {q:"In CRC, a nonzero remainder at the receiver means:", opts:["The frame is perfectly fine","An error was very likely detected","The generator polynomial is wrong","Nothing — it's ignored"], a:1},
+    {q:"In the checksum method, the checksum itself is:", opts:["The sum of all the data values","The one's complement of the sum","A random number","Always zero"], a:1},
+    {q:"In random access (contention) methods, if two stations send at the same time, the result is:", opts:["A handshake","A collision","A token","A reservation"], a:1},
+    {q:"Pure ALOHA's vulnerable time is:", opts:["Tfr","2 × Tfr","Tp","2 × Tp"], a:1},
+    {q:"Slotted ALOHA improves on Pure ALOHA mainly by:", opts:["Adding more stations","Forcing sends only at the start of a time slot","Removing acknowledgments","Increasing frame size"], a:1},
+    {q:"CSMA is based on the principle:", opts:["Send first, ask later","Sense before transmit","Always wait for a token","Ignore the channel state"], a:1},
+    {q:"CSMA/CD requires the frame transmission time to be at least:", opts:["Equal to the propagation time","Half the propagation time","Twice the propagation time","Unrelated to propagation time"], a:2},
+    {q:"CSMA/CA is mainly designed for:", opts:["Wired Ethernet","Wireless networks","Fiber-optic backbones","Token Ring only"], a:1},
+    {q:"In Token Passing, a station may transmit only when it:", opts:["Senses an idle channel","Holds the token","Receives a poll from any station","Waits for a fixed timer"], a:1},
+    {q:"Which channelization method lets every station transmit at the same time, separated only by unique codes?", opts:["FDMA","TDMA","CDMA","Polling"], a:2},
+    {q:"Ethernet's Media Access Control method is:", opts:["Token passing","Polling","CSMA/CD","Reservation"], a:2},
+  ],
 };
 
 /* ================= RENDER LOGIC ================= */
@@ -954,7 +1177,7 @@ function buildQuizHTML(quizArr, quizId){
 
 function buildSummaryHTML(){
   return `
-    ${explain(`<p>Great job reaching the last station! Here's a one-page recap of everything we covered across both units.</p>`)}
+    ${explain(`<p>Great job reaching the last station! Here's a one-page recap of everything we covered across all three units.</p>`)}
     <div class="card">
       <h3 style="margin-bottom:8px;">Unit 1 · Basic Computer Concepts &amp; Network Models</h3>
       <ul>
@@ -982,6 +1205,18 @@ function buildSummaryHTML(){
         <li><strong>Multiplexing:</strong> FDM (frequency), WDM (fiber-optic light), TDM (time — Synchronous vs Statistical).</li>
         <li><strong>Transmission Media:</strong> Guided (twisted-pair, coaxial, fiber-optic) vs Unguided (radio, microwave, infrared).</li>
         <li><strong>Switching (in depth):</strong> Circuit switching's 3 phases; Packet switching's Datagram vs Virtual-Circuit networks.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:8px;">Unit 3 · Data Link Layer &amp; MAC</h3>
+      <ul>
+        <li><strong>DLL Basics:</strong> node-to-node communication; source encapsulates, destination decapsulates, routers do both; broadcast vs point-to-point links.</li>
+        <li><strong>Framing:</strong> fixed-size (cells) vs variable-size; character-oriented (byte stuffing) vs bit-oriented (bit stuffing) framing.</li>
+        <li><strong>Flow &amp; Error Control:</strong> buffering (producer/consumer), CRC-based error control, ACK for both flow+error control, piggybacking.</li>
+        <li><strong>Protocols:</strong> Simple (no control), Stop-and-Wait (ARQ), Go-Back-N, Selective-Repeat.</li>
+        <li><strong>Error Detection/Correction:</strong> single-bit vs burst errors; redundancy; block coding, cyclic codes, CRC; checksum with one's complement arithmetic.</li>
+        <li><strong>Media Access Control:</strong> Random Access (ALOHA, CSMA, CSMA/CD, CSMA/CA), Controlled Access (Reservation, Polling, Token Passing), Channelization (FDMA, TDMA, CDMA).</li>
+        <li><strong>Ethernet:</strong> IEEE 802 standards; LLC + MAC sublayers; 4 generations from 10 Mbps to 10 Gbps.</li>
       </ul>
     </div>
     ${remember(["Revisit any station any time from the side menu","Try each unit's quiz again until you score full marks!"])}
@@ -1147,6 +1382,780 @@ document.getElementById("spacingToggle").addEventListener("click",()=>{
   const isWide = root.getAttribute("data-spacing")==="wide";
   root.setAttribute("data-spacing", isWide ? "" : "wide");
 });
+
+
+
+/* ================= UNIT 3 CONTENT: DATA LINK LAYER ================= */
+
+CONTENT.dlbasics = `
+  ${explain(`
+    <p>The <strong>Data Link Layer</strong> handles something different from what we've seen so far: while the Network layer delivers data <strong>host-to-host</strong> across an entire journey, the Data Link Layer only worries about getting data across <strong>one single link</strong> — <strong>node-to-node</strong>.</p>
+  `)}
+
+  <h3>What counts as a "node" and a "link"?</h3>
+  <div class="chiprow">
+    <span class="chip">🖥️ Nodes — the two end hosts AND every router in between</span>
+    <span class="chip">🔗 Links — the individual network connections between each pair of nodes</span>
+  </div>
+
+  <div class="imgcard">
+    <svg viewBox="0 0 420 90">
+      <g stroke="var(--rail)" stroke-width="3">
+        <line x1="30" y1="45" x2="140" y2="45"/>
+        <line x1="140" y1="45" x2="280" y2="45"/>
+        <line x1="280" y1="45" x2="390" y2="45"/>
+      </g>
+      <circle cx="30" cy="45" r="16" fill="var(--rail)"/><text x="30" y="50" text-anchor="middle" font-size="14" fill="#fff">🖥️</text>
+      <circle cx="140" cy="45" r="16" fill="var(--spark)"/><text x="140" y="50" text-anchor="middle" font-size="14" fill="#fff">🌐</text>
+      <circle cx="280" cy="45" r="16" fill="var(--spark)"/><text x="280" y="50" text-anchor="middle" font-size="14" fill="#fff">🌐</text>
+      <circle cx="390" cy="45" r="16" fill="var(--rail)"/><text x="390" y="50" text-anchor="middle" font-size="14" fill="#fff">🖥️</text>
+      <text x="85" y="30" text-anchor="middle" font-size="11" fill="var(--ink-soft)">Link 1</text>
+      <text x="210" y="30" text-anchor="middle" font-size="11" fill="var(--ink-soft)">Link 2</text>
+      <text x="335" y="30" text-anchor="middle" font-size="11" fill="var(--ink-soft)">Link 3</text>
+    </svg>
+    <p class="imgcaption">Two end hosts and two routers = four nodes. The three connections between them = three separate links, each handled independently by the Data Link Layer.</p>
+  </div>
+
+  <h3 style="margin-top:20px;">What does the Data Link Layer actually do at each node?</h3>
+  <p>Tap each role below.</p>
+  <div class="diagram">
+    <div class="node clickable" data-pop="Only needs to encapsulate — wrap the packet from the network layer into a frame — since it's the very start of the journey.">
+      <span class="emoji">📦</span>Source Host
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Needs to both DEcapsulate the frame it receives AND re-encapsulate a new frame to send it onward — it's just passing through.">
+      <span class="emoji">🔀</span>Intermediate Router
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Only needs to decapsulate — unwrap the final frame to get back the original packet — since it's the end of the journey.">
+      <span class="emoji">📭</span>Destination Host
+      <div class="node-pop"></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;">Two categories of links</h3>
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>📡 Broadcast Link</h4>
+      <p style="font-size:14.5px;">Many stations share the same link at once — like everyone in a room hearing the same shout. Needs a way to coordinate who gets to "talk" — this is exactly what Media Access Control (MAC) handles later in this unit.</p>
+    </div>
+    <div class="flow-card">
+      <h4>➡️ Point-to-Point (Unicast) Link</h4>
+      <p style="font-size:14.5px;">A dedicated link between exactly two devices — no sharing, no coordination needed.</p>
+    </div>
+  </div>
+
+  ${remember(["Data Link Layer works node-to-node, on ONE link at a time (unlike Network layer's host-to-host)","Nodes = end hosts + routers · Links = the connections between them","Source host encapsulates only · Destination host decapsulates only · Routers do both","Broadcast link = shared among many stations · Point-to-point link = dedicated between two"])}
+`;
+
+CONTENT.framing = `
+  ${explain(`<p>A packet at the data-link layer is called a <strong>frame</strong>. Before sending data, the Data Link Layer packs bits into frames so each one is clearly distinguishable from the next.</p>`)}
+
+  <h3>Why not just send the whole message as ONE giant frame?</h3>
+  <div class="chiprow">
+    <span class="chip">🐌 A very large frame makes flow and error control inefficient</span>
+    <span class="chip">💥 Even a single-bit error would force retransmitting the ENTIRE message</span>
+  </div>
+
+  <h3 style="margin-top:20px;">Fixed-size vs Variable-size framing</h3>
+  <p>Frames of a <strong>fixed size</strong> are called <strong>cells</strong> — since every frame is the same size, there's no need to mark where one ends and the next begins. With <strong>variable-size framing</strong> (the common approach in LANs), we DO need a way to mark frame boundaries — two approaches exist.</p>
+
+  <div class="tabbar" id="framingTabs">
+    <button class="tabbtn active" data-tab="byte">🔤 Character/Byte-Oriented</button>
+    <button class="tabbtn" data-tab="bit">🔢 Bit-Oriented</button>
+  </div>
+
+  <div class="tabpanel active" data-tab="byte">
+    <div class="card">
+      <p>Data is carried as 8-bit characters (like ASCII). An 8-bit (1-byte) <strong>flag</strong> — a special reserved bit pattern — is added at the very beginning and end of every frame to mark where it starts and stops.</p>
+      <p><strong>The problem:</strong> what if the actual data happens to contain that exact flag pattern by coincidence? The receiver would think the frame ended early!</p>
+      <p><strong>The fix — Byte Stuffing:</strong> whenever the flag pattern (or another reserved character called the <strong>escape character, ESC</strong>) appears inside the real data, the sender secretly inserts one extra ESC byte right before it. The receiver, seeing an ESC byte, knows to remove it and treat the next byte as ordinary data — not a real flag.</p>
+      <div class="imgcard">
+        <svg viewBox="0 0 400 110">
+          <text x="10" y="18" font-size="11" font-weight="700" fill="var(--ink)">Original data (contains a flag byte, shown in orange):</text>
+          <rect x="10" y="26" width="34" height="22" fill="var(--rail)"/><text x="27" y="41" text-anchor="middle" font-size="10" fill="#fff">A</text>
+          <rect x="46" y="26" width="34" height="22" fill="var(--spark)"/><text x="63" y="41" text-anchor="middle" font-size="9" fill="#fff">FLAG</text>
+          <rect x="82" y="26" width="34" height="22" fill="var(--rail)"/><text x="99" y="41" text-anchor="middle" font-size="10" fill="#fff">B</text>
+
+          <text x="10" y="72" font-size="11" font-weight="700" fill="var(--ink)">After byte stuffing (ESC inserted before it):</text>
+          <rect x="10" y="80" width="34" height="22" fill="var(--rail)"/><text x="27" y="95" text-anchor="middle" font-size="10" fill="#fff">A</text>
+          <rect x="46" y="80" width="30" height="22" fill="var(--volt)"/><text x="61" y="95" text-anchor="middle" font-size="9">ESC</text>
+          <rect x="78" y="80" width="34" height="22" fill="var(--spark)"/><text x="95" y="95" text-anchor="middle" font-size="9" fill="#fff">FLAG</text>
+          <rect x="114" y="80" width="34" height="22" fill="var(--rail)"/><text x="131" y="95" text-anchor="middle" font-size="10" fill="#fff">B</text>
+        </svg>
+        <p class="imgcaption">The receiver removes any ESC byte it finds and treats the byte right after it as plain data — not a real flag or control character.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabpanel" data-tab="bit">
+    <div class="card">
+      <p>Here the data is just a raw sequence of bits (which the upper layer might interpret as text, graphics, audio, or video). Most protocols use a special 8-bit flag, <strong>01111110</strong>, as the delimiter marking each frame's start and end.</p>
+      <p><strong>Bit Stuffing:</strong> whenever <strong>five consecutive 1s</strong> appear in the actual data, the sender inserts one extra <strong>0</strong> right after them. This guarantees the real data can never accidentally contain the flag pattern 0111110, since real data will never have five 1s in a row without a stuffed 0 breaking it up. The receiver removes any 0 that follows five consecutive 1s.</p>
+      <div class="imgcard">
+        <svg viewBox="0 0 400 90">
+          <text x="10" y="18" font-size="11" font-weight="700" fill="var(--ink)">Original data:</text>
+          <text x="10" y="40" font-family="monospace" font-size="16" fill="var(--rail)">0  1  1  1  1  1  0  1</text>
+
+          <text x="10" y="65" font-size="11" font-weight="700" fill="var(--ink)">After bit stuffing (extra 0 inserted after five 1s):</text>
+          <text x="10" y="85" font-family="monospace" font-size="16" fill="var(--spark)">0  1  1  1  1  1  <tspan text-decoration="underline">0</tspan>  0  1</text>
+        </svg>
+        <p class="imgcaption">The bold/underlined 0 is the stuffed bit — it's not part of the real data, just there to prevent confusion with the flag pattern.</p>
+      </div>
+    </div>
+  </div>
+
+  ${remember(["A frame = a packet at the data-link layer","Fixed-size frames = cells (no boundary marker needed) · Variable-size frames need explicit boundaries","Byte stuffing = insert an ESC byte before an accidental flag/ESC byte in the data","Bit stuffing = insert an extra 0 after five consecutive 1s in the data"])}
+`;
+
+CONTENT.flowerror = `
+  ${explain(`<p>Beyond framing, the Data Link Layer is also responsible for two more core jobs: making sure the sender doesn't overwhelm the receiver, and making sure the data arrives correctly.</p>`)}
+
+  <h3>💧 Flow Control — Producer & Consumer</h3>
+  <p>Think of the sender as a <strong>producer</strong> of frames and the receiver as a <strong>consumer</strong>. If the producer makes frames faster than the consumer can use them, the receiver needs somewhere to hold the extra ones — a <strong>buffer</strong>. When that buffer fills up, the receiving Data Link Layer must tell the sending Data Link Layer to <strong>stop or slow down</strong>.</p>
+
+  <h3 style="margin-top:20px;">🛡️ Error Control</h3>
+  <p>On the sender's side: Frames → Bits → Electromagnetic Signals. On the receiver's side, this happens in reverse: Signals → Bits → Frames. Along the way, things can go wrong. When an error is detected, it is either:</p>
+  <div class="chiprow">
+    <span class="chip">✔️ Corrected right at the receiver, OR</span>
+    <span class="chip">🗑️ Discarded, and the sender is asked to retransmit it</span>
+  </div>
+
+  ${mistake(`<p>Don't confuse Error Control with Congestion Control! Congestion is about too much traffic overall clogging the network — that's mainly handled by the Network and Transport layers (end-to-end), not the Data Link Layer, even though WANs do sometimes get involved.</p>`)}
+
+  <h3 style="margin-top:20px;">🤝 Combining Flow &amp; Error Control: the ACK</h3>
+  <p>A single <strong>acknowledgment (ACK)</strong> frame can actually do both jobs at once:</p>
+  <div class="chiprow">
+    <span class="chip">Flow Control message: "I've received your frame — I'm ready for the next one."</span>
+    <span class="chip">Error Control message: "The frame I got was correct, with no errors."</span>
+  </div>
+  <p style="margin-top:12px;"><strong>Piggybacking:</strong> when data is flowing in BOTH directions between two nodes, it's efficient to attach ("piggyback") the acknowledgment for data received onto a regular data frame heading the other way — instead of sending a separate, tiny ACK-only frame every time.</p>
+
+  <h3 style="margin-top:20px;">Connectionless vs Connection-Oriented Protocols</h3>
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>Connectionless</h4>
+      <p style="font-size:14.5px;">Frames are independent of each other — not numbered, not ordered. Most LAN data-link protocols work this way.</p>
+    </div>
+    <div class="flow-card">
+      <h4>Connection-Oriented</h4>
+      <p style="font-size:14.5px;">Has clear Setup, Transfer, and Teardown phases. Frames ARE numbered and ordered — the receiver waits until it has every frame in a set. Used in some point-to-point protocols and some wireless LANs/WANs.</p>
+    </div>
+  </div>
+
+  ${remember(["Flow control = don't overwhelm the receiver's buffer (producer/consumer problem)","Error control = correct or discard-and-retransmit corrupted frames","An ACK frame can serve BOTH flow control and error control at once","Piggybacking = attaching an ACK onto a normal data frame heading the other way","Connectionless = independent, unordered frames · Connection-oriented = Setup → Transfer → Teardown, numbered & ordered"])}
+`;
+
+CONTENT.arqprotocols = `
+  ${explain(`<p>Traditionally, four protocols are defined for combining flow and error control at the data-link layer. Tap each one below.</p>`)}
+
+  <div class="diagram">
+    <div class="node clickable" data-pop="No flow control and no error control at all — the sender just sends whenever it has data ready, with no waiting and no acknowledgments.">
+      <span class="emoji">🎯</span>Simple
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Sends exactly one frame, then waits for an acknowledgment before sending the next. Uses CRC to detect corruption, plus sequence numbers.">
+      <span class="emoji">✋</span>Stop-and-Wait
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Sender can have several frames 'in flight' at once (a sliding window) without waiting for each ACK individually. If one is lost, the sender resends THAT frame and every frame after it.">
+      <span class="emoji">↩️</span>Go-Back-N
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Also uses a sliding window of multiple frames in flight, but if one frame is lost, ONLY that specific frame is resent — not the ones after it. More efficient, but the receiver needs a sorting buffer.">
+      <span class="emoji">🎯</span>Selective-Repeat
+      <div class="node-pop"></div>
+    </div>
+  </div>
+
+  <h3>The Simple Protocol</h3>
+  <p>Exactly as the name suggests — it has <strong>neither flow nor error control</strong>. The sender fires off a frame the moment it's ready, with no acknowledgment and no waiting. It works only when the receiver can always keep up.</p>
+
+  <h3 style="margin-top:20px;">The Stop-and-Wait Protocol</h3>
+  <p>This one uses <strong>both</strong> flow and error control. The sender transmits a single frame, then waits for an acknowledgment before sending the next — meaning only one frame and one ACK can ever be "in the channel" at any moment. A <strong>CRC</strong> is added to every data frame to detect corruption.</p>
+
+  <div class="imgcard">
+    <svg viewBox="0 0 380 140">
+      <text x="60" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">Sender</text>
+      <text x="320" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">Receiver</text>
+      <line x1="60" y1="25" x2="60" y2="130" stroke="var(--line)" stroke-width="2"/>
+      <line x1="320" y1="25" x2="320" y2="130" stroke="var(--line)" stroke-width="2"/>
+
+      <line x1="60" y1="40" x2="320" y2="60" stroke="var(--rail)" stroke-width="2.5" marker-end="url(#arrow1)"/>
+      <text x="150" y="38" font-size="10" fill="var(--rail)">Frame 0 sent</text>
+
+      <line x1="320" y1="75" x2="60" y2="95" stroke="var(--spark)" stroke-width="2.5" marker-end="url(#arrow2)"/>
+      <text x="150" y="92" font-size="10" fill="var(--spark)">ACK 1 returned</text>
+
+      <line x1="60" y1="105" x2="320" y2="125" stroke="var(--rail)" stroke-width="2.5" marker-end="url(#arrow1)"/>
+      <text x="150" y="103" font-size="10" fill="var(--rail)">Frame 1 sent</text>
+
+      <defs>
+        <marker id="arrow1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="var(--rail)"/></marker>
+        <marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="var(--spark)"/></marker>
+      </defs>
+    </svg>
+    <p class="imgcaption">The sender waits for the ACK of Frame 0 before sending Frame 1 — only one frame is ever "in flight" at a time.</p>
+  </div>
+
+  <p style="margin-top:12px;">Sequence numbers are added to data frames, and acknowledgment numbers to ACK frames, so both sides can tell exactly which frame is being confirmed. Because the protocol automatically re-sends a frame if its ACK doesn't arrive, it's also known as <strong>ARQ — Automatic Repeat reQuest</strong>.</p>
+
+  <h3 style="margin-top:20px;">Beyond Stop-and-Wait: sliding windows</h3>
+  <p>Stop-and-Wait is simple but slow — the link sits idle while waiting for each ACK. <strong>Go-Back-N</strong> and <strong>Selective-Repeat</strong> both fix this using a <strong>sliding window</strong>, letting the sender have multiple frames outstanding at once. They differ only in how they recover from a lost or corrupted frame — Go-Back-N resends everything from that point onward (simpler, but wastes bandwidth resending already-good frames); Selective-Repeat resends only the exact frame that failed (efficient, but needs the receiver to buffer and reorder frames that arrive out of sequence).</p>
+
+  ${remember(["Simple = no flow/error control at all","Stop-and-Wait = one frame at a time, waits for ACK, uses CRC + sequence numbers (this is ARQ)","Go-Back-N = sliding window, resends the lost frame AND everything after it","Selective-Repeat = sliding window, resends ONLY the lost frame"])}
+`;
+
+CONTENT.errortypes = `
+  ${explain(`<p>Whenever bits travel from one point to another, interference can unpredictably change them along the way. There are two categories of errors.</p>`)}
+
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>1️⃣ Single-Bit Error</h4>
+      <p style="font-size:14.5px;">Only ONE bit in the data unit changes — a 0 flips to a 1, or a 1 flips to a 0.</p>
+    </div>
+    <div class="flow-card">
+      <h4>💥 Burst Error</h4>
+      <p style="font-size:14.5px;">TWO OR MORE bits change — and this is actually the <strong>most likely</strong> type of error to happen in real networks.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:14px;">The number of bits affected in a burst depends on the data rate and how long the noise lasts. <strong>Example:</strong> if data is sent at 1 kbps, just 1/100th of a second of noise can corrupt 10 bits at once!</p>
+
+  <h3 style="margin-top:20px;">Redundancy — the key idea behind catching errors</h3>
+  <p>To detect or correct errors, we send some <strong>extra bits</strong> along with our actual data. These <strong>redundant bits</strong> are added by the sender and removed again by the receiver — they carry no "real" information themselves, but let the receiver check whether something went wrong.</p>
+
+  <h3 style="margin-top:20px;">Detection vs Correction — correction is much harder!</h3>
+  <p><strong>Error Detection</strong> only answers a yes/no question: did ANY error occur? It doesn't even need to know how many bits were affected — a single-bit error is treated the same as a burst error.</p>
+  <p><strong>Error Correction</strong> needs much more — the exact number of corrupted bits AND their precise location in the message. This gets expensive fast: correcting a single error in an 8-bit unit means checking 8 possible locations, but correcting just two errors in that same 8-bit unit means checking 28 possible combinations!</p>
+
+  <h3 style="margin-top:20px;">Coding: how redundancy is actually built</h3>
+  <p>The sender adds redundant bits through a process that creates a mathematical relationship between the redundant bits and the real data bits. The receiver then checks whether that relationship still holds — if it doesn't, an error occurred. Coding schemes fall into two broad families:</p>
+  <div class="chiprow">
+    <span class="chip">🧱 Block Coding — covered next</span>
+    <span class="chip">🌊 Convolutional Coding — encodes a continuous stream rather than fixed blocks</span>
+  </div>
+
+  ${remember(["Single-bit error = one bit flips · Burst error = two or more bits flip (more common in practice)","Redundancy = extra bits added purely to help detect/correct errors","Detection just says YES/NO · Correction needs the exact location(s) of the error(s) — much harder","Coding creates a relationship between redundant bits and data bits, which the receiver checks"])}
+`;
+
+CONTENT.blockcrc = `
+  ${explain(`<p><strong>Block coding</strong> divides a message into fixed-size blocks, then adds redundant bits to each one.</p>`)}
+
+  <div class="chiprow">
+    <span class="chip">A dataword of k bits becomes a codeword of n bits (n &gt; k)</span>
+    <span class="chip">The extra r = n − k bits are the redundant bits</span>
+    <span class="chip">This gives 2ᵏ possible datawords mapped to 2ⁿ possible codewords</span>
+  </div>
+  <p style="margin-top:10px;">Block coding is <strong>one-to-one</strong> — the same dataword is always encoded into the exact same codeword.</p>
+
+  <h3>How does the receiver detect an error?</h3>
+  <p>Two conditions must both be true:</p>
+  <ol>
+    <li>The receiver has (or can figure out) a list of every <strong>valid</strong> codeword.</li>
+    <li>The original codeword has changed into an <strong>invalid</strong> one during transmission.</li>
+  </ol>
+  <div class="card" style="background:var(--bg);">
+    <p style="margin:0;"><strong>Worked scenario:</strong> the receiver expects codeword <code>011</code>.</p>
+    <ul style="margin:8px 0 0;">
+      <li>If the leftmost bit flips, <code>111</code> is received instead — if that's not on the valid list, the error is caught.</li>
+      <li>If the right two bits flip, <code>000</code> is received instead — again caught, if invalid.</li>
+    </ul>
+  </div>
+
+  <h3 style="margin-top:20px;">Cyclic Codes — a special kind of block code</h3>
+  <p>In a <strong>cyclic code</strong>, if you cyclically shift (rotate) a valid codeword, the result is <strong>also</strong> a valid codeword. For example, if <code>1011000</code> is a valid codeword, then left-shifting it cyclically gives <code>0110001</code> — which is also valid.</p>
+
+  <h3 style="margin-top:20px;">CRC — Cyclic Redundancy Check</h3>
+  <p><strong>CRC</strong> is a widely-used subset of cyclic codes, common in LANs and WANs.</p>
+
+  <div class="imgcard">
+    <svg viewBox="0 0 380 110">
+      <rect x="10" y="15" width="100" height="40" rx="8" fill="var(--rail)"/>
+      <text x="60" y="39" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Encoder</text>
+      <text x="60" y="70" text-anchor="middle" font-size="11" fill="var(--ink-soft)">divides data by</text>
+      <text x="60" y="83" text-anchor="middle" font-size="11" fill="var(--ink-soft)">a generator, appends</text>
+      <text x="60" y="96" text-anchor="middle" font-size="11" fill="var(--ink-soft)">the remainder</text>
+
+      <line x1="115" y1="35" x2="185" y2="35" stroke="var(--ink-soft)" stroke-width="2" marker-end="url(#arrowcrc)"/>
+      <text x="150" y="27" text-anchor="middle" font-size="10">codeword sent</text>
+
+      <rect x="190" y="15" width="100" height="40" rx="8" fill="var(--spark)"/>
+      <text x="240" y="39" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Decoder</text>
+      <text x="240" y="70" text-anchor="middle" font-size="11" fill="var(--ink-soft)">divides received</text>
+      <text x="240" y="83" text-anchor="middle" font-size="11" fill="var(--ink-soft)">codeword by SAME</text>
+      <text x="240" y="96" text-anchor="middle" font-size="11" fill="var(--ink-soft)">generator</text>
+
+      <line x1="295" y1="35" x2="350" y2="35" stroke="var(--ink-soft)" stroke-width="2" marker-end="url(#arrowcrc)"/>
+      <text x="322" y="27" text-anchor="middle" font-size="9">remainder = 0?</text>
+      <text x="322" y="55" text-anchor="middle" font-size="9" fill="var(--right)" font-weight="700">no error!</text>
+      <defs><marker id="arrowcrc" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="var(--ink-soft)"/></marker></defs>
+    </svg>
+    <p class="imgcaption">The sender's encoder divides the data by an agreed-upon "generator" number and attaches the remainder. If the receiver's decoder divides the received codeword by that same generator and gets a remainder of 0, the frame is (very likely) error-free.</p>
+  </div>
+
+  <p style="margin-top:12px;">The divisor (generator) isn't picked randomly — it's a <strong>generator polynomial</strong> chosen specifically because it has strong mathematical properties for catching errors reliably.</p>
+
+  ${remember(["Block coding: k-bit dataword → n-bit codeword, one-to-one mapping","Detecting an error needs: a known list of valid codewords, AND the corruption must produce an invalid one","Cyclic code = rotating a valid codeword always gives another valid codeword","CRC = divide by a generator polynomial; a nonzero remainder at the receiver signals an error"])}
+`;
+
+CONTENT.checksum = `
+  ${explain(`<p><strong>Checksum</strong> is an error-detecting technique that works on a message of ANY length. On the modern Internet, it's mostly used at the Network and Transport layers rather than the Data Link Layer.</p>`)}
+
+  <h3>A simple (but flawed) first attempt</h3>
+  <p>Suppose we want to send the numbers <strong>(7, 11, 12, 0, 6)</strong>. We add them up: 7+11+12+0+6 = <strong>36</strong>. We send <strong>(7, 11, 12, 0, 6, 36)</strong> — the receiver adds the first five and checks it matches the sixth.</p>
+  <p><strong>The problem:</strong> if each number fits in 4 bits (since they're all under 15), the sum 36 does NOT fit in 4 bits! We need a smarter way to keep everything the same size.</p>
+
+  <h3 style="margin-top:20px;">The fix: One's Complement Arithmetic</h3>
+  <p>In one's complement arithmetic, numbers between 0 and 2ᵐ − 1 can be represented using only <strong>m</strong> bits. If a result needs MORE than m bits, the extra leftmost bits simply "wrap around" and get added back onto the m rightmost bits.</p>
+
+  <div class="card" style="background:var(--bg);">
+    <p style="margin:0 0 8px;"><strong>Worked example — Sender's side</strong> (values 7, 11, 12, 0, 6, each as a 4-bit binary number):</p>
+    <ul style="margin:0;">
+      <li>0111 + 1011 = 10010 → wrap the extra leftmost bit in: 0010 + 1 = <strong>0011</strong> (3)</li>
+      <li>0011 + 1100 = 1111 (15)</li>
+      <li>1111 + 0000 = 1111 (15)</li>
+      <li>1111 + 0110 = 10101 → wrap: 0101 + 1 = <strong>0110</strong> (6) — this is the Sum</li>
+      <li><strong>Checksum</strong> = one's complement of the Sum (0110) = <strong>1001</strong> (decimal 9)</li>
+    </ul>
+    <p style="margin:10px 0 0;">The sender transmits the 5 original values PLUS this checksum (9).</p>
+  </div>
+
+  <div class="card" style="background:var(--bg); margin-top:12px;">
+    <p style="margin:0 0 8px;"><strong>Worked example — Receiver's side</strong></p>
+    <p style="margin:0;">The receiver adds ALL the received values, including the checksum itself: Data Sum (0110) + Checksum (1001) = <strong>1111</strong>. Complementing 1111 gives <strong>0000</strong> — a "positive zero," which tells the receiver: <strong style="color:var(--right);">the data was NOT corrupted!</strong></p>
+  </div>
+
+  <h3 style="margin-top:20px;">Why does this trick work?</h3>
+  <p>In one's complement arithmetic there are actually two "zeros": <strong>positive zero</strong> (all bits 0) and <strong>negative zero</strong> (all bits 1) — and they are complements of each other. Adding any number to its own complement always produces a negative zero. So when the receiver adds all values (data + checksum) and gets a negative zero, then complements it, a resulting positive zero confirms everything arrived correctly.</p>
+
+  <h3 style="margin-top:20px;">The Internet Checksum &amp; its limits</h3>
+  <p>The Internet's own checksum algorithm follows the same idea, using two's complement addition combined with a one's complement conversion step. It's compact — just 16 bits can check a message of any size — but it's noticeably <strong>weaker</strong> than CRC: if, by unlucky coincidence, the sum and checksum happen to still match after corruption, the error slips through undetected.</p>
+  <p>Other checksum variants exist too, such as the <strong>Fletcher Checksum</strong> and the <strong>Adler Checksum</strong>, which improve on some of the traditional checksum's weaknesses.</p>
+
+  ${remember(["Checksum works on messages of any length, mainly used at Network/Transport layers","One's complement arithmetic wraps extra leftmost bits back onto the right side","Checksum = one's complement of the sum · Receiver adds everything (including checksum) and expects a 'positive zero'","Checksum is compact (16 bits) but weaker than CRC at catching errors"])}
+`;
+
+/* ================= UNIT 3 CONTENT: MEDIA ACCESS CONTROL ================= */
+
+CONTENT.macbasics = `
+  ${explain(`
+    <p>When multiple stations share the same broadcast link (a "multipoint" link), we need rules to coordinate who gets to send and when. These rules belong to a sublayer of the Data Link Layer called <strong>Media Access Control (MAC)</strong>.</p>
+  `)}
+
+  <h3>Random Access (Contention Methods)</h3>
+  <p>In <strong>random access</strong>, no station is superior to another, and no station is given control over the rest. Each time a station wants to send, it uses a procedure to decide whether or not to transmit — based on whether the medium is currently idle or busy.</p>
+
+  <h3 style="margin-top:20px;">Why is it called "random" access?</h3>
+  <div class="chiprow">
+    <span class="chip">⏱️ There's no scheduled time for any station to transmit — it happens randomly among the stations</span>
+    <span class="chip">🙅 No rule specifies which station goes next — stations simply compete for the medium</span>
+  </div>
+
+  <p style="margin-top:14px;">If more than one station tries to send at the same time, the result is a <strong>collision</strong>! To avoid this, every station's procedure must answer four questions:</p>
+  <div class="chiprow">
+    <span class="chip">When can I access the medium?</span>
+    <span class="chip">What do I do if the medium is busy?</span>
+    <span class="chip">How do I know if my transmission succeeded or failed?</span>
+    <span class="chip">What do I do if there's an access conflict?</span>
+  </div>
+
+  <h3 style="margin-top:20px;">How random-access methods evolved</h3>
+  <div class="diagram">
+    <div class="node clickable" data-pop="A very simple 'multiple access' (MA) procedure from the University of Hawaii, developed in the early 1970s for wireless LANs.">
+      <span class="emoji">📻</span>ALOHA
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Carrier Sense Multiple Access — 'sense before transmit.' A station checks if the medium is idle before sending.">
+      <span class="emoji">👂</span>CSMA
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="CSMA with Collision Detection — used on wired networks; a station keeps listening WHILE sending, to detect collisions early.">
+      <span class="emoji">💥</span>CSMA/CD
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="CSMA with Collision Avoidance — used on wireless networks, where reliably detecting collisions directly is much harder.">
+      <span class="emoji">🚫</span>CSMA/CA
+      <div class="node-pop"></div>
+    </div>
+  </div>
+
+  ${remember(["MAC = the data-link sublayer that coordinates access to a shared/broadcast link","Random access = no station is superior; stations compete, and collisions can happen","4 key questions: when to send, what to do if busy, how to detect success/failure, what to do on conflict","Evolution: ALOHA → CSMA → CSMA/CD (wired) and CSMA/CA (wireless)"])}
+`;
+
+CONTENT.aloha = `
+  ${explain(`<p><strong>ALOHA</strong> was developed at the University of Hawaii in the early 1970s, originally for a wireless radio LAN — though the idea works on any shared medium.</p>`)}
+
+  <h3>📻 Pure ALOHA</h3>
+  <p>Each station simply sends a frame the moment it has one ready. Since there's only one shared channel, collisions are always possible when two stations transmit around the same time. Pure ALOHA relies on <strong>acknowledgments</strong>: after sending, the station expects an ACK back. If none arrives within a <strong>timeout period</strong>, the station assumes a collision occurred and resends.</p>
+
+  <div class="chiprow">
+    <span class="chip">Timeout period = 2 × Tp (twice the maximum propagation time between the two most distant stations)</span>
+    <span class="chip">If ALL colliding stations just resent immediately, they'd collide again! So each waits a random <strong>backoff time</strong> first.</span>
+    <span class="chip">Kmax = maximum number of retransmission attempts before giving up (usually 15)</span>
+  </div>
+
+  <p style="margin-top:12px;"><strong>Binary Exponential Backoff:</strong> after the Kth collision, the station waits a random number of time slots between 0 and 2ᴷ−1 — the possible wait range doubles after each collision (1st collision: 0–1 slots; 2nd: 0–3 slots; 3rd: 0–7 slots, and so on).</p>
+
+  <div class="imgcard">
+    <svg viewBox="0 0 380 90">
+      <line x1="10" y1="60" x2="370" y2="60" stroke="var(--line)" stroke-width="2"/>
+      <rect x="130" y="30" width="60" height="25" fill="var(--rail)"/>
+      <text x="160" y="47" text-anchor="middle" font-size="10" fill="#fff">Frame sent</text>
+      <rect x="70" y="30" width="60" height="25" fill="var(--spark)" opacity="0.35"/>
+      <rect x="190" y="30" width="60" height="25" fill="var(--spark)" opacity="0.35"/>
+      <text x="160" y="20" text-anchor="middle" font-size="10" font-weight="700" fill="var(--spark)">Vulnerable time = 2 × Tfr</text>
+      <text x="60" y="75" font-size="9" fill="var(--ink-soft)">another station could start...</text>
+      <text x="245" y="75" font-size="9" fill="var(--ink-soft)">...or finish here and still collide</text>
+    </svg>
+    <p class="imgcaption">In Pure ALOHA, a collision can happen if another station starts up to one full frame-time BEFORE, or finishes up to one full frame-time AFTER — a vulnerable window of 2 × Tfr.</p>
+  </div>
+
+  <h3 style="margin-top:20px;">Pure ALOHA vs Slotted ALOHA — as flowcharts</h3>
+  <p>The two protocols follow almost the same steps — except Slotted ALOHA adds ONE extra step (highlighted in gold below): waiting for the next time-slot boundary before it's allowed to send.</p>
+
+  <div class="imgcard tall">
+    <svg viewBox="0 0 480 260">
+      <defs>
+        <marker id="af1" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="var(--ink-soft)"/></marker>
+      </defs>
+
+      <text x="110" y="12" text-anchor="middle" font-size="11" font-weight="700" fill="var(--rail)">Pure ALOHA</text>
+      <rect x="55" y="20" width="110" height="24" rx="6" fill="var(--rail)"/>
+      <text x="110" y="35" text-anchor="middle" font-size="9" fill="#fff">Frame ready</text>
+      <line x1="110" y1="44" x2="110" y2="52" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af1)"/>
+
+      <rect x="55" y="52" width="110" height="24" rx="6" fill="var(--rail)"/>
+      <text x="110" y="67" text-anchor="middle" font-size="9" fill="#fff">Send frame now</text>
+      <line x1="110" y1="76" x2="110" y2="84" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af1)"/>
+
+      <rect x="55" y="84" width="110" height="26" rx="6" fill="var(--rail)"/>
+      <text x="110" y="95" text-anchor="middle" font-size="8.5" fill="#fff">Wait for ACK</text>
+      <text x="110" y="106" text-anchor="middle" font-size="8.5" fill="#fff">(timeout = 2Tp)</text>
+      <line x1="110" y1="110" x2="110" y2="118" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af1)"/>
+
+      <polygon points="110,118 155,142 110,166 65,142" fill="var(--bg-panel)" stroke="var(--rail)" stroke-width="2"/>
+      <text x="110" y="139" text-anchor="middle" font-size="8.5" fill="var(--ink)">ACK</text>
+      <text x="110" y="150" text-anchor="middle" font-size="8.5" fill="var(--ink)">received?</text>
+
+      <line x1="155" y1="142" x2="190" y2="142" stroke="var(--right)" stroke-width="1.5" marker-end="url(#af1)"/>
+      <text x="165" y="136" font-size="8" fill="var(--right)">Yes</text>
+      <rect x="190" y="128" width="60" height="28" rx="6" fill="var(--right)"/>
+      <text x="220" y="146" text-anchor="middle" font-size="9" fill="#fff">✅ Done</text>
+
+      <line x1="110" y1="166" x2="110" y2="180" stroke="var(--wrong)" stroke-width="1.5" marker-end="url(#af1)"/>
+      <text x="118" y="176" font-size="8" fill="var(--wrong)">No</text>
+
+      <rect x="50" y="180" width="120" height="28" rx="6" fill="var(--spark)"/>
+      <text x="110" y="192" text-anchor="middle" font-size="8.5" fill="#fff">Wait random</text>
+      <text x="110" y="203" text-anchor="middle" font-size="8.5" fill="#fff">backoff time</text>
+
+      <path d="M50,194 L25,194 L25,64 L52,64" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af1)"/>
+      <text x="10" y="130" font-size="7.5" fill="var(--ink-soft)" transform="rotate(-90 10 130)">retry (max 15×)</text>
+
+      <line x1="240" y1="0" x2="240" y2="260" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 3"/>
+
+      <text x="360" y="12" text-anchor="middle" font-size="11" font-weight="700" fill="var(--spark-dark)">Slotted ALOHA</text>
+      <rect x="305" y="20" width="110" height="24" rx="6" fill="var(--rail)"/>
+      <text x="360" y="35" text-anchor="middle" font-size="9" fill="#fff">Frame ready</text>
+      <line x1="360" y1="44" x2="360" y2="52" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af1)"/>
+
+      <rect x="295" y="52" width="130" height="26" rx="6" fill="var(--spark)"/>
+      <text x="360" y="63" text-anchor="middle" font-size="8.5" fill="#fff">Wait for next</text>
+      <text x="360" y="74" text-anchor="middle" font-size="8.5" fill="#fff">time-slot start</text>
+      <line x1="360" y1="78" x2="360" y2="86" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af1)"/>
+
+      <rect x="305" y="86" width="110" height="24" rx="6" fill="var(--rail)"/>
+      <text x="360" y="101" text-anchor="middle" font-size="9" fill="#fff">Send frame</text>
+      <line x1="360" y1="110" x2="360" y2="118" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af1)"/>
+
+      <rect x="305" y="118" width="110" height="26" rx="6" fill="var(--rail)"/>
+      <text x="360" y="129" text-anchor="middle" font-size="8.5" fill="#fff">Wait for ACK</text>
+      <text x="360" y="140" text-anchor="middle" font-size="8.5" fill="#fff">(timeout = 2Tp)</text>
+      <line x1="360" y1="144" x2="360" y2="152" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af1)"/>
+
+      <polygon points="360,152 405,176 360,200 315,176" fill="var(--bg-panel)" stroke="var(--rail)" stroke-width="2"/>
+      <text x="360" y="173" text-anchor="middle" font-size="8.5" fill="var(--ink)">ACK</text>
+      <text x="360" y="184" text-anchor="middle" font-size="8.5" fill="var(--ink)">received?</text>
+
+      <line x1="405" y1="176" x2="440" y2="176" stroke="var(--right)" stroke-width="1.5" marker-end="url(#af1)"/>
+      <text x="415" y="170" font-size="8" fill="var(--right)">Yes</text>
+      <rect x="440" y="162" width="35" height="28" rx="6" fill="var(--right)"/>
+      <text x="457" y="180" text-anchor="middle" font-size="9" fill="#fff">✅</text>
+
+      <line x1="360" y1="200" x2="360" y2="214" stroke="var(--wrong)" stroke-width="1.5" marker-end="url(#af1)"/>
+      <text x="368" y="210" font-size="8" fill="var(--wrong)">No</text>
+
+      <rect x="300" y="214" width="120" height="28" rx="6" fill="var(--spark)"/>
+      <text x="360" y="226" text-anchor="middle" font-size="8.5" fill="#fff">Wait random</text>
+      <text x="360" y="237" text-anchor="middle" font-size="8.5" fill="#fff">backoff time</text>
+
+      <path d="M300,228 L280,228 L280,64 L293,64" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af1)"/>
+    </svg>
+    <p class="imgcaption">Notice the loop-back arrows: Pure ALOHA retries by jumping straight back to "Send frame," while Slotted ALOHA's retry always lands back on "Wait for next time-slot start" (gold box) — it can never send off-slot, even on a retry.</p>
+  </div>
+
+  <p>Throughput (the fraction of frames that get through successfully) is <strong>S = G × e⁻²ᴳ</strong>, where G is the average number of frames generated during one frame-transmission time. The best possible throughput is only <strong>S = 1/2e ≈ 0.184</strong> — just <strong>18.4%</strong> — achieved when G = 0.5.</p>
+
+  <h3 style="margin-top:22px;">📶 Slotted ALOHA — a big improvement</h3>
+  <p>Slotted ALOHA divides time into slots of exactly Tfr seconds, and forces every station to send ONLY at the very start of a slot. This simple change <strong>halves the vulnerable time</strong> down to just Tfr, since two stations can now only collide if they start in the very same slot.</p>
+  <p>Throughput becomes <strong>S = G × e⁻ᴳ</strong>, with a maximum of <strong>S = 0.368</strong> — <strong>36.8%</strong> — achieved when G = 1. That's double Pure ALOHA's best performance, just from timing sends to slot boundaries!</p>
+
+  ${remember(["Pure ALOHA = send whenever ready; rely on ACK + timeout + random backoff to handle collisions","Pure ALOHA's vulnerable time = 2 × Tfr · max throughput = 18.4% (at G = 0.5)","Slotted ALOHA = must send only at the start of a time slot","Slotted ALOHA's vulnerable time = Tfr (halved) · max throughput = 36.8% (at G = 1)"])}
+`;
+
+CONTENT.csmacd = `
+  ${explain(`<p>To reduce collisions further than ALOHA managed, <strong>CSMA (Carrier Sense Multiple Access)</strong> was developed, based on one simple principle: <strong>"sense before transmit"</strong> — or "listen before talk."</p>`)}
+
+  ${mistake(`<p>CSMA can reduce the CHANCE of a collision, but it can never fully eliminate it — because of propagation delay, a station might sense the channel as idle even though another station's signal just hasn't reached it yet.</p>`)}
+
+  <p>CSMA's vulnerable time shrinks to just the <strong>propagation time (Tp)</strong> — much smaller than ALOHA's whole frame time.</p>
+
+  <h3>What should a station do if the channel is busy?</h3>
+  <p>Three "persistence" strategies answer this:</p>
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>1-Persistent</h4>
+      <p style="font-size:14px;">Keep sensing continuously; the instant the channel goes idle, transmit immediately (with probability 1). Simple, but risky — if several stations are all waiting, they'll all jump in at once.</p>
+    </div>
+    <div class="flow-card">
+      <h4>Nonpersistent</h4>
+      <p style="font-size:14px;">If busy, wait a random amount of time, then sense again — rather than continuously monitoring. Reduces collisions, but can waste idle channel time.</p>
+    </div>
+    <div class="flow-card">
+      <h4>p-Persistent</h4>
+      <p style="font-size:14px;">When idle, transmit with probability p, or wait for the next time slot with probability (1−p). A tunable middle ground between the other two.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:22px;">💥 CSMA/CD — adding Collision Detection</h3>
+  <p>CSMA/CD builds on CSMA by having the sender keep monitoring the channel WHILE it transmits. If a collision is detected, the station immediately <strong>aborts</strong> transmission and sends a brief <strong>jamming signal</strong> so every station on the shared medium knows a collision just happened.</p>
+
+  <h3 style="margin-top:18px;">Why is there a minimum frame size?</h3>
+  <p>A station must detect a collision <em>before</em> it finishes sending its last bit — otherwise it won't realize the frame was destroyed. This means the frame's transmission time (Tfr) must be <strong>at least twice</strong> the maximum propagation time (Tp): <strong>Tfr ≥ 2 × Tp</strong>. This guarantees the sender is still transmitting when a signal from the far end of the network could reach it.</p>
+
+  <div class="chiprow">
+    <span class="chip">⚪ Energy Level: Normal — a station is transmitting alone, no collision</span>
+    <span class="chip">🔵 Energy Level: Zero — the channel is idle</span>
+    <span class="chip">🔴 Energy Level: Abnormal — energy is higher than any single station could produce alone — a collision is happening!</span>
+  </div>
+
+  <p style="margin-top:12px;"><strong>Throughput:</strong> for the 1-persistent method, maximum throughput is only around 50% (at G=1). For the nonpersistent method, it can reach as high as 90% (when G is between 3 and 8) — showing why patience (waiting instead of pouncing) often pays off on a busy network!</p>
+
+  ${remember(["CSMA = sense before transmit; reduces but never fully eliminates collisions","CSMA's vulnerable time = Tp (propagation time only)","1-persistent = send immediately when idle · Nonpersistent = wait random time, then resense · p-persistent = send with probability p","CSMA/CD adds collision detection + a jamming signal; needs Tfr ≥ 2×Tp so the sender is still transmitting when a collision could be detected"])}
+`;
+
+CONTENT.csmaca = `
+  ${explain(`<p><strong>CSMA/CA (Collision Avoidance)</strong> was designed for wireless networks, where directly detecting a collision (like CSMA/CD does on wires) is much harder — a wireless station usually can't listen and transmit strongly at the same time, and signals fade very differently over the air. So instead of detecting collisions, CSMA/CA tries to <strong>avoid</strong> them in the first place, using three strategies.</p>`)}
+
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>1. Interframe Space (IFS)</h4>
+      <p style="font-size:14px;">Even when a station finds the channel idle, it doesn't send immediately — it waits a short period called the IFS first. If the channel is STILL idle after that, it can proceed (but still needs to wait through the contention window below).</p>
+    </div>
+    <div class="flow-card">
+      <h4>2. Contention Window</h4>
+      <p style="font-size:14px;">The station picks a random number of time slots to wait, following the same binary exponential backoff idea as ALOHA/CSMA-CD. It re-checks the channel after each slot.</p>
+    </div>
+    <div class="flow-card">
+      <h4>3. Acknowledgment</h4>
+      <p style="font-size:14px;">Even with all this care, a collision or corruption could still occur. A positive ACK, backed by a timeout timer, confirms to the sender that the frame truly arrived safely.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;">CSMA/CA as a flowchart</h3>
+  <p>Putting all three strategies together, here's the full decision process a station follows:</p>
+
+  <div class="imgcard tall">
+    <svg viewBox="0 0 300 400">
+      <defs>
+        <marker id="af2" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="var(--ink-soft)"/></marker>
+      </defs>
+
+      <rect x="70" y="8" width="160" height="26" rx="6" fill="var(--rail)"/>
+      <text x="150" y="25" text-anchor="middle" font-size="10" fill="#fff">Frame ready to send</text>
+      <line x1="150" y1="34" x2="150" y2="44" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af2)"/>
+
+      <polygon points="150,44 195,68 150,92 105,68" fill="var(--bg-panel)" stroke="var(--rail)" stroke-width="2"/>
+      <text x="150" y="65" text-anchor="middle" font-size="9" fill="var(--ink)">Channel</text>
+      <text x="150" y="77" text-anchor="middle" font-size="9" fill="var(--ink)">idle?</text>
+
+      <path d="M195,68 C 240,50 240,86 197,70" fill="none" stroke="var(--wrong)" stroke-width="1.5" marker-end="url(#af2)"/>
+      <text x="220" y="45" font-size="7.5" fill="var(--wrong)">No — keep sensing</text>
+
+      <line x1="150" y1="92" x2="150" y2="102" stroke="var(--right)" stroke-width="1.5" marker-end="url(#af2)"/>
+      <text x="158" y="99" font-size="8" fill="var(--right)">Yes</text>
+
+      <rect x="65" y="102" width="170" height="24" rx="6" fill="var(--spark)"/>
+      <text x="150" y="118" text-anchor="middle" font-size="9" fill="#fff">1. Wait DIFS (interframe space)</text>
+      <line x1="150" y1="126" x2="150" y2="136" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af2)"/>
+
+      <rect x="55" y="136" width="190" height="26" rx="6" fill="var(--spark)"/>
+      <text x="150" y="150" text-anchor="middle" font-size="8.5" fill="#fff">2. Choose random Contention</text>
+      <text x="150" y="160" text-anchor="middle" font-size="8.5" fill="#fff">Window &amp; count down</text>
+      <line x1="150" y1="162" x2="150" y2="172" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af2)"/>
+
+      <rect x="70" y="172" width="160" height="24" rx="6" fill="var(--rail)"/>
+      <text x="150" y="188" text-anchor="middle" font-size="9" fill="#fff">Send RTS, then frame</text>
+      <line x1="150" y1="196" x2="150" y2="206" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af2)"/>
+
+      <rect x="70" y="206" width="160" height="26" rx="6" fill="var(--volt)"/>
+      <text x="150" y="223" text-anchor="middle" font-size="9" fill="var(--ink)">3. Wait for CTS / ACK</text>
+      <line x1="150" y1="232" x2="150" y2="242" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af2)"/>
+
+      <polygon points="150,242 200,268 150,294 100,268" fill="var(--bg-panel)" stroke="var(--rail)" stroke-width="2"/>
+      <text x="150" y="265" text-anchor="middle" font-size="9" fill="var(--ink)">ACK</text>
+      <text x="150" y="277" text-anchor="middle" font-size="9" fill="var(--ink)">received?</text>
+
+      <line x1="200" y1="268" x2="240" y2="268" stroke="var(--right)" stroke-width="1.5" marker-end="url(#af2)"/>
+      <text x="208" y="262" font-size="8" fill="var(--right)">Yes</text>
+      <rect x="240" y="254" width="50" height="28" rx="6" fill="var(--right)"/>
+      <text x="265" y="272" text-anchor="middle" font-size="9" fill="#fff">✅ Done</text>
+
+      <line x1="150" y1="294" x2="150" y2="308" stroke="var(--wrong)" stroke-width="1.5" marker-end="url(#af2)"/>
+      <text x="158" y="304" font-size="8" fill="var(--wrong)">No</text>
+
+      <rect x="55" y="308" width="190" height="28" rx="6" fill="var(--wrong)"/>
+      <text x="150" y="320" text-anchor="middle" font-size="8.5" fill="#fff">Increase Contention Window</text>
+      <text x="150" y="331" text-anchor="middle" font-size="8.5" fill="#fff">(exponential backoff)</text>
+
+      <path d="M55,322 L20,322 L20,68 L103,68" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#af2)"/>
+      <text x="8" y="200" font-size="7.5" fill="var(--ink-soft)" transform="rotate(-90 8 200)">retry from the top</text>
+    </svg>
+    <p class="imgcaption">The three CSMA/CA strategies — Interframe Space, Contention Window, and Acknowledgment — mapped onto one flow. A failed ACK sends the station all the way back to re-checking whether the channel is idle.</p>
+  </div>
+
+  <h3 style="margin-top:20px;">The Frame Exchange Timeline</h3>
+  <p>A full CSMA/CA exchange often uses several short control messages:</p>
+  <div class="chiprow">
+    <span class="chip">DIFS — Distributed Coordination Function Interframe Space</span>
+    <span class="chip">RTS — Request To Send</span>
+    <span class="chip">SIFS — Short Interframe Space</span>
+    <span class="chip">CTS — Clear To Send</span>
+    <span class="chip">NAV — Network Allocation Vector (tells other stations how long to stay quiet)</span>
+    <span class="chip">ACK — Acknowledgment</span>
+  </div>
+
+  <h3 style="margin-top:20px;">Open questions CSMA/CA still has to handle</h3>
+  <p>What if a collision happens DURING the RTS/CTS handshaking itself? And what about the classic <strong>hidden-station problem</strong> — where two stations can each "hear" a shared access point, but can't hear each other, so neither realizes the other is about to transmit?</p>
+
+  ${remember(["CSMA/CA is built for wireless, where direct collision detection is impractical","3 strategies: Interframe Space (IFS), Contention Window (random backoff), Acknowledgment","Frame exchange uses DIFS, RTS, SIFS, CTS, NAV, and ACK","The hidden-station problem: two stations can't hear each other, even though both can hear a shared access point"])}
+`;
+
+CONTENT.controlled = `
+  ${explain(`<p>In <strong>controlled access</strong>, stations consult one another before anyone sends — a station cannot transmit unless it has been specifically authorized by the others. This trades some flexibility for far fewer collisions.</p>`)}
+
+  <h3>📅 Reservation</h3>
+  <p>Time is divided into intervals. In each interval, a small <strong>reservation frame</strong> goes out first, letting stations claim a slot before the actual data frames for that interval are sent.</p>
+
+  <h3 style="margin-top:20px;">📋 Polling</h3>
+  <p>Polling needs one device designated as the <strong>primary station</strong>, with the rest as <strong>secondary stations</strong>. Every exchange goes through the primary — even when the real destination is a secondary device — and the primary always initiates each session.</p>
+  <div class="chiprow">
+    <span class="chip">SELECT function — used when the primary has data to send TO a secondary</span>
+    <span class="chip">POLL function — used by the primary to ask secondaries whether THEY have data to send</span>
+  </div>
+
+  <h3 style="margin-top:20px;">🎫 Token Passing</h3>
+  <p>Stations are arranged in a <strong>logical ring</strong> — each one has a predecessor and a successor. A special packet called a <strong>token</strong> circulates around this ring. Whichever station currently holds the token has earned the right to access the channel and send data; once done, it passes the token along to its successor.</p>
+
+  <div class="imgcard">
+    <svg viewBox="0 0 220 160">
+      <circle cx="110" cy="80" r="55" fill="none" stroke="var(--line)" stroke-width="2" stroke-dasharray="4 3"/>
+      <circle cx="110" cy="25" r="16" fill="var(--rail)"/><text x="110" y="30" text-anchor="middle" font-size="12" fill="#fff">A</text>
+      <circle cx="160" cy="60" r="16" fill="var(--rail)"/><text x="160" y="65" text-anchor="middle" font-size="12" fill="#fff">B</text>
+      <circle cx="140" cy="125" r="16" fill="var(--rail)"/><text x="140" y="130" text-anchor="middle" font-size="12" fill="#fff">C</text>
+      <circle cx="80" cy="125" r="16" fill="var(--rail)"/><text x="80" y="130" text-anchor="middle" font-size="12" fill="#fff">D</text>
+      <circle cx="60" cy="60" r="16" fill="var(--spark)"/><text x="60" y="65" text-anchor="middle" font-size="12" fill="#fff">🎫</text>
+      <path d="M65,45 A55,55 0 0,1 100,26" stroke="var(--spark)" stroke-width="2" fill="none" marker-end="url(#arrowtok)"/>
+      <defs><marker id="arrowtok" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="var(--spark)"/></marker></defs>
+    </svg>
+    <p class="imgcaption">Station E (gold, holding the token 🎫) currently has the right to transmit. When it's done, it passes the token onward to station A, its successor around the ring.</p>
+  </div>
+
+  <p style="margin-top:12px;"><strong>Token management</strong> matters a lot here — how long a station is allowed to hold the token, what happens if a token gets lost, and whether some stations get priority over others based on their data.</p>
+
+  ${remember(["Controlled access = stations authorize each other before anyone sends","Reservation = a reservation frame claims a slot before each interval's data frames","Polling = primary station controls everything; SELECT sends to a secondary, POLL asks a secondary if it has data","Token Passing = a token circulates a logical ring; holding it = the right to transmit"])}
+`;
+
+CONTENT.channelization = `
+  ${explain(`<p><strong>Channelization</strong> (or channel partitioning) is a multiple-access method where the available bandwidth of a link is divided among different stations — by Time, Frequency, or Code.</p>`)}
+
+  <div class="imgcard">
+    <svg viewBox="0 0 420 130">
+      <text x="70" y="15" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">FDMA</text>
+      <rect x="20" y="22" width="100" height="18" fill="var(--rail)"/><text x="70" y="35" text-anchor="middle" font-size="9" fill="#fff">Station 1 (own freq)</text>
+      <rect x="20" y="42" width="100" height="18" fill="var(--spark)"/><text x="70" y="55" text-anchor="middle" font-size="9" fill="#fff">Station 2 (own freq)</text>
+      <rect x="20" y="62" width="100" height="18" fill="var(--volt)"/><text x="70" y="75" text-anchor="middle" font-size="9">Station 3 (own freq)</text>
+      <text x="70" y="95" text-anchor="middle" font-size="9" fill="var(--ink-soft)">all sending at the same time,</text>
+      <text x="70" y="107" text-anchor="middle" font-size="9" fill="var(--ink-soft)">each on its own frequency band</text>
+
+      <text x="215" y="15" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">TDMA</text>
+      <rect x="165" y="22" width="30" height="58" fill="var(--rail)"/><text x="180" y="55" text-anchor="middle" font-size="8" fill="#fff" transform="rotate(-90 180 55)">Stn 1</text>
+      <rect x="195" y="22" width="30" height="58" fill="var(--spark)"/><text x="210" y="55" text-anchor="middle" font-size="8" fill="#fff" transform="rotate(-90 210 55)">Stn 2</text>
+      <rect x="225" y="22" width="30" height="58" fill="var(--volt)"/><text x="240" y="55" text-anchor="middle" font-size="8" transform="rotate(-90 240 55)">Stn 3</text>
+      <text x="215" y="95" text-anchor="middle" font-size="9" fill="var(--ink-soft)">each station gets the WHOLE</text>
+      <text x="215" y="107" text-anchor="middle" font-size="9" fill="var(--ink-soft)">band, but only for its own time slot</text>
+
+      <text x="365" y="15" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">CDMA</text>
+      <rect x="315" y="22" width="100" height="58" fill="var(--rail)" opacity="0.35"/>
+      <rect x="315" y="22" width="100" height="58" fill="var(--spark)" opacity="0.35"/>
+      <rect x="315" y="22" width="100" height="58" fill="var(--volt)" opacity="0.35"/>
+      <text x="365" y="55" text-anchor="middle" font-size="9" fill="var(--ink)">all overlap, separated</text>
+      <text x="365" y="67" text-anchor="middle" font-size="9" fill="var(--ink)">only by unique CODES</text>
+      <text x="365" y="95" text-anchor="middle" font-size="9" fill="var(--ink-soft)">everyone shares time AND</text>
+      <text x="365" y="107" text-anchor="middle" font-size="9" fill="var(--ink-soft)">frequency simultaneously</text>
+    </svg>
+    <p class="imgcaption">FDMA splits by frequency, TDMA splits by time, and CDMA lets everyone share both — separated only by mathematically unique codes.</p>
+  </div>
+
+  <h3>FDMA — Frequency-Division Multiple Access</h3>
+  <p>Each station is permanently assigned its own frequency band for as long as it's active — similar in spirit to FDM from Unit 2, but here it's about controlling <em>access</em> rather than just multiplexing signals.</p>
+
+  <h3 style="margin-top:20px;">TDMA — Time-Division Multiple Access</h3>
+  <p>Each station gets the entire bandwidth, but only during its own assigned time slot. This requires tight synchronization — every station needs to know exactly when its slot begins. Since stations may be spread over a large area, propagation delays can throw off this timing, so <strong>guard times</strong> are inserted between slots, and special <strong>preamble (synchronization) bits</strong> are added at the start of each slot to help keep everyone in sync.</p>
+
+  <h3 style="margin-top:20px;">CDMA — Code-Division Multiple Access</h3>
+  <p>CDMA is different from both of the above: only ONE channel occupies the ENTIRE bandwidth, and unlike TDMA, there's no timesharing at all — every station can send <strong>simultaneously</strong>. Instead, each station is given a unique code (a sequence of numbers called <strong>chips</strong>), carefully chosen so that:</p>
+  <div class="chiprow">
+    <span class="chip">Multiplying two DIFFERENT stations' codes together always gives 0</span>
+    <span class="chip">Multiplying a station's code by ITSELF gives N (the number of stations)</span>
+  </div>
+  <p style="margin-top:10px;">These special codes are called <strong>orthogonal sequences</strong>. A receiver "decodes" a specific station's signal by multiplying the combined incoming signal by that station's unique code and dividing by N — every other station's contribution cancels out to 0, leaving just the intended data. These chip sequences are generated using a <strong>Walsh table</strong>, and the number of sequences is always a power of 2 (N = 2ᵐ).</p>
+
+  ${remember(["Channelization splits bandwidth by Time (TDMA), Frequency (FDMA), or Code (CDMA)","FDMA = each station gets its own permanent frequency band","TDMA = each station gets the full bandwidth, but only during its own time slot (needs guard times + preamble bits)","CDMA = everyone shares time AND frequency at once, separated only by unique orthogonal codes (chips)"])}
+`;
+
+CONTENT.ethernet = `
+  ${explain(`<p><strong>Ethernet</strong> is by far the most common technology for wired LANs today. Other LAN technologies have existed historically too — Token Ring, Token Bus, FDDI, and ATM LAN — but Ethernet became the dominant standard.</p>`)}
+
+  <h3>The IEEE 802 Standards</h3>
+  <p>In 1985, the <strong>IEEE Project 802</strong> was created specifically to standardize how equipment from different manufacturers could interconnect reliably. It was later adopted by <strong>ANSI</strong> (American National Standards Institute), and in 1987, <strong>ISO</strong> approved it as the international standard <strong>ISO 8802</strong> (also known as IEEE 802.2).</p>
+
+  <h3 style="margin-top:20px;">Two Sublayers of the Data Link Layer</h3>
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>LLC — Logical Link Control</h4>
+      <p style="font-size:14.5px;">Handles flow control, error control, and part of framing. There's just ONE single LLC standard shared across all IEEE LAN types.</p>
+    </div>
+    <div class="flow-card">
+      <h4>MAC — Media Access Control</h4>
+      <p style="font-size:14.5px;">Defines the SPECIFIC access method for each type of LAN — for example, CSMA/CD for Ethernet LANs, and token-passing for Token Ring/Token Bus LANs.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;">Ethernet's Evolution — 4 Generations</h3>
+  <div class="chiprow">
+    <span class="chip">1️⃣ Standard Ethernet — 10 Mbps</span>
+    <span class="chip">2️⃣ Fast Ethernet — 100 Mbps</span>
+    <span class="chip">3️⃣ Gigabit Ethernet — 1 Gbps</span>
+    <span class="chip">4️⃣ Ten-Gigabit Ethernet — 10 Gbps</span>
+  </div>
+  <p style="margin-top:10px;">Ethernet was originally created in the 1970s, and each generation since has multiplied its speed roughly tenfold — all while keeping enough backward compatibility that Ethernet devices from very different eras can often still talk to each other.</p>
+
+  ${more("🔎 Want to know more? What's inside an Ethernet frame?","<p>A typical Ethernet frame carries several fields in sequence: a <strong>Preamble</strong> (helps receivers synchronize their clocks), the <strong>Destination and Source addresses</strong> (each a unique 6-byte MAC address), a <strong>Type/Length</strong> field (identifies the upper-layer protocol or the frame's length), the actual <strong>Data</strong> payload, and a trailing <strong>CRC</strong> field for error checking — tying directly back to the CRC concept from earlier in this unit.</p>")}
+
+  ${remember(["Ethernet is the dominant wired LAN technology today","IEEE Project 802 (1985) standardized cross-manufacturer LAN interconnection; later ISO 8802/IEEE 802.2","LLC = one shared standard for flow/error control across all LANs · MAC = access method specific to each LAN type (CSMA/CD for Ethernet)","4 Ethernet generations: Standard (10 Mbps) → Fast (100 Mbps) → Gigabit (1 Gbps) → Ten-Gigabit (10 Gbps)"])}
+`;
 
 buildNav();
 render();
