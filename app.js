@@ -51,6 +51,26 @@ const STATIONS = [
   { id:"ethernet",     icon:"🔌", label:"Ethernet & IEEE Standards", kind:"topic", group:"unit3" },
   { id:"quiz3",        icon:"🧠", label:"Unit 3 Quiz", kind:"quiz", group:"unit3", quizId:"quiz3" },
 
+  { id:"ipintro",      icon:"🏷️", label:"What is an IP Address?", kind:"topic", group:"unit4net" },
+  { id:"ipv4notation", icon:"🔢", label:"IPv4 Addresses & Notation", kind:"topic", group:"unit4net" },
+  { id:"classful",     icon:"🏛️", label:"Classful Addressing", kind:"topic", group:"unit4net" },
+  { id:"classless",    icon:"✂️", label:"Classless Addressing & CIDR", kind:"topic", group:"unit4net" },
+  { id:"subnetting",   icon:"🧩", label:"Subnetting & Supernetting", kind:"topic", group:"unit4net" },
+  { id:"specialip",    icon:"⭐", label:"Special IPv4 Addresses & Block Allocation", kind:"topic", group:"unit4net" },
+  { id:"dhcp",         icon:"🔌", label:"DHCP", kind:"topic", group:"unit4net" },
+  { id:"nat",          icon:"🔁", label:"NAT — Network Address Translation", kind:"topic", group:"unit4net" },
+  { id:"ipv6",         icon:"6️⃣", label:"IPv6", kind:"topic", group:"unit4net" },
+  { id:"quiz4net",     icon:"🧠", label:"Network Layer Quiz", kind:"quiz", group:"unit4net", quizId:"quiz4net" },
+
+  { id:"ports",        icon:"🔢", label:"Process-to-Process & Port Numbers", kind:"topic", group:"unit4trans" },
+  { id:"sockets",      icon:"🔗", label:"Socket Addresses & Encapsulation", kind:"topic", group:"unit4trans" },
+  { id:"muxtrans",     icon:"🎛️", label:"Multiplexing & Demultiplexing", kind:"topic", group:"unit4trans" },
+  { id:"flowtrans",    icon:"🛡️", label:"Flow Control at the Transport Layer", kind:"topic", group:"unit4trans" },
+  { id:"errortrans",   icon:"⚠️", label:"Error Control at the Transport Layer", kind:"topic", group:"unit4trans" },
+  { id:"slidingwindow",icon:"🪟", label:"Sliding Window", kind:"topic", group:"unit4trans" },
+  { id:"congestion",   icon:"🚦", label:"Congestion Control & Service Types", kind:"topic", group:"unit4trans" },
+  { id:"quiz4trans",   icon:"🧠", label:"Transport Layer Quiz", kind:"quiz", group:"unit4trans", quizId:"quiz4trans" },
+
   { id:"summary",     icon:"📄", label:"Summary & Download", kind:"summary" },
 ];
 
@@ -58,6 +78,8 @@ const GROUP_META = {
   unit1: { title:"Unit 1 · Network Basics", eyebrow:"UNIT 1" },
   unit2: { title:"Unit 2 · Physical Layer", eyebrow:"UNIT 2" },
   unit3: { title:"Unit 3 · Data Link Layer & MAC", eyebrow:"UNIT 3" },
+  unit4net: { title:"Unit 4 · Network Layer (IP Addressing)", eyebrow:"UNIT 4 · NETWORK" },
+  unit4trans: { title:"Unit 4 · Transport Layer", eyebrow:"UNIT 4 · TRANSPORT" },
 };
 
 /* ---------- helper builders ---------- */
@@ -75,9 +97,9 @@ CONTENT.home = `
     <div class="hero-cables">🛰️</div>
     <span class="eyebrow" style="background:rgba(28,18,6,.18);">SMC PORTAL</span>
     <h1>Study More Confidently</h1>
-    <p>Welcome to SMC! We'll travel station by station through three units of Computer Networks — one small idea at a time, with pictures, examples, and quick checks along the way.</p>
+    <p>Welcome to SMC! We'll travel station by station through four units of Computer Networks — one small idea at a time, with pictures, examples, and quick checks along the way.</p>
     <div class="stat-row">
-      <div class="stat-pill">🧩 3 Units</div>
+      <div class="stat-pill">🧩 4 Units</div>
       <div class="stat-pill">🧠 A quiz after each unit</div>
       <div class="stat-pill">📥 Downloadable notes</div>
     </div>
@@ -102,6 +124,20 @@ CONTENT.home = `
   <h3 style="margin-top:26px;">Unit 3 · Data Link Layer &amp; MAC</h3>
   <div class="route-preview">
     ${STATIONS.filter(s=>s.group==="unit3" && s.kind==="topic").map(s=>`
+      <div class="route-item"><span class="emoji">${s.icon}</span>${s.label}</div>
+    `).join("")}
+  </div>
+
+  <h3 style="margin-top:26px;">Unit 4 · Network Layer (IP Addressing)</h3>
+  <div class="route-preview">
+    ${STATIONS.filter(s=>s.group==="unit4net" && s.kind==="topic").map(s=>`
+      <div class="route-item"><span class="emoji">${s.icon}</span>${s.label}</div>
+    `).join("")}
+  </div>
+
+  <h3 style="margin-top:26px;">Unit 4 · Transport Layer</h3>
+  <div class="route-preview">
+    ${STATIONS.filter(s=>s.group==="unit4trans" && s.kind==="topic").map(s=>`
       <div class="route-item"><span class="emoji">${s.icon}</span>${s.label}</div>
     `).join("")}
   </div>
@@ -1098,6 +1134,40 @@ const QUIZZES = {
     {q:"Which channelization method lets every station transmit at the same time, separated only by unique codes?", opts:["FDMA","TDMA","CDMA","Polling"], a:2},
     {q:"Ethernet's Media Access Control method is:", opts:["Token passing","Polling","CSMA/CD","Reservation"], a:2},
   ],
+  quiz4net: [
+    {q:"An IP address identifies:", opts:["Only the device","Only the network name","A device AND its position on the network","Nothing useful"], a:2},
+    {q:"Which IP address type is unique worldwide?", opts:["Private IP","Static IP","Public IP","Dynamic IP"], a:2},
+    {q:"IPv4 uses how many bits per address?", opts:["16","24","32","64"], a:2},
+    {q:"In an IP address, the Network Part is most like a:", opts:["House number","Street address","Phone number","Zip code only"], a:1},
+    {q:"In classful addressing, which class has the FEWEST possible networks worldwide?", opts:["Class A","Class B","Class C","They're all equal"], a:0},
+    {q:"'Address depletion' in classful addressing happened because:", opts:["There were too few classes","Blocks were often far bigger than organizations actually needed","IPv4 had too many bits","Classes were too small"], a:1},
+    {q:"CIDR / slash notation writes the prefix length as:", opts:["A prefix before the address","A suffix after the address, separated by a slash","A separate file","A MAC address"], a:1},
+    {q:"In an address mask, the network bits are:", opts:["All 0s","All 1s, on the left","All 1s, on the right","Random"], a:1},
+    {q:"Subnetting means:", opts:["Combining blocks into one bigger block","Splitting one block into smaller subnetworks","Deleting unused addresses","Changing MAC addresses"], a:1},
+    {q:"Supernetting is mainly done to:", opts:["Increase security","Reduce the size of routing tables","Slow down traffic","Remove DHCP"], a:1},
+    {q:"Which address block is reserved for loopback?", opts:["0.0.0.0/32","255.255.255.255/32","127.0.0.0/8","224.0.0.0/4"], a:2},
+    {q:"DHCP is often nicknamed:", opts:["The security protocol","The plug-and-play protocol","The routing protocol","The compression protocol"], a:1},
+    {q:"In the DORA process, what comes right after DISCOVER?", opts:["ACK","REQUEST","OFFER","DECLINE"], a:2},
+    {q:"NAT mainly allows a private network to:", opts:["Have unlimited bandwidth","Share one or a few public IP addresses with the outside world","Avoid using DHCP","Skip using IP addresses"], a:1},
+    {q:"IPv6 addresses are how many bits long?", opts:["32","64","128","256"], a:2},
+    {q:"Which IPv6 address type delivers a packet to only the NEAREST of several devices sharing an address?", opts:["Unicast","Anycast","Multicast","Broadcast"], a:1},
+  ],
+  quiz4trans: [
+    {q:"A port number's job is to identify:", opts:["The device","A specific process/program on a device","The physical cable","The router"], a:1},
+    {q:"Ephemeral ports are typically:", opts:["Below 1023","Chosen by the server only","Greater than 1023, picked by the client","Fixed by ICANN"], a:2},
+    {q:"Which port number is well-known for HTTP?", opts:["21","25","53","80"], a:3},
+    {q:"A socket address is the combination of:", opts:["Two IP addresses","An IP address and a port number","A MAC address and a port","Two port numbers"], a:1},
+    {q:"Multiplexing at the transport layer means:", opts:["One process sending to many devices","Many processes sending through one connection out","Deleting duplicate packets","Encrypting data"], a:1},
+    {q:"Flow control at the transport layer typically uses:", opts:["One shared buffer","Two buffers, one at each end","No buffers at all","A single sequence number"], a:1},
+    {q:"Why does the Transport layer need its OWN error control?", opts:["Because IP already guarantees delivery","Because the underlying IP layer is unreliable","Because TCP doesn't exist","Because ports are unreliable"], a:1},
+    {q:"Sequence numbers in a transport header are:", opts:["Unlimited","Modulo 2ᵐ for an m-bit field","Always exactly 4 bits","Never reused"], a:1},
+    {q:"On the sender's side, error control uses a timer to:", opts:["Slow down the network on purpose","Detect a lost packet and resend it","Count total bytes sent","Change the port number"], a:1},
+    {q:"The Sliding Window mechanism combines:", opts:["Only flow control","Only error control","Flow control AND error control together","Neither"], a:2},
+    {q:"In the sender's sliding window, a packet's buffer slot is freed when:", opts:["It is first sent","Its ACK arrives","The timer starts","The connection closes"], a:1},
+    {q:"Congestion happens when:", opts:["The network load exceeds its capacity","Too few devices are connected","IP addresses run out","DHCP fails"], a:0},
+    {q:"Which service model does UDP follow?", opts:["Connection-oriented","Connectionless","Neither","Both equally"], a:1},
+    {q:"Which service model does TCP follow?", opts:["Connectionless","Connection-oriented","Neither","Only multicast"], a:1},
+  ],
 };
 
 /* ================= RENDER LOGIC ================= */
@@ -1177,7 +1247,7 @@ function buildQuizHTML(quizArr, quizId){
 
 function buildSummaryHTML(){
   return `
-    ${explain(`<p>Great job reaching the last station! Here's a one-page recap of everything we covered across all three units.</p>`)}
+    ${explain(`<p>Great job reaching the last station! Here's a one-page recap of everything we covered across all four units.</p>`)}
     <div class="card">
       <h3 style="margin-bottom:8px;">Unit 1 · Basic Computer Concepts &amp; Network Models</h3>
       <ul>
@@ -1217,6 +1287,30 @@ function buildSummaryHTML(){
         <li><strong>Error Detection/Correction:</strong> single-bit vs burst errors; redundancy; block coding, cyclic codes, CRC; checksum with one's complement arithmetic.</li>
         <li><strong>Media Access Control:</strong> Random Access (ALOHA, CSMA, CSMA/CD, CSMA/CA), Controlled Access (Reservation, Polling, Token Passing), Channelization (FDMA, TDMA, CDMA).</li>
         <li><strong>Ethernet:</strong> IEEE 802 standards; LLC + MAC sublayers; 4 generations from 10 Mbps to 10 Gbps.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:8px;">Unit 4 · Network Layer (IP Addressing)</h3>
+      <ul>
+        <li><strong>IP Addresses:</strong> Public/Private/Static/Dynamic; IPv4 = 32 bits, address space 2³²; Network Part + Host Part.</li>
+        <li><strong>Classful Addressing:</strong> Fixed-length prefix per class (A/B/C); simple but caused address depletion.</li>
+        <li><strong>Classless Addressing/CIDR:</strong> Variable-length prefix, slash notation; address mask formulas for count/first/last address.</li>
+        <li><strong>Subnetting &amp; Supernetting:</strong> splitting vs combining blocks; n_sub = 32 − log₂(N_sub).</li>
+        <li><strong>Special Addresses:</strong> this-host, broadcast, loopback, private ranges, multicast; allocation via ICANN → RIRs → ISPs.</li>
+        <li><strong>DHCP:</strong> automatic IP assignment via DORA (Discover, Offer, Request, Acknowledgment).</li>
+        <li><strong>NAT:</strong> private network shares one/few public IPs; pool-based or IP+Port (PAT) scaling.</li>
+        <li><strong>IPv6:</strong> 128-bit addresses; zero compression; Unicast/Anycast/Multicast address types.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:8px;">Unit 4 · Transport Layer</h3>
+      <ul>
+        <li><strong>Ports &amp; Sockets:</strong> port number identifies a process; ephemeral (client) vs well-known (server) ports; socket = IP + port.</li>
+        <li><strong>Multiplexing/Demultiplexing:</strong> many processes share one connection out; incoming data sorted back out by port.</li>
+        <li><strong>Flow Control:</strong> push vs pull delivery; two buffers, one at each end.</li>
+        <li><strong>Error Control:</strong> detect/discard corrupted, resend lost, discard duplicates, buffer out-of-order; sequence numbers are modulo 2ᵐ.</li>
+        <li><strong>Sliding Window:</strong> combines flow + error control using numbered buffers at both ends.</li>
+        <li><strong>Congestion &amp; Service Types:</strong> load &gt; capacity = congestion; Connectionless (UDP-style) vs Connection-oriented (TCP-style) service.</li>
       </ul>
     </div>
     ${remember(["Revisit any station any time from the side menu","Try each unit's quiz again until you score full marks!"])}
@@ -2155,6 +2249,480 @@ CONTENT.ethernet = `
   ${more("🔎 Want to know more? What's inside an Ethernet frame?","<p>A typical Ethernet frame carries several fields in sequence: a <strong>Preamble</strong> (helps receivers synchronize their clocks), the <strong>Destination and Source addresses</strong> (each a unique 6-byte MAC address), a <strong>Type/Length</strong> field (identifies the upper-layer protocol or the frame's length), the actual <strong>Data</strong> payload, and a trailing <strong>CRC</strong> field for error checking — tying directly back to the CRC concept from earlier in this unit.</p>")}
 
   ${remember(["Ethernet is the dominant wired LAN technology today","IEEE Project 802 (1985) standardized cross-manufacturer LAN interconnection; later ISO 8802/IEEE 802.2","LLC = one shared standard for flow/error control across all LANs · MAC = access method specific to each LAN type (CSMA/CD for Ethernet)","4 Ethernet generations: Standard (10 Mbps) → Fast (100 Mbps) → Gigabit (1 Gbps) → Ten-Gigabit (10 Gbps)"])}
+`;
+
+
+/* ================= UNIT 4a: NETWORK LAYER — IP ADDRESSING ================= */
+
+CONTENT.ipintro = `
+  ${explain(`
+    <p>When a packet travels from a sending computer to a destination computer, it may pass through several different LANs or WANs along the way. To make sure it actually gets there, every device needs a <strong>global addressing scheme</strong> — a logical address recognized across the whole Internet. This is the <strong>IP address</strong> (Internet Protocol address).</p>
+  `)}
+
+  <div class="chiprow">
+    <span class="chip">🏷️ Identifies a device on the network — your phone, laptop, or a server</span>
+    <span class="chip">📍 Gives the device's position in the network, so data can be routed to it correctly</span>
+  </div>
+
+  <h3 style="margin-top:20px;">Four types of IP addresses</h3>
+  <div class="flow-grid">
+    <div class="flow-card"><h4>🌍 Public IP</h4><p style="font-size:14px;">Used directly on the Internet — unique worldwide.</p></div>
+    <div class="flow-card"><h4>🏠 Private IP</h4><p style="font-size:14px;">Used inside local/home networks (e.g. 192.168.x.x, 10.x.x.x).</p></div>
+    <div class="flow-card"><h4>📌 Static IP</h4><p style="font-size:14px;">Permanently assigned to one device — common for servers.</p></div>
+    <div class="flow-card"><h4>🔄 Dynamic IP</h4><p style="font-size:14px;">Assigned temporarily by the network — common for everyday home users.</p></div>
+  </div>
+
+  ${analogy(`<p>Think of an IP address like your home's postal address. A public IP is like your full address as the postal service sees it — unique everywhere. A private IP is more like "Room 3B" — meaningful only inside your own building. A static IP is a permanent address; a dynamic IP is like moving into temporary housing that gets reassigned each time.</p>`)}
+
+  ${remember(["An IP address identifies a device AND its position on the network","Public = unique worldwide · Private = only meaningful inside a local network","Static = permanent · Dynamic = temporarily assigned"])}
+`;
+
+CONTENT.ipv4notation = `
+  ${explain(`
+    <p><strong>IPv4</strong> uses a <strong>32-bit address</strong> that uniquely and universally defines the connection of a host or router to the Internet.</p>
+  `)}
+
+  ${mistake(`<p>An IP address belongs to a <strong>connection</strong>, not to the device itself! If a device moves to a different network, its IP address can change.</p>`)}
+
+  <h3>IPv4 Address Space</h3>
+  <p>The <strong>address space</strong> is the total number of addresses a protocol can use. If a protocol uses <em>b</em> bits, the address space is 2<sup>b</sup>. Since IPv4 uses 32 bits, its address space is <strong>2³² = 4,294,967,296</strong> — over four billion possible addresses!</p>
+
+  <h3 style="margin-top:20px;">Three ways to write an IPv4 address</h3>
+  <div class="chiprow">
+    <span class="chip">Binary notation (base 2) — e.g. 10000001.00001011.00001011.11101111</span>
+    <span class="chip">Dotted-decimal notation (base 256) — e.g. 129.11.11.239 (the everyday form)</span>
+    <span class="chip">Hexadecimal notation (base 16) — e.g. 0x810B0BEF</span>
+  </div>
+
+  <h3 style="margin-top:20px;">Two parts inside every IP address</h3>
+  <div class="imgcard">
+    <svg viewBox="0 0 380 90">
+      <rect x="20" y="20" width="170" height="40" fill="var(--rail)"/>
+      <text x="105" y="45" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Network Part (Prefix)</text>
+      <rect x="190" y="20" width="170" height="40" fill="var(--spark)"/>
+      <text x="275" y="45" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">Host Part (Suffix)</text>
+      <text x="105" y="78" text-anchor="middle" font-size="10" fill="var(--ink-soft)">like a Street Address</text>
+      <text x="275" y="78" text-anchor="middle" font-size="10" fill="var(--ink-soft)">like a House Number</text>
+    </svg>
+    <p class="imgcaption">Just like a full postal address combines a street (shared by a neighbourhood) with a house number (unique to one home), an IP address combines a Network Part shared by every device on that network with a Host Part unique to just one device.</p>
+  </div>
+
+  ${remember(["IPv4 = 32-bit address · Address space = 2³² ≈ 4.29 billion addresses","Written in binary, dotted-decimal, or hexadecimal notation","Every address splits into a Network Part (prefix) and a Host Part (suffix)"])}
+`;
+
+CONTENT.classful = `
+  ${explain(`
+    <p>The network identifier in IPv4 was originally designed with a <strong>fixed-length prefix</strong> — called <strong>classful addressing</strong>. A newer scheme, <strong>classless addressing</strong>, instead uses a variable-length prefix (we'll get to that next).</p>
+  `)}
+
+  <h3>The Classes</h3>
+  <div class="chiprow">
+    <span class="chip">Class A — 2⁷ = 128 networks possible worldwide (huge networks, few of them)</span>
+    <span class="chip">Class B — 2¹⁴ = 16,384 networks possible</span>
+    <span class="chip">Class C — 2²¹ = 2,097,152 networks possible (small networks, lots of them)</span>
+  </div>
+
+  <h3 style="margin-top:20px;">The advantage — simplicity</h3>
+  <p>Since the prefix length for each class was fixed, it was easy to identify an address's class at a glance, and its prefix length was known immediately — no extra calculation needed.</p>
+
+  <h3 style="margin-top:20px;">The fatal flaw — Address Depletion</h3>
+  <p>Class A could only ever be assigned to <strong>128 organizations</strong> in the entire world — yet each of those organizations would automatically get <strong>16,777,216 host addresses</strong>, whether they needed anywhere near that many or not! Millions of addresses sat wasted inside organizations that only needed a few hundred. This wastage — called <strong>address depletion</strong> — is exactly what pushed the Internet toward classless addressing.</p>
+
+  ${mistake(`<p>Don't assume "bigger class = better" — Class A's huge blocks were actually the PROBLEM, not a benefit. Most organizations wasted the vast majority of the addresses handed to them.</p>`)}
+
+  ${remember(["Classful addressing = fixed-length prefix per class (A, B, C)","Advantage: simple to identify the class and prefix length instantly","Fatal flaw: Address Depletion — most assigned blocks were far bigger than needed, wasting huge numbers of addresses"])}
+`;
+
+CONTENT.classless = `
+  ${explain(`
+    <p><strong>Classless addressing</strong> was a short-term fix to keep using IPv4 addresses efficiently. The rigid class system was removed, and the whole address space was divided into <strong>variable-length blocks</strong> instead — a small prefix means a larger network; a large prefix means a smaller network.</p>
+  `)}
+
+  <h3>Slash Notation (CIDR)</h3>
+  <p>The prefix length, <em>n</em>, is written right after the address, separated by a slash — e.g. <code>192.168.1.0/24</code>. This is informally called <strong>slash notation</strong>, and formally <strong>CIDR — Classless Interdomain Routing</strong>.</p>
+
+  <h3 style="margin-top:20px;">What can we learn from an address block?</h3>
+  <p>Given any address in a block, we can work out three things: the <strong>number of addresses</strong>, the <strong>first address</strong>, and the <strong>last address</strong> in that block — all using something called the <strong>address mask</strong>.</p>
+
+  <div class="imgcard">
+    <svg viewBox="0 0 400 70">
+      <text x="10" y="20" font-family="monospace" font-size="13" fill="var(--rail)">11111111.11111111.11111111.11100000</text>
+      <text x="10" y="45" font-size="10" fill="var(--ink-soft)">25 ones (the prefix), then 7 zeros (the host bits) → written as /25</text>
+    </svg>
+    <p class="imgcaption">A 32-bit mask: the leftmost n bits are 1s (marking the network part), the rest are 0s (marking the host part). This example shows a /25 mask.</p>
+  </div>
+
+  <h3 style="margin-top:20px;">The Address Mask formulas</h3>
+  <div class="chiprow">
+    <span class="chip">Number of addresses: N = NOT(mask) + 1</span>
+    <span class="chip">First address: (Any address) AND (mask)</span>
+    <span class="chip">Last address: (Any address) OR [NOT(mask)]</span>
+  </div>
+
+  ${remember(["Classless addressing = variable-length prefix, no fixed classes","CIDR / slash notation: address/n, e.g. 192.168.1.0/24","Address mask: n leading 1s then 0s · N = NOT(mask)+1 · First = addr AND mask · Last = addr OR NOT(mask)"])}
+`;
+
+CONTENT.subnetting = `
+  ${explain(`<p>Once an organization is granted a block of addresses, it often needs to split that single block into several smaller <strong>subnetworks</strong> — this is <strong>subnetting</strong>. The reverse — combining several smaller blocks into one bigger one — is <strong>supernetting</strong>.</p>`)}
+
+  <h3>The Subnetting Formula</h3>
+  <p>If the organization has <em>N</em> total addresses with prefix length <em>n</em>, and wants to create a subnet with <em>N<sub>sub</sub></em> addresses:</p>
+  <div class="chiprow">
+    <span class="chip">The subnet's address count must be a power of 2: N<sub>sub</sub> = 2³²⁻ⁿˢᵘᵇ</span>
+    <span class="chip">Subnet prefix length: n<sub>sub</sub> = 32 − log₂(N<sub>sub</sub>)</span>
+    <span class="chip">The subnet's starting address must be divisible by N<sub>sub</sub></span>
+  </div>
+
+  <div class="card" style="background:var(--bg); margin-top:14px;">
+    <p style="margin:0 0 8px;"><strong>Worked example:</strong> We want an 8-address subnet. Since 8 addresses need a /29 prefix (32 − log₂8 = 32 − 3 = 29), the starting address in the last octet must be divisible by 8: valid starts are 0, 8, 16, 24, 32...</p>
+    <ul style="margin:0;">
+      <li><code>192.168.1.16/29</code> is a VALID first address — it covers 192.168.1.16 through 192.168.1.23 (8 addresses)</li>
+      <li><code>192.168.1.18/29</code> would NOT be a valid starting address, since 18 isn't divisible by 8</li>
+    </ul>
+  </div>
+
+  <h3 style="margin-top:22px;">Supernetting / Address Aggregation</h3>
+  <p>Sometimes an ISP holds several separate small blocks and wants to advertise them to the rest of the Internet as just ONE larger block — mainly to keep <strong>routing tables</strong> smaller and more efficient. For example, four separate /26 blocks (64 addresses each) can be aggregated into a single /24 block (256 addresses) — one routing table entry instead of four.</p>
+
+  <h3 style="margin-top:20px;">Who hands out these blocks?</h3>
+  <p>Block allocation is managed globally by <strong>ICANN</strong> (Internet Corporation for Assigned Names and Numbers), which allocates large blocks to <strong>Regional Internet Registries (RIRs)</strong>, which in turn assign blocks to ISPs. Two restrictions always apply: the requested number of addresses <strong>N must be a power of 2</strong>, and there must be enough <strong>contiguous</strong> addresses available to allocate.</p>
+
+  ${remember(["Subnetting = splitting one block into smaller subnetworks · Supernetting = combining smaller blocks into one","Subnet prefix: n_sub = 32 − log₂(N_sub) · Starting address must divide evenly by the subnet size","ICANN → Regional Internet Registries (RIRs) → ISPs is the real-world allocation chain","Supernetting mainly exists to keep routing tables smaller"])}
+`;
+
+CONTENT.specialip = `
+  ${explain(`<p>A handful of special IPv4 address blocks are permanently reserved for specific purposes rather than being handed out to regular devices.</p>`)}
+
+  <div class="chiprow">
+    <span class="chip">🏠 This-host Address — 0.0.0.0/32, used when a device needs to send a datagram but doesn't yet know its own address</span>
+    <span class="chip">📢 Limited-broadcast — 255.255.255.255/32, used to send a message to every device on the local network</span>
+    <span class="chip">🔁 Loopback — 127.0.0.0/8, a packet sent here never actually leaves the host (used for testing)</span>
+    <span class="chip">🏡 Private Addresses — 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, and 169.254.0.0/16 — reserved for internal/local networks</span>
+    <span class="chip">📡 Multicast — 224.0.0.0/4, reserved for sending to a specific group of devices at once</span>
+  </div>
+
+  ${remember(["0.0.0.0/32 = 'this host' (used before a device knows its own address)","255.255.255.255/32 = broadcast to everyone on the local network","127.0.0.0/8 = loopback, never leaves the host","10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16 = private address ranges","224.0.0.0/4 = multicast"])}
+`;
+
+CONTENT.dhcp = `
+  ${explain(`
+    <p><strong>DHCP (Dynamic Host Configuration Protocol)</strong> automates IP address assignment inside an organization. It's an application-layer program that helps TCP/IP at the network layer — often nicknamed the <strong>"plug-and-play" protocol</strong>, since a device can join a network and get configured automatically, with zero manual setup.</p>
+  `)}
+
+  <h3>The DORA Process</h3>
+  <div class="imgcard">
+    <svg viewBox="0 0 380 200">
+      <text x="70" y="15" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">Client</text>
+      <text x="310" y="15" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">DHCP Server</text>
+      <line x1="70" y1="22" x2="70" y2="185" stroke="var(--line)" stroke-width="2"/>
+      <line x1="310" y1="22" x2="310" y2="185" stroke="var(--line)" stroke-width="2"/>
+
+      <line x1="70" y1="40" x2="310" y2="55" stroke="var(--rail)" stroke-width="2.5" marker-end="url(#dhcpa)"/>
+      <text x="190" y="36" text-anchor="middle" font-size="10" fill="var(--rail)">1. DISCOVER (broadcast)</text>
+
+      <line x1="310" y1="75" x2="70" y2="90" stroke="var(--spark)" stroke-width="2.5" marker-end="url(#dhcpb)"/>
+      <text x="190" y="71" text-anchor="middle" font-size="10" fill="var(--spark)">2. OFFER (an available IP)</text>
+
+      <line x1="70" y1="110" x2="310" y2="125" stroke="var(--rail)" stroke-width="2.5" marker-end="url(#dhcpa)"/>
+      <text x="190" y="106" text-anchor="middle" font-size="10" fill="var(--rail)">3. REQUEST (use this IP)</text>
+
+      <line x1="310" y1="145" x2="70" y2="160" stroke="var(--right)" stroke-width="2.5" marker-end="url(#dhcpb)"/>
+      <text x="190" y="141" text-anchor="middle" font-size="10" fill="var(--right)">4. ACK (IP leased!)</text>
+
+      <defs>
+        <marker id="dhcpa" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="var(--rail)"/></marker>
+        <marker id="dhcpb" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="var(--spark)"/></marker>
+      </defs>
+    </svg>
+    <p class="imgcaption">DORA = Discover, Offer, Request, Acknowledgment. Four messages, and a brand-new device is fully connected — no manual configuration needed.</p>
+  </div>
+
+  <div class="chiprow">
+    <span class="chip">Discover — client broadcasts a request for an IP address</span>
+    <span class="chip">Offer — server replies with an available IP and configuration</span>
+    <span class="chip">Request — client asks to actually use the offered IP</span>
+    <span class="chip">Acknowledgment — server confirms and leases the IP to the client</span>
+  </div>
+
+  <h3 style="margin-top:20px;">Inside a DHCP message</h3>
+  <p>The message format includes fields such as a hardware type (<code>1</code> for Ethernet) and a hardware address length (<code>6</code> for a MAC address). A special number called the <strong>magic cookie</strong> (value <code>99.130.83.99</code>, written in the format of an IP address) appears right after the older BOOTP-style portion of the message — DHCP actually evolved from an earlier protocol called BOOTP, and still reuses much of its message structure. If the magic cookie is present, the next 60 bytes hold <strong>options</strong> — each one made of a 1-byte tag, a 1-byte length, and a variable-length value (for example, tag <code>53</code> means "DHCP Message Type").</p>
+
+  ${remember(["DHCP automates IP assignment — the 'plug-and-play' protocol","DORA = Discover → Offer → Request → Acknowledgment","DHCP evolved from BOOTP and still shares much of its message format","The magic cookie (99.130.83.99) marks where DHCP-specific options begin"])}
+`;
+
+CONTENT.nat = `
+  ${explain(`
+    <p><strong>NAT (Network Address Translation)</strong> lets a site use private addresses internally, while still communicating with the outside world using just one (or a few) public/global addresses.</p>
+  `)}
+
+  <div class="imgcard">
+    <svg viewBox="0 0 400 140">
+      <rect x="10" y="30" width="130" height="80" rx="10" fill="none" stroke="var(--line)" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="75" y="20" text-anchor="middle" font-size="10" fill="var(--ink-soft)">Private Network</text>
+      <circle cx="45" cy="55" r="14" fill="var(--rail)"/><text x="45" y="59" text-anchor="middle" font-size="10" fill="#fff">💻</text>
+      <text x="45" y="82" text-anchor="middle" font-size="8" fill="var(--ink-soft)">192.168.1.5</text>
+      <circle cx="105" cy="85" r="14" fill="var(--rail)"/><text x="105" y="89" text-anchor="middle" font-size="10" fill="#fff">📱</text>
+      <text x="105" y="108" text-anchor="middle" font-size="8" fill="var(--ink-soft)">192.168.1.9</text>
+
+      <rect x="170" y="50" width="60" height="40" rx="8" fill="var(--spark)"/>
+      <text x="200" y="66" text-anchor="middle" font-size="9" fill="#fff">NAT</text>
+      <text x="200" y="79" text-anchor="middle" font-size="9" fill="#fff">Router</text>
+
+      <line x1="140" y1="60" x2="170" y2="65" stroke="var(--ink-soft)" stroke-width="2"/>
+      <line x1="140" y1="90" x2="170" y2="75" stroke="var(--ink-soft)" stroke-width="2"/>
+
+      <line x1="230" y1="70" x2="300" y2="70" stroke="var(--ink-soft)" stroke-width="2" marker-end="url(#natarrow)"/>
+      <defs><marker id="natarrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="var(--ink-soft)"/></marker></defs>
+
+      <circle cx="340" cy="70" r="22" fill="var(--rail)"/>
+      <text x="340" y="75" text-anchor="middle" font-size="11" fill="#fff">🌍</text>
+      <text x="340" y="105" text-anchor="middle" font-size="9" fill="var(--ink-soft)">200.24.8.5</text>
+      <text x="340" y="118" text-anchor="middle" font-size="8" fill="var(--ink-soft)">(one public IP)</text>
+    </svg>
+    <p class="imgcaption">Every private device shares the router's single public IP address when talking to the outside world — the NAT router keeps a translation table to route replies back to the correct internal device.</p>
+  </div>
+
+  <h3>Two ways NAT scales up</h3>
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>Using a Pool of Addresses</h4>
+      <p style="font-size:14px;">With just one global address, only ONE private-network host can reach a given external host at a time. Using a whole POOL of global addresses removes this restriction.</p>
+    </div>
+    <div class="flow-card">
+      <h4>Using IP + Port Addresses (PAT)</h4>
+      <p style="font-size:14px;">Combining the address with port numbers lets many internal devices share the SAME single public IP simultaneously — this is what most home routers actually do.</p>
+    </div>
+  </div>
+
+  ${remember(["NAT lets a private network share one (or a few) public IP addresses","A translation table maps private addresses to the shared public address","A pool of addresses removes the 'one host at a time' limit","Combining IP + port (PAT) lets many devices share a single public IP at once"])}
+`;
+
+CONTENT.ipv6 = `
+  ${explain(`
+    <p><strong>IPv6</strong> is the next-generation addressing system, created mainly to solve IPv4's address depletion problem once and for all — its address space is vastly larger (128 bits instead of 32).</p>
+  `)}
+
+  <h3>Writing an IPv6 address</h3>
+  <div class="chiprow">
+    <span class="chip">Colon-hex notation — the standard form, e.g. FDEC:0074:0000:0000:0000:B0FF:0000:FFFF</span>
+    <span class="chip">Abbreviation (zero compression) — consecutive all-zero groups can be replaced with a double colon "::", used only once per address</span>
+    <span class="chip">Mixed notation — colon-hex for the leftmost six sections, plus familiar dotted-decimal for the rightmost two, e.g. 0:0:0:0:0:0:13.1.68.3</span>
+    <span class="chip">CIDR notation — same slash notation as IPv4, e.g. address/prefix-length</span>
+  </div>
+
+  <h3 style="margin-top:20px;">Three types of IPv6 addresses</h3>
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>🎯 Unicast (one-to-one)</h4>
+      <p style="font-size:14px;">Identifies exactly one specific interface/device.</p>
+    </div>
+    <div class="flow-card">
+      <h4>📍 Anycast (one-to-one-of-many)</h4>
+      <p style="font-size:14px;">Assigned to multiple devices, but a packet is delivered to only ONE of them — normally the nearest or best one, according to the routing system.</p>
+    </div>
+    <div class="flow-card">
+      <h4>📢 Multicast (many-to-many)</h4>
+      <p style="font-size:14px;">Identifies a whole group of devices at once.</p>
+    </div>
+  </div>
+
+  ${analogy(`<p>Unicast is like calling one specific friend's phone. Anycast is like dialing a general support hotline — your call reaches just ONE of possibly many available agents, whichever is closest or free. Multicast is like a group announcement broadcast to an entire mailing list at once.</p>`)}
+
+  ${remember(["IPv6 uses 128-bit addresses — a vastly bigger address space than IPv4's 32 bits","Zero compression (::) can only be used ONCE in a single address","3 address types: Unicast (one device), Anycast (nearest of many), Multicast (a whole group)"])}
+`;
+
+/* ================= UNIT 4b: TRANSPORT LAYER ================= */
+
+CONTENT.ports = `
+  ${explain(`
+    <p>The most common way two programs communicate across a network is the <strong>client-server paradigm</strong>: the local host runs the <strong>client</strong>, the remote host runs the <strong>server</strong>. But since a computer can run many programs at once, an IP address alone (which just identifies the device) isn't enough — we need a second identifier for the specific PROCESS. That's the job of the <strong>port number</strong>, ranging from 0 to 65,535.</p>
+  `)}
+
+  <h3>Two kinds of port numbers</h3>
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>Ephemeral Port (client)</h4>
+      <p style="font-size:14px;">The client picks this itself — usually recommended to be greater than 1023 for many client/server programs to work properly.</p>
+    </div>
+    <div class="flow-card">
+      <h4>Well-Known Port (server)</h4>
+      <p style="font-size:14px;">Cannot be chosen randomly — TCP/IP has agreed on universal, standardized port numbers so any client knows exactly where to find a given service.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;">Some well-known port numbers</h3>
+  <div class="imgcard">
+    <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
+      <tr style="background:var(--rail); color:#fff;"><th style="padding:6px; text-align:left;">Port</th><th style="padding:6px; text-align:left;">Protocol</th><th style="padding:6px; text-align:left;">Description</th><th style="padding:6px; text-align:left;">Transport</th></tr>
+      <tr><td style="padding:6px; border-bottom:1px solid var(--line);">21</td><td style="padding:6px; border-bottom:1px solid var(--line);">FTP</td><td style="padding:6px; border-bottom:1px solid var(--line);">File transfer</td><td style="padding:6px; border-bottom:1px solid var(--line);">TCP</td></tr>
+      <tr><td style="padding:6px; border-bottom:1px solid var(--line);">23</td><td style="padding:6px; border-bottom:1px solid var(--line);">Telnet</td><td style="padding:6px; border-bottom:1px solid var(--line);">Remote login</td><td style="padding:6px; border-bottom:1px solid var(--line);">TCP</td></tr>
+      <tr><td style="padding:6px; border-bottom:1px solid var(--line);">25</td><td style="padding:6px; border-bottom:1px solid var(--line);">SMTP</td><td style="padding:6px; border-bottom:1px solid var(--line);">E-mail</td><td style="padding:6px; border-bottom:1px solid var(--line);">TCP</td></tr>
+      <tr><td style="padding:6px; border-bottom:1px solid var(--line);">53</td><td style="padding:6px; border-bottom:1px solid var(--line);">DNS</td><td style="padding:6px; border-bottom:1px solid var(--line);">Domain Name System</td><td style="padding:6px; border-bottom:1px solid var(--line);">UDP</td></tr>
+      <tr><td style="padding:6px; border-bottom:1px solid var(--line);">80</td><td style="padding:6px; border-bottom:1px solid var(--line);">HTTP</td><td style="padding:6px; border-bottom:1px solid var(--line);">World Wide Web</td><td style="padding:6px; border-bottom:1px solid var(--line);">TCP</td></tr>
+      <tr><td style="padding:6px; border-bottom:1px solid var(--line);">110</td><td style="padding:6px; border-bottom:1px solid var(--line);">POP-3</td><td style="padding:6px; border-bottom:1px solid var(--line);">Remote e-mail access</td><td style="padding:6px; border-bottom:1px solid var(--line);">TCP</td></tr>
+      <tr><td style="padding:6px;">161</td><td style="padding:6px;">SNMP</td><td style="padding:6px;">Network management</td><td style="padding:6px;">UDP</td></tr>
+    </table>
+    <p class="imgcaption">Well-known ports (managed by ICANN) let any client on Earth know exactly which port to knock on for a given service — no guesswork needed.</p>
+  </div>
+
+  ${remember(["IP address identifies the DEVICE · Port number identifies the specific PROCESS/program on it","Ephemeral ports (usually >1023) are picked freely by the client","Well-known ports (like 80 for HTTP, 25 for SMTP) are standardized so clients always know where to connect"])}
+`;
+
+CONTENT.sockets = `
+  ${explain(`
+    <p>A <strong>socket address</strong> is simply the combination of an <strong>IP address</strong> and a <strong>port number</strong> — together they pin down exactly which process, on exactly which device, a piece of data is meant for.</p>
+  `)}
+
+  <div class="imgcard">
+    <svg viewBox="0 0 340 70">
+      <rect x="10" y="15" width="150" height="34" rx="6" fill="var(--rail)"/>
+      <text x="85" y="36" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">192.168.1.5</text>
+      <text x="165" y="36" text-anchor="middle" font-size="16" fill="var(--ink)">:</text>
+      <rect x="175" y="15" width="80" height="34" rx="6" fill="var(--spark)"/>
+      <text x="215" y="36" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">80</text>
+      <text x="130" y="65" text-anchor="middle" font-size="10" fill="var(--ink-soft)">IP address  +  Port number  =  Socket address</text>
+    </svg>
+    <p class="imgcaption">A full connection actually needs a PAIR of socket addresses — one for the client, one for the server — so both ends know exactly where to send and expect replies.</p>
+  </div>
+
+  <p style="margin-top:12px;">These four pieces of information (source IP, source port, destination IP, destination port) are split across two headers: the network-layer header carries the IP addresses, while the transport-layer header carries the port numbers.</p>
+
+  <h3 style="margin-top:20px;">Encapsulation &amp; Decapsulation</h3>
+  <p>As a message travels down through the layers on the sender's side, each layer wraps it with its own header — this is <strong>encapsulation</strong> (the same idea we met back in Unit 1's Layers station, and again with framing in Unit 3). On the receiver's side, each layer strips off its matching header as the message moves back up — <strong>decapsulation</strong>.</p>
+
+  ${remember(["Socket address = IP address + port number","A full connection needs a socket address pair — one for each end","Encapsulation adds headers going down the layers; decapsulation removes them going up"])}
+`;
+
+CONTENT.muxtrans = `
+  ${explain(`<p>Just like we saw multiplexing at the physical layer back in Unit 2, the transport layer does its own version of multiplexing and demultiplexing too — just with processes instead of physical signals.</p>`)}
+
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>🔀 Multiplexing (many-to-one)</h4>
+      <p style="font-size:14.5px;">Whenever an entity accepts items from MORE than one source. At the sender, several different application processes can all hand their data down to a single transport-layer protocol to be sent out.</p>
+    </div>
+    <div class="flow-card">
+      <h4>🔁 Demultiplexing (one-to-many)</h4>
+      <p style="font-size:14.5px;">Whenever an entity delivers items to MORE than one destination. At the receiver, the transport layer uses port numbers to sort incoming data back out to the correct waiting application process.</p>
+    </div>
+  </div>
+
+  ${analogy(`<p>Think of an apartment building's single mailbox slot (multiplexing) — mail from many different senders all funnels through that one slot. The building manager (demultiplexing) then sorts everything by apartment number so it reaches the right resident.</p>`)}
+
+  ${remember(["Multiplexing = combining data from multiple processes onto one connection out","Demultiplexing = sorting incoming data back out to the correct waiting process, using port numbers"])}
+`;
+
+CONTENT.flowtrans = `
+  ${explain(`<p>Just like flow control at the Data Link Layer (Unit 3), the Transport Layer also needs to stop a fast sender from overwhelming a slower receiver.</p>`)}
+
+  <h3>Pushing vs Pulling</h3>
+  <p>Delivering items from a producer to a consumer can happen in one of two ways: the producer can <strong>push</strong> data out whenever it's ready, or the consumer can <strong>pull</strong> (request) data only when it's ready to handle more.</p>
+
+  <h3 style="margin-top:20px;">Four entities involved</h3>
+  <p>Flow control at the transport layer really involves four separate entities working together: the <strong>sender process</strong>, the <strong>sender's transport layer</strong>, the <strong>receiver's transport layer</strong>, and the <strong>receiver process</strong>.</p>
+
+  <h3 style="margin-top:20px;">The two-buffer solution</h3>
+  <p>One common implementation uses <strong>two buffers</strong> — a set of memory locations that can temporarily hold packets — one sitting at the sending transport layer, and one at the receiving transport layer. When the receiving buffer starts filling up, it signals back to slow or pause the sender, exactly as we saw with the producer/consumer idea in Unit 3.</p>
+
+  ${remember(["Flow control prevents a fast sender from overwhelming a slow receiver","Data can be pushed (sender-driven) or pulled (receiver-driven)","4 entities: sender process, sender's transport layer, receiver's transport layer, receiver process","Two buffers (one at each end) are the standard mechanism"])}
+`;
+
+CONTENT.errortrans = `
+  ${explain(`
+    <p>On the Internet, the underlying Network layer (IP) is <strong>unreliable</strong> — it makes no promises about delivery. If an application needs guaranteed reliability, the Transport layer has to add its own error control on top.</p>
+  `)}
+
+  <h3>What Transport-Layer error control must do</h3>
+  <div class="chiprow">
+    <span class="chip">1️⃣ Detect and discard corrupted packets</span>
+    <span class="chip">2️⃣ Keep track of lost or discarded packets, and resend them</span>
+    <span class="chip">3️⃣ Recognize duplicate packets and discard them</span>
+    <span class="chip">4️⃣ Buffer out-of-order packets until the missing ones arrive</span>
+  </div>
+
+  <h3 style="margin-top:20px;">Sequence Numbers</h3>
+  <p>To know which packet needs resending, which is a duplicate, or which arrived out of order, every packet is given a <strong>sequence number</strong>. Since the header only has a limited number of bits <em>m</em> to store this, the numbers wrap around — they run from 0 to 2<sup>m</sup> − 1 and are effectively <strong>modulo 2<sup>m</sup></strong>. For example, if m = 4, only sequence numbers 0 through 15 exist before the count wraps back to 0.</p>
+
+  <h3 style="margin-top:20px;">Acknowledgment — the two sides</h3>
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>Receiver's Side</h4>
+      <p style="font-size:14px;">Sends an ACK for each collection of packets that arrived safe and sound. Corrupted or duplicate packets are simply discarded.</p>
+    </div>
+    <div class="flow-card">
+      <h4>Sender's Side</h4>
+      <p style="font-size:14px;">Uses a <strong>timer</strong> after sending each packet. If no ACK arrives before the timer expires, the sender resends it. Out-of-order packets can either be discarded (treated as lost) or stored until the missing one shows up.</p>
+    </div>
+  </div>
+
+  ${remember(["IP is unreliable, so the Transport layer adds its own error control when needed","4 jobs: detect/discard corrupted, resend lost, discard duplicates, buffer out-of-order","Sequence numbers wrap around: modulo 2ᵐ for an m-bit field","Receiver ACKs good packets · Sender uses a timer to detect and resend lost ones"])}
+`;
+
+CONTENT.slidingwindow = `
+  ${explain(`
+    <p>Combining flow control (two buffers) with error control (sequence + acknowledgment numbers) naturally leads to one elegant mechanism: <strong>two numbered buffers</strong> — one at the sender, one at the receiver — known as the <strong>Sliding Window</strong>.</p>
+  `)}
+
+  <div class="imgcard">
+    <svg viewBox="0 0 420 80">
+      <text x="15" y="15" font-size="10" fill="var(--ink-soft)">Sender's buffer:</text>
+      <g>
+        <rect x="15" y="22" width="30" height="24" fill="var(--ink-soft)" opacity="0.3"/>
+        <rect x="45" y="22" width="30" height="24" fill="var(--rail)"/>
+        <rect x="75" y="22" width="30" height="24" fill="var(--rail)"/>
+        <rect x="105" y="22" width="30" height="24" fill="var(--rail)"/>
+        <rect x="135" y="22" width="30" height="24" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="2"/>
+        <rect x="165" y="22" width="30" height="24" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="2"/>
+      </g>
+      <text x="80" y="60" text-anchor="middle" font-size="9" fill="var(--rail)" font-weight="700">← window: sent, awaiting ACK →</text>
+      <text x="180" y="60" text-anchor="middle" font-size="9" fill="var(--ink-soft)">not yet sent</text>
+
+      <text x="255" y="15" font-size="10" fill="var(--ink-soft)">Receiver's buffer:</text>
+      <g>
+        <rect x="255" y="22" width="30" height="24" fill="var(--ink-soft)" opacity="0.3"/>
+        <rect x="285" y="22" width="30" height="24" fill="var(--right)"/>
+        <rect x="315" y="22" width="30" height="24" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="2"/>
+        <rect x="345" y="22" width="30" height="24" fill="var(--bg-panel)" stroke="var(--line)" stroke-width="2"/>
+      </g>
+      <text x="300" y="60" text-anchor="middle" font-size="9" fill="var(--right)" font-weight="700">received, stored</text>
+      <text x="360" y="60" text-anchor="middle" font-size="9" fill="var(--ink-soft)">waiting</text>
+    </svg>
+    <p class="imgcaption">Each numbered slot in the buffer corresponds to a sequence number. As ACKs come back, the sender's "window" of in-flight packets slides forward, freeing up space to send more.</p>
+  </div>
+
+  <h3>At the Sender's Side</h3>
+  <p>When a packet is ready to send, the number of the next free buffer location, <strong>x</strong>, becomes its sequence number. Once sent, a copy STAYS in that location, waiting for acknowledgment. Only when the ACK arrives does the packet get removed and that memory location freed up again.</p>
+
+  <h3 style="margin-top:20px;">At the Receiver's Side</h3>
+  <p>When a packet with sequence number <strong>y</strong> arrives, it's stored at memory location y until the application layer is ready to receive it — and an acknowledgment is sent to announce that packet y has safely arrived.</p>
+
+  ${remember(["Sliding Window = the combination of flow control (buffers) + error control (sequence/ACK numbers)","Sender keeps a sent packet until its ACK arrives, then frees that slot","Receiver stores an arrived packet at its matching sequence-number slot, and ACKs it"])}
+`;
+
+CONTENT.congestion = `
+  ${explain(`
+    <p><strong>Congestion</strong> happens when the load placed on a network is greater than its capacity to handle it — much like a traffic jam on a road built for fewer cars. <strong>Congestion control</strong> covers the mechanisms and techniques used to detect and manage this, keeping the load under control.</p>
+  `)}
+
+  ${mistake(`<p>Congestion at the Transport layer isn't really caused BY the Transport layer — it's actually a symptom of congestion happening down at the Network layer, showing up as slower or dropped transport-layer deliveries.</p>`)}
+
+  <h3 style="margin-top:20px;">Two service models</h3>
+  <p>The transport layer can offer its service to applications in two fundamentally different styles:</p>
+
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>📨 Connectionless Service</h4>
+      <p style="font-size:14.5px;">Each packet (segment) is handled independently, with no setup phase and no guarantee of order or delivery. Fast and low-overhead — this is the model <strong>UDP</strong> uses.</p>
+    </div>
+    <div class="flow-card">
+      <h4>🔗 Connection-Oriented Service</h4>
+      <p style="font-size:14.5px;">A logical connection is established first, data flows in order with reliability guarantees, and the connection is formally closed afterward. This is the model <strong>TCP</strong> uses.</p>
+    </div>
+  </div>
+
+  ${analogy(`<p>Connectionless service is like dropping postcards in a mailbox — each one travels independently, with no guarantee they arrive in the order you wrote them, or even that they all arrive. Connection-oriented service is like a phone call — you dial first (setup), have an ordered back-and-forth conversation (data transfer), then hang up (teardown).</p>`)}
+
+  ${remember(["Congestion = network load exceeds its capacity","Transport-layer congestion is really a symptom of Network-layer congestion","Connectionless service = independent packets, no setup (UDP's model)","Connection-oriented service = setup → ordered/reliable transfer → teardown (TCP's model)"])}
 `;
 
 buildNav();
