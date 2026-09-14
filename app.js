@@ -2315,22 +2315,57 @@ CONTENT.classful = `
     <p>The network identifier in IPv4 was originally designed with a <strong>fixed-length prefix</strong> — called <strong>classful addressing</strong>. A newer scheme, <strong>classless addressing</strong>, instead uses a variable-length prefix (we'll get to that next).</p>
   `)}
 
-  <h3>The Classes</h3>
+  <h3>How a class is identified — the leading bits</h3>
+  <p>Classful addressing splits the entire address space into 5 classes (A through E), and — cleverly — a device can tell which class an address belongs to just by looking at its <strong>first few bits</strong>, without needing any extra information.</p>
+
+  <div class="imgcard">
+    <svg viewBox="0 0 420 190">
+      <text x="10" y="15" font-size="10" font-weight="700" fill="var(--ink)">Class A — starts with 0</text>
+      <rect x="10" y="20" width="20" height="20" fill="var(--rail)"/><text x="20" y="34" text-anchor="middle" font-size="10" fill="#fff">0</text>
+      <rect x="30" y="20" width="100" height="20" fill="var(--spark)"/><text x="80" y="34" text-anchor="middle" font-size="9" fill="#fff">Network (7 bits)</text>
+      <rect x="130" y="20" width="260" height="20" fill="var(--volt)"/><text x="260" y="34" text-anchor="middle" font-size="9">Host (24 bits)</text>
+
+      <text x="10" y="55" font-size="10" font-weight="700" fill="var(--ink)">Class B — starts with 10</text>
+      <rect x="10" y="60" width="35" height="20" fill="var(--rail)"/><text x="27" y="74" text-anchor="middle" font-size="9" fill="#fff">10</text>
+      <rect x="45" y="60" width="120" height="20" fill="var(--spark)"/><text x="105" y="74" text-anchor="middle" font-size="9" fill="#fff">Network (14 bits)</text>
+      <rect x="165" y="60" width="225" height="20" fill="var(--volt)"/><text x="277" y="74" text-anchor="middle" font-size="9">Host (16 bits)</text>
+
+      <text x="10" y="95" font-size="10" font-weight="700" fill="var(--ink)">Class C — starts with 110</text>
+      <rect x="10" y="100" width="45" height="20" fill="var(--rail)"/><text x="32" y="114" text-anchor="middle" font-size="9" fill="#fff">110</text>
+      <rect x="55" y="100" width="180" height="20" fill="var(--spark)"/><text x="145" y="114" text-anchor="middle" font-size="9" fill="#fff">Network (21 bits)</text>
+      <rect x="235" y="100" width="155" height="20" fill="var(--volt)"/><text x="312" y="114" text-anchor="middle" font-size="9">Host (8 bits)</text>
+
+      <text x="10" y="135" font-size="10" font-weight="700" fill="var(--ink)">Class D — starts with 1110 (Multicast, no split)</text>
+      <rect x="10" y="140" width="380" height="20" fill="var(--wrong)"/><text x="200" y="154" text-anchor="middle" font-size="9" fill="#fff">Entire address = multicast group identifier</text>
+
+      <text x="10" y="175" font-size="10" font-weight="700" fill="var(--ink)">Class E — starts with 1111 (Reserved, experimental use)</text>
+    </svg>
+    <p class="imgcaption">As the network part grows narrower (Class A → B → C), the host part shrinks — trading fewer, huge networks for more, smaller ones. Classes D and E aren't split into network/host at all.</p>
+  </div>
+
+  <h3 style="margin-top:20px;">All 5 classes at a glance</h3>
   <div class="chiprow">
-    <span class="chip">Class A — 2⁷ = 128 networks possible worldwide (huge networks, few of them)</span>
-    <span class="chip">Class B — 2¹⁴ = 16,384 networks possible</span>
-    <span class="chip">Class C — 2²¹ = 2,097,152 networks possible (small networks, lots of them)</span>
+    <span class="chip">Class A — 2⁷ = 128 networks, ~16.7 million hosts each (huge networks, very few of them)</span>
+    <span class="chip">Class B — 2¹⁴ = 16,384 networks, 65,534 hosts each</span>
+    <span class="chip">Class C — 2²¹ = 2,097,152 networks, only 254 hosts each (small networks, lots of them)</span>
+    <span class="chip">Class D — reserved entirely for multicast addressing, no network/host split</span>
+    <span class="chip">Class E — reserved for future/experimental use</span>
+  </div>
+
+  <div class="card" style="background:var(--bg); margin-top:14px;">
+    <p style="margin:0;"><strong>Worked example:</strong> which class is <code>200.45.34.7</code>?</p>
+    <p style="margin:8px 0 0;">Converting the first octet, 200, to binary gives <code>11001000</code> — it starts with <code>110</code>, so this is a <strong>Class C</strong> address. That instantly tells us the network prefix is 21 bits, leaving only 8 bits (254 usable addresses) for hosts on this particular network.</p>
   </div>
 
   <h3 style="margin-top:20px;">The advantage — simplicity</h3>
   <p>Since the prefix length for each class was fixed, it was easy to identify an address's class at a glance, and its prefix length was known immediately — no extra calculation needed.</p>
 
   <h3 style="margin-top:20px;">The fatal flaw — Address Depletion</h3>
-  <p>Class A could only ever be assigned to <strong>128 organizations</strong> in the entire world — yet each of those organizations would automatically get <strong>16,777,216 host addresses</strong>, whether they needed anywhere near that many or not! Millions of addresses sat wasted inside organizations that only needed a few hundred. This wastage — called <strong>address depletion</strong> — is exactly what pushed the Internet toward classless addressing.</p>
+  <p>Class A could only ever be assigned to <strong>128 organizations</strong> in the entire world — yet each of those organizations would automatically get <strong>16,777,216 host addresses</strong>, whether they needed anywhere near that many or not! Millions of addresses sat wasted inside organizations that only needed a few hundred. Meanwhile, a mid-sized company with, say, 300 devices didn't fit neatly into a Class C (254 hosts, too small) OR a Class B (65,534 hosts, wildly oversized) — they'd often be forced to take a whole Class B block just to cover 300 devices, wasting over 65,000 addresses in the process! This wastage — called <strong>address depletion</strong> — is exactly what pushed the Internet toward classless addressing.</p>
 
   ${mistake(`<p>Don't assume "bigger class = better" — Class A's huge blocks were actually the PROBLEM, not a benefit. Most organizations wasted the vast majority of the addresses handed to them.</p>`)}
 
-  ${remember(["Classful addressing = fixed-length prefix per class (A, B, C)","Advantage: simple to identify the class and prefix length instantly","Fatal flaw: Address Depletion — most assigned blocks were far bigger than needed, wasting huge numbers of addresses"])}
+  ${remember(["5 classes (A–E), identified instantly by the leading bits: A=0, B=10, C=110, D=1110, E=1111","Classful addressing = fixed-length prefix per class","Advantage: simple to identify the class and prefix length instantly","Fatal flaw: Address Depletion — most assigned blocks were far bigger (or forced a big jump in size) than needed"])}
 `;
 
 CONTENT.classless = `
@@ -2365,6 +2400,34 @@ CONTENT.classless = `
 CONTENT.subnetting = `
   ${explain(`<p>Once an organization is granted a block of addresses, it often needs to split that single block into several smaller <strong>subnetworks</strong> — this is <strong>subnetting</strong>. The reverse — combining several smaller blocks into one bigger one — is <strong>supernetting</strong>.</p>`)}
 
+  <div class="imgcard">
+    <svg viewBox="0 0 400 130">
+      <rect x="10" y="10" width="380" height="30" fill="var(--rail)"/>
+      <text x="200" y="30" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">One block: 192.168.1.0/24 (256 addresses)</text>
+
+      <text x="200" y="55" text-anchor="middle" font-size="16" fill="var(--ink-soft)">↓ subnetting ↓</text>
+
+      <rect x="10" y="70" width="90" height="40" fill="var(--spark)"/>
+      <text x="55" y="88" text-anchor="middle" font-size="9" fill="#fff">Subnet 1</text>
+      <text x="55" y="101" text-anchor="middle" font-size="8" fill="#fff">.0/26 (64)</text>
+
+      <rect x="105" y="70" width="90" height="40" fill="var(--spark)"/>
+      <text x="150" y="88" text-anchor="middle" font-size="9" fill="#fff">Subnet 2</text>
+      <text x="150" y="101" text-anchor="middle" font-size="8" fill="#fff">.64/26 (64)</text>
+
+      <rect x="200" y="70" width="90" height="40" fill="var(--spark)"/>
+      <text x="245" y="88" text-anchor="middle" font-size="9" fill="#fff">Subnet 3</text>
+      <text x="245" y="101" text-anchor="middle" font-size="8" fill="#fff">.128/26 (64)</text>
+
+      <rect x="295" y="70" width="90" height="40" fill="var(--spark)"/>
+      <text x="340" y="88" text-anchor="middle" font-size="9" fill="#fff">Subnet 4</text>
+      <text x="340" y="101" text-anchor="middle" font-size="8" fill="#fff">.192/26 (64)</text>
+
+      <text x="200" y="125" text-anchor="middle" font-size="9" fill="var(--ink-soft)">Same 256 addresses, now split into 4 equal /26 subnets of 64 each</text>
+    </svg>
+    <p class="imgcaption">Subnetting doesn't create new addresses — it just draws internal boundaries inside the block you already have, so different departments/floors/buildings can each get their own smaller network.</p>
+  </div>
+
   <h3>The Subnetting Formula</h3>
   <p>If the organization has <em>N</em> total addresses with prefix length <em>n</em>, and wants to create a subnet with <em>N<sub>sub</sub></em> addresses:</p>
   <div class="chiprow">
@@ -2381,6 +2444,9 @@ CONTENT.subnetting = `
     </ul>
   </div>
 
+  <h3 style="margin-top:20px;">Why go to the trouble?</h3>
+  <p>Subnetting isn't just a math exercise — it's what lets a single college campus, for example, give the Computer Science block one subnet, the Library another, and the Hostel a third, all while keeping the traffic on each subnet naturally separated from the others. This makes the network easier to manage, easier to secure (problems on one subnet don't automatically spread to another), and easier to troubleshoot.</p>
+
   <h3 style="margin-top:22px;">Supernetting / Address Aggregation</h3>
   <p>Sometimes an ISP holds several separate small blocks and wants to advertise them to the rest of the Internet as just ONE larger block — mainly to keep <strong>routing tables</strong> smaller and more efficient. For example, four separate /26 blocks (64 addresses each) can be aggregated into a single /24 block (256 addresses) — one routing table entry instead of four.</p>
 
@@ -2391,17 +2457,65 @@ CONTENT.subnetting = `
 `;
 
 CONTENT.specialip = `
-  ${explain(`<p>A handful of special IPv4 address blocks are permanently reserved for specific purposes rather than being handed out to regular devices.</p>`)}
+  ${explain(`<p>A handful of special IPv4 address blocks are permanently reserved for specific purposes rather than being handed out to regular devices. Think of them as the "off-limits" reserved zones inside the address space, each with its own job.</p>`)}
 
-  <div class="chiprow">
-    <span class="chip">🏠 This-host Address — 0.0.0.0/32, used when a device needs to send a datagram but doesn't yet know its own address</span>
-    <span class="chip">📢 Limited-broadcast — 255.255.255.255/32, used to send a message to every device on the local network</span>
-    <span class="chip">🔁 Loopback — 127.0.0.0/8, a packet sent here never actually leaves the host (used for testing)</span>
-    <span class="chip">🏡 Private Addresses — 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, and 169.254.0.0/16 — reserved for internal/local networks</span>
-    <span class="chip">📡 Multicast — 224.0.0.0/4, reserved for sending to a specific group of devices at once</span>
+  <div class="imgcard">
+    <svg viewBox="0 0 420 100">
+      <rect x="10" y="30" width="400" height="30" fill="var(--line)"/>
+      <rect x="10" y="30" width="4" height="30" fill="var(--wrong)"/>
+      <text x="12" y="20" font-size="8" fill="var(--wrong)">0.0.0.0</text>
+
+      <rect x="200" y="30" width="30" height="30" fill="var(--rail)"/>
+      <text x="215" y="22" text-anchor="middle" font-size="8" fill="var(--rail)">127.0.0.0/8</text>
+      <text x="215" y="48" text-anchor="middle" font-size="7" fill="#fff">Loop-</text>
+      <text x="215" y="57" text-anchor="middle" font-size="7" fill="#fff">back</text>
+
+      <rect x="260" y="30" width="45" height="30" fill="var(--spark)"/>
+      <text x="282" y="22" text-anchor="middle" font-size="8" fill="var(--spark)">Private ranges</text>
+      <text x="282" y="48" text-anchor="middle" font-size="7" fill="#fff">10.x / 172.16.x</text>
+      <text x="282" y="57" text-anchor="middle" font-size="7" fill="#fff">/ 192.168.x</text>
+
+      <rect x="330" y="30" width="45" height="30" fill="var(--volt)"/>
+      <text x="352" y="22" text-anchor="middle" font-size="8" fill="var(--ink)">224.0.0.0/4</text>
+      <text x="352" y="48" text-anchor="middle" font-size="7">Multi-</text>
+      <text x="352" y="57" text-anchor="middle" font-size="7">cast</text>
+
+      <rect x="406" y="30" width="4" height="30" fill="var(--wrong)"/>
+      <text x="408" y="20" font-size="8" fill="var(--wrong)" text-anchor="end">255.255.255.255</text>
+
+      <text x="215" y="80" text-anchor="middle" font-size="9" fill="var(--ink-soft)">Reserved zones scattered across the full 0.0.0.0 – 255.255.255.255 address space</text>
+    </svg>
+    <p class="imgcaption">Each reserved block sits at a fixed, well-known location — a router or host recognizes them instantly and handles them specially rather than treating them as an ordinary destination.</p>
   </div>
 
-  ${remember(["0.0.0.0/32 = 'this host' (used before a device knows its own address)","255.255.255.255/32 = broadcast to everyone on the local network","127.0.0.0/8 = loopback, never leaves the host","10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16 = private address ranges","224.0.0.0/4 = multicast"])}
+  <h3>The reserved blocks, one at a time</h3>
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>🏠 This-host — 0.0.0.0/32</h4>
+      <p style="font-size:14px;">Used when a device needs to send a datagram but doesn't yet know its OWN address to use as the source — for example, right at boot-up, before DHCP has assigned it anything.</p>
+    </div>
+    <div class="flow-card">
+      <h4>📢 Limited-broadcast — 255.255.255.255/32</h4>
+      <p style="font-size:14px;">Used whenever a router or host needs to send a datagram to EVERY device on the local network at once — a true "shout to the whole room."</p>
+    </div>
+    <div class="flow-card">
+      <h4>🔁 Loopback — 127.0.0.0/8</h4>
+      <p style="font-size:14px;">A packet sent to any address in this block never actually leaves the host — it loops right back to the same machine. Extremely useful for testing network software without needing a real network.</p>
+    </div>
+    <div class="flow-card">
+      <h4>🏡 Private Addresses — 4 blocks</h4>
+      <p style="font-size:14px;">10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, and 169.254.0.0/16 are reserved for internal/local networks — the same private ranges can be reused inside millions of different homes and offices worldwide, since they're never routed on the public Internet directly (this is exactly why NAT, covered next, is needed).</p>
+    </div>
+    <div class="flow-card">
+      <h4>📡 Multicast — 224.0.0.0/4</h4>
+      <p style="font-size:14px;">Reserved for sending to a specific GROUP of devices at once — not everyone (like broadcast), and not just one device (like unicast), but exactly the group that's chosen to listen.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:22px;">Who actually hands out the "normal" blocks?</h3>
+  <p>Outside of these reserved zones, ordinary address blocks are managed globally by <strong>ICANN</strong> (Internet Corporation for Assigned Names and Numbers), which allocates large blocks to <strong>Regional Internet Registries (RIRs)</strong>, which in turn assign smaller blocks to ISPs — who finally hand out individual addresses to their customers. Two restrictions always apply to any request: the number of addresses requested, N, <strong>must be a power of 2</strong> (otherwise there's no valid integer prefix length for it), and there must be enough <strong>contiguous</strong> (unbroken, back-to-back) addresses available to allocate as one block.</p>
+
+  ${remember(["0.0.0.0/32 = 'this host' (used before a device knows its own address)","255.255.255.255/32 = broadcast to everyone on the local network","127.0.0.0/8 = loopback, never leaves the host","10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16 = private address ranges (reusable everywhere, thanks to NAT)","224.0.0.0/4 = multicast","Allocation chain: ICANN → Regional Internet Registries (RIRs) → ISPs → you"])}
 `;
 
 CONTENT.dhcp = `
@@ -2499,8 +2613,17 @@ CONTENT.nat = `
 
 CONTENT.ipv6 = `
   ${explain(`
-    <p><strong>IPv6</strong> is the next-generation addressing system, created mainly to solve IPv4's address depletion problem once and for all — its address space is vastly larger (128 bits instead of 32).</p>
+    <p><strong>IPv6</strong> is the next-generation addressing system, created mainly to solve IPv4's address depletion problem once and for all — its address space is vastly larger (128 bits instead of 32). That's <strong>2¹²⁸</strong> possible addresses — an almost incomprehensibly large number, enough to assign trillions of addresses to every single person on Earth without ever running out.</p>
   `)}
+
+  <div class="imgcard">
+    <svg viewBox="0 0 420 90">
+      <text x="10" y="18" font-size="10" font-weight="700" fill="var(--ink)">A full IPv6 address — 8 groups of 4 hex digits, separated by colons:</text>
+      <text x="10" y="45" font-family="monospace" font-size="13" fill="var(--rail)">FDEC : 0074 : 0000 : 0000 : 0000 : B0FF : 0000 : FFFF</text>
+      <text x="10" y="70" font-size="9" fill="var(--ink-soft)">8 groups × 16 bits each = 128 bits total (compare: IPv4 had 4 groups × 8 bits = 32 bits)</text>
+    </svg>
+    <p class="imgcaption">Each of the 8 groups holds 16 bits, shown as 4 hexadecimal digits — dramatically more room than IPv4's four small decimal octets.</p>
+  </div>
 
   <h3>Writing an IPv6 address</h3>
   <div class="chiprow">
@@ -2508,6 +2631,14 @@ CONTENT.ipv6 = `
     <span class="chip">Abbreviation (zero compression) — consecutive all-zero groups can be replaced with a double colon "::", used only once per address</span>
     <span class="chip">Mixed notation — colon-hex for the leftmost six sections, plus familiar dotted-decimal for the rightmost two, e.g. 0:0:0:0:0:0:13.1.68.3</span>
     <span class="chip">CIDR notation — same slash notation as IPv4, e.g. address/prefix-length</span>
+  </div>
+
+  <div class="card" style="background:var(--bg); margin-top:14px;">
+    <p style="margin:0 0 8px;"><strong>Worked example — zero compression:</strong></p>
+    <p style="margin:0; font-family:monospace; font-size:13px;">FDEC : 0074 : 0000 : 0000 : 0000 : B0FF : 0000 : FFFF</p>
+    <p style="margin:8px 0 0;">The three consecutive all-zero groups in the middle collapse into a single <code>::</code>:</p>
+    <p style="margin:8px 0 0; font-family:monospace; font-size:13px; color:var(--right); font-weight:700;">FDEC : 0074 :: B0FF : 0000 : FFFF</p>
+    <p style="margin:8px 0 0;">Much shorter and easier to read — but remember, <code>::</code> can only appear ONCE in an address, since using it twice would make the address ambiguous (the reader wouldn't know how many zero groups belong to each gap).</p>
   </div>
 
   <h3 style="margin-top:20px;">Three types of IPv6 addresses</h3>
@@ -2528,7 +2659,9 @@ CONTENT.ipv6 = `
 
   ${analogy(`<p>Unicast is like calling one specific friend's phone. Anycast is like dialing a general support hotline — your call reaches just ONE of possibly many available agents, whichever is closest or free. Multicast is like a group announcement broadcast to an entire mailing list at once.</p>`)}
 
-  ${remember(["IPv6 uses 128-bit addresses — a vastly bigger address space than IPv4's 32 bits","Zero compression (::) can only be used ONCE in a single address","3 address types: Unicast (one device), Anycast (nearest of many), Multicast (a whole group)"])}
+  ${mistake(`<p>IPv6 does NOT use broadcast addresses at all (unlike IPv4's 255.255.255.255) — multicast takes over that job instead, since it's more efficient and gives finer control over exactly who receives the message.</p>`)}
+
+  ${remember(["IPv6 = 128-bit addresses, written as 8 groups of 4 hex digits","Address space = 2¹²⁸ — vastly bigger than IPv4's 2³²","Zero compression (::) can only be used ONCE in a single address","3 address types: Unicast (one device), Anycast (nearest of many), Multicast (a whole group) — no broadcast type exists in IPv6"])}
 `;
 
 /* ================= UNIT 4b: TRANSPORT LAYER ================= */
@@ -2609,22 +2742,70 @@ CONTENT.muxtrans = `
 
   ${analogy(`<p>Think of an apartment building's single mailbox slot (multiplexing) — mail from many different senders all funnels through that one slot. The building manager (demultiplexing) then sorts everything by apartment number so it reaches the right resident.</p>`)}
 
+  <div class="imgcard">
+    <svg viewBox="0 0 400 160">
+      <text x="70" y="12" text-anchor="middle" font-size="10" font-weight="700" fill="var(--rail)">Sending host</text>
+      <rect x="15" y="18" width="110" height="20" rx="5" fill="var(--rail)"/><text x="70" y="32" text-anchor="middle" font-size="8" fill="#fff">Browser (port 51000)</text>
+      <rect x="15" y="42" width="110" height="20" rx="5" fill="var(--rail)"/><text x="70" y="56" text-anchor="middle" font-size="8" fill="#fff">Email app (port 51001)</text>
+      <rect x="15" y="66" width="110" height="20" rx="5" fill="var(--rail)"/><text x="70" y="80" text-anchor="middle" font-size="8" fill="#fff">Game (port 51002)</text>
+
+      <line x1="125" y1="28" x2="165" y2="50" stroke="var(--ink-soft)" stroke-width="1.5"/>
+      <line x1="125" y1="52" x2="165" y2="52" stroke="var(--ink-soft)" stroke-width="1.5"/>
+      <line x1="125" y1="76" x2="165" y2="54" stroke="var(--ink-soft)" stroke-width="1.5"/>
+
+      <rect x="165" y="42" width="70" height="24" rx="6" fill="var(--spark)"/>
+      <text x="200" y="58" text-anchor="middle" font-size="8" fill="#fff">MUX ➔ 1 link</text>
+
+      <line x1="235" y1="54" x2="400" y2="54" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="315" y="46" text-anchor="middle" font-size="8" fill="var(--ink-soft)">one shared connection out to the network</text>
+
+      <text x="330" y="90" text-anchor="middle" font-size="10" font-weight="700" fill="var(--spark)">Receiving host</text>
+      <rect x="280" y="96" width="90" height="20" rx="5" fill="var(--spark)"/><text x="325" y="110" text-anchor="middle" font-size="8" fill="#fff">DEMUX (by port)</text>
+
+      <line x1="280" y1="106" x2="240" y2="130" stroke="var(--ink-soft)" stroke-width="1.5"/>
+      <line x1="280" y1="106" x2="240" y2="106" stroke="var(--ink-soft)" stroke-width="1.5"/>
+      <line x1="280" y1="106" x2="240" y2="82" stroke="var(--ink-soft)" stroke-width="1.5"/>
+
+      <rect x="120" y="72" width="120" height="20" rx="5" fill="var(--rail)"/><text x="180" y="86" text-anchor="middle" font-size="8" fill="#fff">→ Browser process</text>
+      <rect x="120" y="96" width="120" height="20" rx="5" fill="var(--rail)"/><text x="180" y="110" text-anchor="middle" font-size="8" fill="#fff">→ Email process</text>
+      <rect x="120" y="120" width="120" height="20" rx="5" fill="var(--rail)"/><text x="180" y="134" text-anchor="middle" font-size="8" fill="#fff">→ Game process</text>
+    </svg>
+    <p class="imgcaption">Three separate apps on your computer all share one network connection going out (multiplexing) — and on the far end, the transport layer reads each packet's port number to sort replies back to the correct app (demultiplexing).</p>
+  </div>
+
   ${remember(["Multiplexing = combining data from multiple processes onto one connection out","Demultiplexing = sorting incoming data back out to the correct waiting process, using port numbers"])}
 `;
 
 CONTENT.flowtrans = `
-  ${explain(`<p>Just like flow control at the Data Link Layer (Unit 3), the Transport Layer also needs to stop a fast sender from overwhelming a slower receiver.</p>`)}
+  ${explain(`<p>Just like flow control at the Data Link Layer (Unit 3), the Transport Layer also needs to stop a fast sender from overwhelming a slower receiver — but here, it's not just about two devices, it's about the whole chain from one APPLICATION to another.</p>`)}
 
   <h3>Pushing vs Pulling</h3>
-  <p>Delivering items from a producer to a consumer can happen in one of two ways: the producer can <strong>push</strong> data out whenever it's ready, or the consumer can <strong>pull</strong> (request) data only when it's ready to handle more.</p>
+  <p>Delivering items from a producer to a consumer can happen in one of two ways: the producer can <strong>push</strong> data out whenever it's ready, or the consumer can <strong>pull</strong> (request) data only when it's ready to handle more. Most real transport-layer implementations lean toward a push model from the application down to the transport layer, but then rely on buffering and feedback signals to avoid overload further along the chain.</p>
 
   <h3 style="margin-top:20px;">Four entities involved</h3>
   <p>Flow control at the transport layer really involves four separate entities working together: the <strong>sender process</strong>, the <strong>sender's transport layer</strong>, the <strong>receiver's transport layer</strong>, and the <strong>receiver process</strong>.</p>
 
-  <h3 style="margin-top:20px;">The two-buffer solution</h3>
-  <p>One common implementation uses <strong>two buffers</strong> — a set of memory locations that can temporarily hold packets — one sitting at the sending transport layer, and one at the receiving transport layer. When the receiving buffer starts filling up, it signals back to slow or pause the sender, exactly as we saw with the producer/consumer idea in Unit 3.</p>
+  <div class="imgcard">
+    <svg viewBox="0 0 400 100">
+      <rect x="10" y="35" width="80" height="30" rx="6" fill="var(--rail)"/><text x="50" y="54" text-anchor="middle" font-size="9" fill="#fff">Sender Process</text>
+      <line x1="90" y1="50" x2="130" y2="50" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#ft1)"/>
+      <rect x="130" y="35" width="90" height="30" rx="6" fill="var(--spark)"/><text x="175" y="49" text-anchor="middle" font-size="8" fill="#fff">Sender's</text><text x="175" y="60" text-anchor="middle" font-size="8" fill="#fff">Transport Layer</text>
+      <line x1="220" y1="50" x2="260" y2="50" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#ft1)"/>
+      <text x="240" y="40" text-anchor="middle" font-size="7" fill="var(--ink-soft)">network</text>
+      <rect x="260" y="35" width="90" height="30" rx="6" fill="var(--spark)"/><text x="305" y="49" text-anchor="middle" font-size="8" fill="#fff">Receiver's</text><text x="305" y="60" text-anchor="middle" font-size="8" fill="#fff">Transport Layer</text>
+      <line x1="350" y1="50" x2="390" y2="50" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#ft1)"/>
+      <defs><marker id="ft1" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="var(--ink-soft)"/></marker></defs>
+      <text x="392" y="45" font-size="9" fill="var(--rail)" transform="rotate(90 392 45)"></text>
+      <text x="392" y="54" text-anchor="start" font-size="9" fill="var(--rail)">→</text>
+      <text x="365" y="80" text-anchor="middle" font-size="8" fill="var(--ink)">Receiver Process</text>
+    </svg>
+    <p class="imgcaption">Four hand-offs, four chances for a mismatch in speed — which is exactly why buffering happens at both transport-layer stops along the way.</p>
+  </div>
 
-  ${remember(["Flow control prevents a fast sender from overwhelming a slow receiver","Data can be pushed (sender-driven) or pulled (receiver-driven)","4 entities: sender process, sender's transport layer, receiver's transport layer, receiver process","Two buffers (one at each end) are the standard mechanism"])}
+  <h3 style="margin-top:20px;">The two-buffer solution</h3>
+  <p>One common implementation uses <strong>two buffers</strong> — a set of memory locations that can temporarily hold packets — one sitting at the sending transport layer, and one at the receiving transport layer. When the receiving buffer starts filling up, it signals back to slow or pause the sender, exactly as we saw with the producer/consumer idea in Unit 3. This is the same underlying concept behind TCP's famous "window size" field, which tells the sender exactly how much buffer space the receiver currently has free.</p>
+
+  ${remember(["Flow control prevents a fast sender from overwhelming a slow receiver","Data can be pushed (sender-driven) or pulled (receiver-driven)","4 entities: sender process, sender's transport layer, receiver's transport layer, receiver process","Two buffers (one at each end) are the standard mechanism — this is the same idea behind TCP's 'window size'"])}
 `;
 
 CONTENT.errortrans = `
@@ -2653,6 +2834,32 @@ CONTENT.errortrans = `
       <h4>Sender's Side</h4>
       <p style="font-size:14px;">Uses a <strong>timer</strong> after sending each packet. If no ACK arrives before the timer expires, the sender resends it. Out-of-order packets can either be discarded (treated as lost) or stored until the missing one shows up.</p>
     </div>
+  </div>
+
+  <div class="imgcard">
+    <svg viewBox="0 0 380 130">
+      <text x="60" y="12" text-anchor="middle" font-size="10" font-weight="700" fill="var(--ink)">Sender</text>
+      <text x="320" y="12" text-anchor="middle" font-size="10" font-weight="700" fill="var(--ink)">Receiver</text>
+      <line x1="60" y1="18" x2="60" y2="120" stroke="var(--line)" stroke-width="2"/>
+      <line x1="320" y1="18" x2="320" y2="120" stroke="var(--line)" stroke-width="2"/>
+
+      <line x1="60" y1="32" x2="320" y2="45" stroke="var(--rail)" stroke-width="2" marker-end="url(#et1)"/>
+      <text x="190" y="28" text-anchor="middle" font-size="9" fill="var(--rail)">Packet 5 sent — timer starts ⏱️</text>
+
+      <path d="M320,48 C 340,55 340,65 320,70" fill="none" stroke="var(--wrong)" stroke-width="2"/>
+      <text x="345" y="60" font-size="8" fill="var(--wrong)">lost!</text>
+
+      <text x="190" y="88" text-anchor="middle" font-size="9" fill="var(--wrong)" font-weight="700">⏱️ Timer expires — no ACK received</text>
+
+      <line x1="60" y1="98" x2="320" y2="111" stroke="var(--right)" stroke-width="2" marker-end="url(#et2)"/>
+      <text x="190" y="94" text-anchor="middle" font-size="9" fill="var(--right)">Packet 5 RESENT — succeeds this time</text>
+
+      <defs>
+        <marker id="et1" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="var(--rail)"/></marker>
+        <marker id="et2" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="var(--right)"/></marker>
+      </defs>
+    </svg>
+    <p class="imgcaption">This timer-and-resend pattern is the core of how TCP recovers from lost packets — the sender never assumes silence means success.</p>
   </div>
 
   ${remember(["IP is unreliable, so the Transport layer adds its own error control when needed","4 jobs: detect/discard corrupted, resend lost, discard duplicates, buffer out-of-order","Sequence numbers wrap around: modulo 2ᵐ for an m-bit field","Receiver ACKs good packets · Sender uses a timer to detect and resend lost ones"])}
@@ -2721,6 +2928,27 @@ CONTENT.congestion = `
   </div>
 
   ${analogy(`<p>Connectionless service is like dropping postcards in a mailbox — each one travels independently, with no guarantee they arrive in the order you wrote them, or even that they all arrive. Connection-oriented service is like a phone call — you dial first (setup), have an ordered back-and-forth conversation (data transfer), then hang up (teardown).</p>`)}
+
+  <div class="imgcard">
+    <svg viewBox="0 0 400 130">
+      <text x="90" y="12" text-anchor="middle" font-size="10" font-weight="700" fill="var(--rail)">Connectionless (UDP)</text>
+      <rect x="20" y="20" width="140" height="18" fill="var(--rail)"/><text x="90" y="33" text-anchor="middle" font-size="8" fill="#fff">Packet 1 → sent directly</text>
+      <rect x="20" y="42" width="140" height="18" fill="var(--rail)"/><text x="90" y="55" text-anchor="middle" font-size="8" fill="#fff">Packet 2 → sent directly</text>
+      <rect x="20" y="64" width="140" height="18" fill="var(--rail)"/><text x="90" y="77" text-anchor="middle" font-size="8" fill="#fff">Packet 3 → sent directly</text>
+      <text x="90" y="100" text-anchor="middle" font-size="8" fill="var(--ink-soft)">No setup. No guaranteed order.</text>
+      <text x="90" y="112" text-anchor="middle" font-size="8" fill="var(--ink-soft)">Fast, but "best effort" only.</text>
+
+      <line x1="200" y1="0" x2="200" y2="130" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 3"/>
+
+      <text x="310" y="12" text-anchor="middle" font-size="10" font-weight="700" fill="var(--spark-dark)">Connection-Oriented (TCP)</text>
+      <rect x="230" y="20" width="160" height="16" rx="4" fill="var(--volt)"/><text x="310" y="32" text-anchor="middle" font-size="8" fill="var(--ink)">1. SETUP (handshake)</text>
+      <rect x="230" y="42" width="160" height="16" rx="4" fill="var(--spark)"/><text x="310" y="54" text-anchor="middle" font-size="8" fill="#fff">2. DATA TRANSFER (in order)</text>
+      <rect x="230" y="64" width="160" height="16" rx="4" fill="var(--volt)"/><text x="310" y="76" text-anchor="middle" font-size="8" fill="var(--ink)">3. TEARDOWN (close)</text>
+      <text x="310" y="100" text-anchor="middle" font-size="8" fill="var(--ink-soft)">Reliable, ordered delivery.</text>
+      <text x="310" y="112" text-anchor="middle" font-size="8" fill="var(--ink-soft)">More overhead, but guaranteed.</text>
+    </svg>
+    <p class="imgcaption">Same underlying idea we first saw with circuit vs packet switching in Unit 1 — one style favors speed and simplicity, the other favors reliability and order.</p>
+  </div>
 
   ${remember(["Congestion = network load exceeds its capacity","Transport-layer congestion is really a symptom of Network-layer congestion","Connectionless service = independent packets, no setup (UDP's model)","Connection-oriented service = setup → ordered/reliable transfer → teardown (TCP's model)"])}
 `;
