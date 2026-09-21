@@ -1330,6 +1330,7 @@ function showStation(i){
   current = i;
   document.querySelectorAll(".station").forEach(sec=>sec.classList.remove("active"));
   document.getElementById(`station-${i}`).classList.add("active");
+  if(typeof raStopReading === "function") raStopReading();
 
   document.querySelectorAll(".navbtn").forEach((btn,idx)=>{
     btn.classList.toggle("active", idx===i);
@@ -2952,6 +2953,149 @@ CONTENT.congestion = `
 
   ${remember(["Congestion = network load exceeds its capacity","Transport-layer congestion is really a symptom of Network-layer congestion","Connectionless service = independent packets, no setup (UDP's model)","Connection-oriented service = setup → ordered/reliable transfer → teardown (TCP's model)"])}
 `;
+
+/* ================= READ ALOUD (Text-to-Speech) ================= */
+const RA = { chunks:[], idx:0, playing:false, rate:1, rates:[1, 1.25, 1.5, 0.75], voice:null };
+
+/* Pick the best available "female, Indian" voice from whatever this visitor's
+   own browser/device offers. Voice lists differ by OS and browser, so this
+   searches by priority rather than assuming one exact name exists. */
+const RA_FEMALE_INDIAN_NAMES = ["heera","veena","lekha","neerja","priya","raveena","kalpana","isha","aditi","sangeeta"];
+
+function raScoreVoice(v){
+  const name = v.name.toLowerCase();
+  const lang = (v.lang || "").toLowerCase();
+  let score = 0;
+  if(lang === "en-in") score += 50;                                   // Indian English locale
+  else if(lang.startsWith("en-in")) score += 40;
+  if(RA_FEMALE_INDIAN_NAMES.some(n => name.includes(n))) score += 30; // known Indian female voice name
+  if(name.includes("india")) score += 15;                             // name explicitly says India
+  if(name.includes("female")) score += 8;
+  if(lang === "hi-in") score += 5;                                    // Hindi as a distant fallback
+  if(name.includes("male") && !name.includes("female")) score -= 20;  // avoid obviously-male voices
+  return score;
+}
+
+function raPickVoice(){
+  if(!window.speechSynthesis) return null;
+  const voices = speechSynthesis.getVoices();
+  if(!voices || voices.length === 0) return null;
+  let best = null, bestScore = -1;
+  voices.forEach(v=>{
+    const s = raScoreVoice(v);
+    if(s > bestScore){ bestScore = s; best = v; }
+  });
+  // Only actually use a pick if it scored above "no signal at all"
+  RA.voice = bestScore > 0 ? best : null;
+  return RA.voice;
+}
+
+if(window.speechSynthesis){
+  raPickVoice();
+  speechSynthesis.addEventListener("voiceschanged", raPickVoice);
+  // Some browsers report an empty voice list right after page load and never
+  // fire voiceschanged reliably — a couple of delayed re-checks catch that.
+  setTimeout(raPickVoice, 400);
+  setTimeout(raPickVoice, 1200);
+}
+
+function raExtractText(stationEl){
+  const clone = stationEl.cloneNode(true);
+  clone.querySelectorAll(".code-block, .navfoot, .demo-tabs, .demo-label, .quiz-opts, .scorebar, .eyebrow").forEach(n=>n.remove());
+  const raw = clone.innerText || "";
+  return raw.split(/(?<=[.!?])\s+|\n+/).map(s=>s.trim()).filter(s=>s.length>1);
+}
+
+function raUpdateStatus(){
+  const statusEl = document.getElementById("raStatus");
+  if(!statusEl) return;
+  if(RA.chunks.length===0){ statusEl.textContent = "Ready to read this page aloud"; return; }
+  const voiceNote = RA.voice ? ` · Voice: ${RA.voice.name}` : " · Voice: this device's default (no Indian voice found)";
+  statusEl.textContent = `Reading part ${Math.min(RA.idx+1, RA.chunks.length)} of ${RA.chunks.length}${voiceNote}`;
+}
+
+function raSpeakNext(){
+  if(RA.idx >= RA.chunks.length){ raStopReading(); return; }
+  const utter = new SpeechSynthesisUtterance(RA.chunks[RA.idx]);
+  utter.rate = RA.rate;
+  if(RA.voice){
+    try{ utter.voice = RA.voice; } catch(e){ /* stale/invalid voice reference — just use the browser default */ }
+  }
+  utter.onend = ()=>{
+    if(!RA.playing) return;
+    RA.idx++;
+    raUpdateStatus();
+    raSpeakNext();
+  };
+  utter.onerror = ()=>{ if(RA.playing){ RA.idx++; raSpeakNext(); } };
+  speechSynthesis.speak(utter);
+}
+
+function raStartReading(){
+  const stationEl = document.getElementById(`station-${current}`);
+  if(!stationEl) return;
+  speechSynthesis.cancel();
+  raPickVoice();
+  RA.chunks = raExtractText(stationEl);
+  RA.idx = 0;
+  RA.playing = true;
+  document.getElementById("readAloudPlayer").classList.add("show");
+  document.getElementById("raPlayPause").textContent = "⏸️";
+  raUpdateStatus();
+  if(RA.chunks.length===0){
+    document.getElementById("raStatus").textContent = "Nothing to read on this page.";
+    RA.playing = false;
+    return;
+  }
+  raSpeakNext();
+}
+
+function raPause(){
+  RA.playing = false;
+  speechSynthesis.pause();
+  const btn = document.getElementById("raPlayPause");
+  if(btn) btn.textContent = "▶️";
+}
+
+function raResume(){
+  RA.playing = true;
+  const btn = document.getElementById("raPlayPause");
+  if(btn) btn.textContent = "⏸️";
+  if(speechSynthesis.paused){ speechSynthesis.resume(); }
+  else { raSpeakNext(); }
+}
+
+function raStopReading(){
+  RA.playing = false;
+  RA.idx = 0;
+  RA.chunks = [];
+  speechSynthesis.cancel();
+  document.getElementById("readAloudPlayer")?.classList.remove("show");
+  const btn = document.getElementById("raPlayPause");
+  if(btn) btn.textContent = "▶️";
+  raUpdateStatus();
+}
+
+if(window.speechSynthesis){
+  document.getElementById("readAloudBtn")?.addEventListener("click",()=>{
+    const playerShown = document.getElementById("readAloudPlayer").classList.contains("show");
+    if(!playerShown){ raStartReading(); }
+    else if(RA.playing){ raPause(); }
+    else { raResume(); }
+  });
+  document.getElementById("raPlayPause")?.addEventListener("click",()=>{
+    if(RA.playing) raPause(); else raResume();
+  });
+  document.getElementById("raStop")?.addEventListener("click", raStopReading);
+  document.getElementById("raSpeed")?.addEventListener("click",()=>{
+    const curIdx = RA.rates.indexOf(RA.rate);
+    RA.rate = RA.rates[(curIdx+1) % RA.rates.length];
+    document.getElementById("raSpeed").textContent = RA.rate + "×";
+  });
+} else {
+  const btn = document.getElementById("readAloudBtn");
+  if(btn){ btn.disabled = true; btn.innerHTML = "🔇 <span>Read aloud not supported here</span>"; }
+}
 
 buildNav();
 render();
