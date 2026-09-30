@@ -148,6 +148,7 @@ code{font-family:var(--font-mono);}
 .navlabel{flex:1;}
 
 .railnav-foot{margin-top:16px; padding-top:14px; border-top:2px dashed var(--line);}
+.railnav-foot-top{margin-top:0; padding-top:0; padding-bottom:14px; border-top:none; border-bottom:2px dashed var(--line); margin-bottom:14px;}
 .tool-label{font-size:11.5px; font-weight:800; letter-spacing:.04em; color:var(--ink-soft); text-transform:uppercase; margin:10px 6px 6px;}
 .tool-label:first-child{margin-top:0;}
 .toolbtn{
@@ -171,6 +172,28 @@ code{font-family:var(--font-mono);}
   font-size:12px; font-weight:700; color:var(--ink-soft); border:2px dashed var(--line); border-radius:10px;
 }
 .menubtn{display:none;}
+
+/* Read Aloud (text-to-speech) player */
+#readAloudBtn{
+  background:linear-gradient(135deg,var(--rail),var(--rail-bright));
+  color:var(--on-accent); border-color:var(--rail);
+}
+#readAloudBtn:hover{opacity:.92;}
+#readAloudBtn:disabled{opacity:.55; cursor:not-allowed;}
+#readAloudPlayer{
+  position:fixed; left:50%; bottom:22px; transform:translate(-50%, 140%);
+  z-index:60; display:flex; align-items:center; gap:14px;
+  background:var(--bg-panel); border:2px solid var(--rail); border-radius:16px;
+  padding:12px 18px; box-shadow:0 10px 30px rgba(0,0,0,.18);
+  transition:transform .25s ease; max-width:min(560px, 92vw);
+}
+#readAloudPlayer.show{transform:translate(-50%, 0);}
+#readAloudPlayer button{
+  border:2px solid var(--rail); background:var(--bg-panel); color:var(--ink);
+  border-radius:10px; padding:8px 12px; font-weight:700; font-size:14px; flex-shrink:0;
+}
+#readAloudPlayer button:hover{background:var(--rail); color:var(--on-accent);}
+#raStatus{font-size:13px; color:var(--ink-soft); flex:1; min-width:0;}
 
 .main{flex:1; min-width:0;}
 .topbar{
@@ -347,7 +370,9 @@ details.more .more-inner{padding:16px 20px;}
 .route-preview{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin-top:10px;}
 .route-item{
   background:var(--bg-panel); border:2px solid var(--line); border-radius:14px; padding:14px; text-align:center; font-weight:700; font-size:14px;
+  cursor:pointer; transition:border-color .15s ease, background .15s ease, transform .15s ease;
 }
+.route-item:hover, .route-item:focus-visible{background:var(--rail); color:var(--on-accent); border-color:var(--rail); transform:translateY(-2px);}
 .route-item .emoji{font-size:26px; display:block; margin-bottom:6px;}
 
 /* original diagram images */
@@ -359,33 +384,20 @@ details.more .more-inner{padding:16px 20px;}
 .imgcard.tall svg{max-height:440px;}
 .imgcaption{font-size:14px; color:var(--ink-soft); margin:10px 0 0; font-style:italic;}
 
-/* Read Aloud (text-to-speech) player */
-.readaloud-player{
-  position:fixed; left:0; right:0; bottom:0; z-index:60;
-  background:var(--bg-panel); border-top:2px solid var(--line);
-  padding:10px 22px; display:none; align-items:center; gap:12px;
-  box-shadow:0 -4px 16px rgba(0,0,0,.10);
+/* Additional Reading — embedded PDF viewer */
+.pdfreader-card{
+  background:var(--bg-panel); border:2px solid var(--line); border-radius:var(--radius);
+  padding:16px; margin:18px 0; text-align:center;
 }
-.readaloud-player.show{display:flex;}
-.ra-btn{
-  background:var(--rail); color:var(--on-accent); border:none; border-radius:50%;
-  width:44px; height:44px; font-size:18px; display:flex; align-items:center; justify-content:center;
-  flex-shrink:0;
+.pdfreader-card iframe{
+  width:100%; height:70vh; min-height:420px; border:2px solid var(--line); border-radius:12px; background:#fff;
 }
-.ra-stop{
-  background:var(--bg); color:var(--ink); border:2px solid var(--line); border-radius:10px;
-  padding:0 16px; height:40px; font-weight:700; font-size:14px; flex-shrink:0;
-}
-.ra-speed{
-  background:var(--bg); border:2px solid var(--line); border-radius:10px;
-  padding:0 14px; height:40px; font-weight:700; color:var(--ink); font-size:14px; flex-shrink:0;
-}
-.readaloud-status{flex:1; font-size:13.5px; color:var(--ink-soft); font-weight:600; min-width:0;}
-@media (max-width:880px){
-  .readaloud-player{padding:8px 12px; gap:8px;}
-  .ra-btn{width:38px; height:38px; font-size:15px;}
-  .ra-stop, .ra-speed{padding:0 10px; height:36px; font-size:12.5px;}
-  .readaloud-status{font-size:12px;}
+.pdfreader-card .btn{margin-top:14px; display:inline-block; text-decoration:none;}
+
+/* Recommended Textbook citation card */
+.textbook-card{
+  background:var(--bg-panel); border:2px dashed var(--spark); border-radius:var(--radius);
+  padding:16px 20px; margin:18px 0;
 }
 
 .pagefoot{text-align:center; color:var(--ink-soft); font-size:13.5px; padding:20px; max-width:920px; margin:0 auto;}
@@ -429,8 +441,9 @@ details.more .more-inner{padding:16px 20px;}
         <div class="t2">Study More Confidently</div>
       </div>
     </div>
-    <ul class="stationlist" id="stationlist"></ul>
-    <div class="railnav-foot">
+    <div class="railnav-foot railnav-foot-top">
+      <div class="tool-label">Accessibility</div>
+      <button class="toolbtn" id="readAloudBtn" type="button">🔊 Listen to this page</button>
       <div class="tool-label">Color theme</div>
       <div class="toolrow">
         <button class="toolbtn active" id="themeLight" type="button">☀️<br>Light</button>
@@ -444,18 +457,10 @@ details.more .more-inner{padding:16px 20px;}
         <button class="fontbtn big" id="fontBigger" type="button" aria-label="Increase text size">A+</button>
       </div>
       <button class="toolbtn" id="spacingToggle" type="button">🔤 <span>Easy-read spacing</span></button>
-      <div class="tool-label">Read aloud</div>
-      <button class="toolbtn" id="readAloudBtn" type="button">🔊 <span>Listen to this page</span></button>
     </div>
+    <ul class="stationlist" id="stationlist"></ul>
   </nav>
   <div class="scrim" id="scrim"></div>
-
-  <div class="readaloud-player" id="readAloudPlayer">
-    <button class="ra-btn" id="raPlayPause" type="button" aria-label="Play or pause reading">▶️</button>
-    <button class="ra-stop" id="raStop" type="button">⏹️ Stop</button>
-    <button class="ra-speed" id="raSpeed" type="button" aria-label="Change reading speed">1×</button>
-    <span class="readaloud-status" id="raStatus">Ready to read this page aloud</span>
-  </div>
 
   <div class="main">
     <div class="topbar">
@@ -472,8 +477,15 @@ details.more .more-inner{padding:16px 20px;}
       <!-- Stations injected by JS -->
     </div>
 
-    <p class="pagefoot">Built for CN55 · Unit 1, Unit 2, Unit 3 &amp; Unit 4 — Computer Networks · Based on Forouzan, <em>Data Communications and Networking</em>, explained in simple original words.</p>
+    <p class="pagefoot">Built for CN55 · Unit 1, Unit 2, Unit 3, Unit 4 &amp; Unit 5 — Computer Networks · Based on Forouzan, <em>Data Communications and Networking</em>, explained in simple original words.</p>
   </div>
+</div>
+
+<div id="readAloudPlayer">
+  <button id="raPlayPause" type="button">⏸️ Pause</button>
+  <button id="raStop" type="button">⏹️ Stop</button>
+  <button id="raSpeed" type="button">1x</button>
+  <span id="raStatus">Reading…</span>
 </div>
 
 <script src="app.js"></script>

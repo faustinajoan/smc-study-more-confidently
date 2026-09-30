@@ -24,6 +24,7 @@ const STATIONS = [
   { id:"internet",    icon:"🛰️", label:"The Internet", kind:"topic", group:"unit1" },
   { id:"layers",      icon:"🧱", label:"Protocols & Layers", kind:"topic", group:"unit1" },
   { id:"quiz1",       icon:"🧠", label:"Unit 1 Quiz", kind:"quiz", group:"unit1", quizId:"quiz1" },
+  { id:"reading1",    icon:"📚", label:"Unit 1 — Additional Reading", kind:"reading", group:"unit1", pdf:"reading/CN55_Unit_1.pdf", unitLabel:"Unit 1 · Basic Computer Concepts & Network Models" },
 
   { id:"signals",     icon:"📡", label:"Data & Signals", kind:"topic", group:"unit2" },
   { id:"digitalnums", icon:"🔢", label:"Bit Rate & Bandwidth", kind:"topic", group:"unit2" },
@@ -34,6 +35,7 @@ const STATIONS = [
   { id:"media",       icon:"🔌", label:"Transmission Media", kind:"topic", group:"unit2" },
   { id:"pswitching",  icon:"🔗", label:"Circuit & Packet Switching", kind:"topic", group:"unit2" },
   { id:"quiz2",       icon:"🧠", label:"Unit 2 Quiz", kind:"quiz", group:"unit2", quizId:"quiz2" },
+  { id:"reading2",    icon:"📚", label:"Unit 2 — Additional Reading", kind:"reading", group:"unit2", pdf:"reading/CN55_Unit_2.pdf", unitLabel:"Unit 2 · Physical Layer" },
 
   { id:"dlbasics",    icon:"🔗", label:"Data Link Layer Basics", kind:"topic", group:"unit3" },
   { id:"framing",     icon:"🧩", label:"Framing", kind:"topic", group:"unit3" },
@@ -50,6 +52,7 @@ const STATIONS = [
   { id:"channelization",icon:"🎚️", label:"Channelization: FDMA, TDMA & CDMA", kind:"topic", group:"unit3" },
   { id:"ethernet",     icon:"🔌", label:"Ethernet & IEEE Standards", kind:"topic", group:"unit3" },
   { id:"quiz3",        icon:"🧠", label:"Unit 3 Quiz", kind:"quiz", group:"unit3", quizId:"quiz3" },
+  { id:"reading3",     icon:"📚", label:"Unit 3 — Additional Reading", kind:"reading", group:"unit3", pdf:"reading/CN55_Unit_3.pdf", unitLabel:"Unit 3 · Data Link Layer & MAC" },
 
   { id:"ipintro",      icon:"🏷️", label:"What is an IP Address?", kind:"topic", group:"unit4net" },
   { id:"ipv4notation", icon:"🔢", label:"IPv4 Addresses & Notation", kind:"topic", group:"unit4net" },
@@ -70,6 +73,18 @@ const STATIONS = [
   { id:"slidingwindow",icon:"🪟", label:"Sliding Window", kind:"topic", group:"unit4trans" },
   { id:"congestion",   icon:"🚦", label:"Congestion Control & Service Types", kind:"topic", group:"unit4trans" },
   { id:"quiz4trans",   icon:"🧠", label:"Transport Layer Quiz", kind:"quiz", group:"unit4trans", quizId:"quiz4trans" },
+  { id:"reading4",     icon:"📚", label:"Unit 4 — Additional Reading", kind:"reading", group:"unit4trans", pdf:"reading/CN55_Unit_4.pdf", unitLabel:"Unit 4 · Network Layer & Transport Layer" },
+
+  { id:"dns",          icon:"🌍", label:"DNS — Domain Name System", kind:"topic", group:"unit5" },
+  { id:"remotelog",    icon:"💻", label:"Remote Logging & Telnet", kind:"topic", group:"unit5" },
+  { id:"ftp",          icon:"📁", label:"File Transfer Protocol (FTP)", kind:"topic", group:"unit5" },
+  { id:"email",        icon:"📧", label:"Electronic Mail", kind:"topic", group:"unit5" },
+  { id:"wirelessbasics",icon:"📶", label:"Wireless Communication Basics", kind:"topic", group:"unit5" },
+  { id:"bluetooth",    icon:"🔵", label:"Bluetooth", kind:"topic", group:"unit5" },
+  { id:"wimax",        icon:"📡", label:"WiMAX", kind:"topic", group:"unit5" },
+  { id:"wpan",         icon:"🏠", label:"Wireless PAN Protocols", kind:"topic", group:"unit5" },
+  { id:"quiz5",        icon:"🧠", label:"Unit 5 Quiz", kind:"quiz", group:"unit5", quizId:"quiz5" },
+  { id:"reading5",     icon:"📚", label:"Unit 5 — Additional Reading", kind:"reading", group:"unit5", unitLabel:"Unit 5 · Application Layer & Wireless" },
 
   { id:"summary",     icon:"📄", label:"Summary & Download", kind:"summary" },
 ];
@@ -80,6 +95,7 @@ const GROUP_META = {
   unit3: { title:"Unit 3 · Data Link Layer & MAC", eyebrow:"UNIT 3" },
   unit4net: { title:"Unit 4 · Network Layer (IP Addressing)", eyebrow:"UNIT 4 · NETWORK" },
   unit4trans: { title:"Unit 4 · Transport Layer", eyebrow:"UNIT 4 · TRANSPORT" },
+  unit5: { title:"Unit 5 · Application Layer & Wireless", eyebrow:"UNIT 5" },
 };
 
 /* ---------- helper builders ---------- */
@@ -97,52 +113,59 @@ CONTENT.home = `
     <div class="hero-cables">🛰️</div>
     <span class="eyebrow" style="background:rgba(28,18,6,.18);">SMC PORTAL</span>
     <h1>Study More Confidently</h1>
-    <p>Welcome to SMC! We'll travel station by station through four units of Computer Networks — one small idea at a time, with pictures, examples, and quick checks along the way.</p>
+    <p>Welcome to SMC! We'll travel station by station through five units of Computer Networks — one small idea at a time, with pictures, examples, and quick checks along the way.</p>
     <div class="stat-row">
-      <div class="stat-pill">🧩 4 Units</div>
+      <div class="stat-pill">🧩 5 Units</div>
       <div class="stat-pill">🧠 A quiz after each unit</div>
       <div class="stat-pill">📥 Downloadable notes</div>
     </div>
   </div>
 
-  ${explain(`<p>This page is your travel guide. Every station explains <strong>one idea only</strong>, with a real-life comparison, an original diagram where it helps, and a short "Remember" box so it's easy to recall later.</p>`)}
+  ${explain(`<p>This page is your travel guide. Every station explains <strong>one idea only</strong>, with a real-life comparison, an original diagram where it helps, and a short "Remember" box so it's easy to recall later. <strong>Tap any topic below to jump straight to it.</strong></p>`)}
 
   <h3 style="margin-top:26px;">Unit 1 · Basic Computer Concepts &amp; Network Models</h3>
   <div class="route-preview">
-    ${STATIONS.filter(s=>s.group==="unit1" && s.kind==="topic").map(s=>`
-      <div class="route-item"><span class="emoji">${s.icon}</span>${s.label}</div>
+    ${STATIONS.map((s,i)=>({s,i})).filter(({s})=>s.group==="unit1" && s.kind==="topic").map(({s,i})=>`
+      <div class="route-item" data-idx="${i}" role="button" tabindex="0"><span class="emoji">${s.icon}</span>${s.label}</div>
     `).join("")}
   </div>
 
   <h3 style="margin-top:26px;">Unit 2 · Physical Layer</h3>
   <div class="route-preview">
-    ${STATIONS.filter(s=>s.group==="unit2" && s.kind==="topic").map(s=>`
-      <div class="route-item"><span class="emoji">${s.icon}</span>${s.label}</div>
+    ${STATIONS.map((s,i)=>({s,i})).filter(({s})=>s.group==="unit2" && s.kind==="topic").map(({s,i})=>`
+      <div class="route-item" data-idx="${i}" role="button" tabindex="0"><span class="emoji">${s.icon}</span>${s.label}</div>
     `).join("")}
   </div>
 
   <h3 style="margin-top:26px;">Unit 3 · Data Link Layer &amp; MAC</h3>
   <div class="route-preview">
-    ${STATIONS.filter(s=>s.group==="unit3" && s.kind==="topic").map(s=>`
-      <div class="route-item"><span class="emoji">${s.icon}</span>${s.label}</div>
+    ${STATIONS.map((s,i)=>({s,i})).filter(({s})=>s.group==="unit3" && s.kind==="topic").map(({s,i})=>`
+      <div class="route-item" data-idx="${i}" role="button" tabindex="0"><span class="emoji">${s.icon}</span>${s.label}</div>
     `).join("")}
   </div>
 
   <h3 style="margin-top:26px;">Unit 4 · Network Layer (IP Addressing)</h3>
   <div class="route-preview">
-    ${STATIONS.filter(s=>s.group==="unit4net" && s.kind==="topic").map(s=>`
-      <div class="route-item"><span class="emoji">${s.icon}</span>${s.label}</div>
+    ${STATIONS.map((s,i)=>({s,i})).filter(({s})=>s.group==="unit4net" && s.kind==="topic").map(({s,i})=>`
+      <div class="route-item" data-idx="${i}" role="button" tabindex="0"><span class="emoji">${s.icon}</span>${s.label}</div>
     `).join("")}
   </div>
 
   <h3 style="margin-top:26px;">Unit 4 · Transport Layer</h3>
   <div class="route-preview">
-    ${STATIONS.filter(s=>s.group==="unit4trans" && s.kind==="topic").map(s=>`
-      <div class="route-item"><span class="emoji">${s.icon}</span>${s.label}</div>
+    ${STATIONS.map((s,i)=>({s,i})).filter(({s})=>s.group==="unit4trans" && s.kind==="topic").map(({s,i})=>`
+      <div class="route-item" data-idx="${i}" role="button" tabindex="0"><span class="emoji">${s.icon}</span>${s.label}</div>
     `).join("")}
   </div>
 
-  ${more("🎒 Tips for using this page","<p>Use the ⬅️➡️ buttons at the bottom of each page, or tap any station on the left. Tap boxes and diagrams — they are clickable! Turn on <strong>Dark mode</strong>, <strong>High Contrast</strong>, adjust <strong>Text size</strong>, or turn on <strong>Easy-read spacing</strong> from the side menu if that helps you read more comfortably.</p>")}
+  <h3 style="margin-top:26px;">Unit 5 · Application Layer &amp; Wireless</h3>
+  <div class="route-preview">
+    ${STATIONS.map((s,i)=>({s,i})).filter(({s})=>s.group==="unit5" && s.kind==="topic").map(({s,i})=>`
+      <div class="route-item" data-idx="${i}" role="button" tabindex="0"><span class="emoji">${s.icon}</span>${s.label}</div>
+    `).join("")}
+  </div>
+
+  ${more("🎒 Tips for using this page","<p>Tap any topic above to jump straight to it, use the ⬅️➡️ buttons at the bottom of each page, or tap any station on the left. Tap boxes and diagrams — they are clickable! Turn on <strong>Dark mode</strong>, <strong>High Contrast</strong>, adjust <strong>Text size</strong>, or turn on <strong>Easy-read spacing</strong> from the side menu if that helps you read more comfortably.</p>")}
 `;
 
 CONTENT.network = `
@@ -1168,6 +1191,28 @@ const QUIZZES = {
     {q:"Which service model does UDP follow?", opts:["Connection-oriented","Connectionless","Neither","Both equally"], a:1},
     {q:"Which service model does TCP follow?", opts:["Connectionless","Connection-oriented","Neither","Only multicast"], a:1},
   ],
+
+  quiz5: [
+    {q:"DNS is best described as a:", opts:["Physical-layer device","Client/server application that maps names to addresses","Type of cable","Data-link protocol"], a:1},
+    {q:"An FQDN (Fully Qualified Domain Name) is one that:", opts:["Is always partial","Ends with a null string (contains the full name back to the root)","Never contains dots","Belongs only to root servers"], a:1},
+    {q:"A Secondary DNS server gets its zone information by:", opts:["Creating it itself","Zone transfer from a primary (or another secondary)","Asking the client","Guessing"], a:1},
+    {q:"TTL in DNS caching controls:", opts:["The transmission speed","How long a server may cache a mapping before it's considered stale","The number of hops a packet can take","The zone file size"], a:1},
+    {q:"Telnet is considered insecure mainly because:", opts:["It's too slow","It sends data, including passwords, in plaintext","It only works on LANs","It uses UDP"], a:1},
+    {q:"NVT in Telnet stands for:", opts:["Network Virtual Terminal","New Version Telnet","Network Verification Tool","Virtual Network Transfer"], a:0},
+    {q:"In FTP, the control connection:", opts:["Opens and closes for every single file","Stays open for the whole session","Is never used","Carries the actual file bytes"], a:1},
+    {q:"An FTP response code beginning with 5 (5xx) means:", opts:["Positive completion","Permanent negative — retrying won't help","More information needed","Preliminary, more reply follows"], a:1},
+    {q:"Which FTP command is used to download a file from the server?", opts:["STOR", "RETR", "LIST", "PORT"], a:1},
+    {q:"The THREE major components of the email system are:", opts:["Router, Switch, Hub","User Agent, Message Transfer Agent, Message Access Agent","TCP, UDP, IP","DNS, FTP, HTTP"], a:1},
+    {q:"SMTP is best described as a:", opts:["Pull protocol used by the receiver's device","Push protocol used to actually transfer mail between servers","File transfer protocol","Wireless protocol"], a:1},
+    {q:"POP3 in \"Delete Mode\" means:", opts:["Mail stays on the server and is also downloaded","Mail is downloaded then removed from the server","No mail is ever downloaded","Mail is duplicated across all devices"], a:1},
+    {q:"Compared to POP3, IMAP4 is more powerful mainly because:", opts:["It deletes mail automatically","It lets you check headers, search, and manage folders on the server before downloading","It doesn't need a server","It only works offline"], a:1},
+    {q:"MIME exists mainly to:", opts:["Replace SMTP entirely","Allow non-ASCII data (images, audio, video) to travel through email","Encrypt all email","Speed up DNS lookups"], a:1},
+    {q:"A Piconet in Bluetooth can have at most how many active stations (1 primary + secondaries)?", opts:["2","8","100","255"], a:1},
+    {q:"Which Bluetooth protocol-stack layer is called the \"heart of the stack\"?", opts:["Radio Layer","L2CAP","SDP","RFCOMM"], a:1},
+    {q:"WiMAX is based on which IEEE standard?", opts:["802.11", "802.15.4", "802.16", "802.3"], a:2},
+    {q:"Which wireless PAN protocol was established by Google Nest and uses an IP network?", opts:["ZigBee","Z-Wave","Thread","RFCOMM"], a:2},
+    {q:"6LoWPAN's key idea is:", opts:["Removing IP entirely from small devices","Giving even small, low-power devices their own IPv6 address","Only working with Bluetooth","Replacing DNS"], a:1},
+  ],
 };
 
 /* ================= RENDER LOGIC ================= */
@@ -1200,10 +1245,41 @@ function buildNav(){
   });
 }
 
+function textbookCitation(){
+  return `
+    <div class="card textbook-card">
+      <h3 style="margin-bottom:8px;">📖 Recommended Textbook</h3>
+      <p style="margin-bottom:4px;"><strong>Behrouz A. Forouzan</strong> — <em>Data Communications and Networking</em> (5th Edition), McGraw-Hill Education.</p>
+      <p style="font-size:14.5px; color:var(--ink-soft);">This portal's explanations are written in original, simplified words, cross-checked against this book. For the full formal treatment, formulas, and extra solved examples, borrow a copy from the department/library reading room, or ask your instructor for the current call number.</p>
+    </div>
+  `;
+}
+
+function buildReadingHTML(s){
+  if(!s.pdf){
+    return `
+      ${explain(`<p>This is where <strong>${s.unitLabel}</strong>'s original lecture slides will appear as extra reading, alongside this unit's simplified station explanations.</p>`)}
+      <div class="card">
+        <p>📄 The original slide PDF for this unit hasn't been added to the portal yet. Once it's shared, it will appear here exactly like the other units' Additional Reading pages — viewable right on this page, plus a download button.</p>
+      </div>
+      ${textbookCitation()}
+    `;
+  }
+  return `
+    ${explain(`<p>Below are the original <strong>${s.unitLabel}</strong> lecture slides, for extra reading alongside this station's simplified explanations. Use them to look up exact terminology, worked examples, or diagrams covered in class.</p>`)}
+    <div class="pdfreader-card">
+      <iframe src="${s.pdf}" title="${s.unitLabel} — slides PDF" loading="lazy"></iframe>
+      <a class="btn secondary" href="${s.pdf}" download>⬇️ Download this PDF</a>
+    </div>
+    ${textbookCitation()}
+  `;
+}
+
 function buildStationShell(s,i){
   let body;
   if(s.kind==="quiz"){ body = buildQuizHTML(QUIZZES[s.quizId], s.quizId); }
   else if(s.kind==="summary"){ body = buildSummaryHTML(); }
+  else if(s.kind==="reading"){ body = buildReadingHTML(s); }
   else { body = CONTENT[s.id]; }
 
   const showEyebrow = s.kind!=="home";
@@ -1247,7 +1323,7 @@ function buildQuizHTML(quizArr, quizId){
 
 function buildSummaryHTML(){
   return `
-    ${explain(`<p>Great job reaching the last station! Here's a one-page recap of everything we covered across all four units.</p>`)}
+    ${explain(`<p>Great job reaching the last station! Here's a one-page recap of everything we covered across all five units.</p>`)}
     <div class="card">
       <h3 style="margin-bottom:8px;">Unit 1 · Basic Computer Concepts &amp; Network Models</h3>
       <ul>
@@ -1313,7 +1389,23 @@ function buildSummaryHTML(){
         <li><strong>Congestion &amp; Service Types:</strong> load &gt; capacity = congestion; Connectionless (UDP-style) vs Connection-oriented (TCP-style) service.</li>
       </ul>
     </div>
-    ${remember(["Revisit any station any time from the side menu","Try each unit's quiz again until you score full marks!"])}
+    <div class="card">
+      <h3 style="margin-bottom:8px;">Unit 5 · Application Layer &amp; Wireless</h3>
+      <ul>
+        <li><strong>DNS:</strong> client/server name-resolution system; inverted-tree name space; FQDN vs PQDN; Root/Primary/Secondary/Authoritative servers; TTL caching.</li>
+        <li><strong>Remote Logging &amp; Telnet:</strong> NVT gives a universal terminal format; Telnet is insecure (plaintext) — SSH is preferred.</li>
+        <li><strong>FTP:</strong> separate Control connection (whole session) and Data connection (per file); response codes 1xx–5xx; RETR/STOR/LIST.</li>
+        <li><strong>Electronic Mail:</strong> User Agent + Message Transfer Agent (SMTP, push) + Message Access Agent (POP3/IMAP4, pull); MIME for non-ASCII content.</li>
+        <li><strong>Wireless Basics:</strong> Transmitter/Receiver/Antenna/Filters/Amplifiers/Mixers; IEEE 802.11 Wi-Fi family.</li>
+        <li><strong>Bluetooth:</strong> Piconet (1 primary + up to 7 secondaries) vs Scatternet; full protocol stack from Radio Layer to Application.</li>
+        <li><strong>WiMAX:</strong> IEEE 802.16, wide-area wireless access via Base Station + Receiver.</li>
+        <li><strong>Wireless PAN Protocols:</strong> ZigBee, Z-Wave, Thread, BLE, 6LoWPAN, and the RPL routing protocol.</li>
+      </ul>
+    </div>
+
+    ${textbookCitation()}
+
+    ${remember(["Revisit any station any time from the side menu","Try each unit's quiz again until you score full marks!","Each unit also has an Additional Reading page with the original slide PDF, right after that unit's quiz"])}
     <div style="text-align:center; margin-top:24px;">
       <button class="btn" onclick="window.print()">📥 Download / Print Notes (PDF)</button>
     </div>
@@ -1330,7 +1422,6 @@ function showStation(i){
   current = i;
   document.querySelectorAll(".station").forEach(sec=>sec.classList.remove("active"));
   document.getElementById(`station-${i}`).classList.add("active");
-  if(typeof raStopReading === "function") raStopReading();
 
   document.querySelectorAll(".navbtn").forEach((btn,idx)=>{
     btn.classList.toggle("active", idx===i);
@@ -1344,6 +1435,8 @@ function showStation(i){
 
   window.scrollTo({top:0, behavior:"smooth"});
   closeMobileNav();
+  if(typeof raStopReading === "function") raStopReading();
+  if(typeof raRefreshButtonForStation === "function") raRefreshButtonForStation(i);
 }
 
 function goTo(i){ if(i>=0 && i<STATIONS.length) showStation(i); }
@@ -1351,6 +1444,13 @@ function goTo(i){ if(i>=0 && i<STATIONS.length) showStation(i); }
 function attachStationEvents(){
   contentEl.querySelectorAll('[data-nav="next"]').forEach(b=>b.addEventListener("click",()=>goTo(current+1)));
   contentEl.querySelectorAll('[data-nav="prev"]').forEach(b=>b.addEventListener("click",()=>goTo(current-1)));
+
+  /* clickable topic links on the home/landing page */
+  contentEl.querySelectorAll(".route-item[data-idx]").forEach(item=>{
+    const jump = ()=>goTo(parseInt(item.dataset.idx));
+    item.addEventListener("click", jump);
+    item.addEventListener("keydown",(e)=>{ if(e.key==="Enter" || e.key===" "){ e.preventDefault(); jump(); } });
+  });
 
   /* clickable diagram nodes */
   contentEl.querySelectorAll(".node.clickable").forEach(node=>{
@@ -2954,148 +3054,756 @@ CONTENT.congestion = `
   ${remember(["Congestion = network load exceeds its capacity","Transport-layer congestion is really a symptom of Network-layer congestion","Connectionless service = independent packets, no setup (UDP's model)","Connection-oriented service = setup → ordered/reliable transfer → teardown (TCP's model)"])}
 `;
 
-/* ================= READ ALOUD (Text-to-Speech) ================= */
-const RA = { chunks:[], idx:0, playing:false, rate:1, rates:[1, 1.25, 1.5, 0.75], voice:null };
+/* ================= UNIT 5 CONTENT: APPLICATION LAYER & WIRELESS ================= */
 
-/* Pick the best available "female, Indian" voice from whatever this visitor's
-   own browser/device offers. Voice lists differ by OS and browser, so this
-   searches by priority rather than assuming one exact name exists. */
+CONTENT.dns = `
+  ${explain(`<p><strong>DNS (Domain Name System)</strong> is a client/server application that lets us use easy-to-remember <strong>names</strong> (like <code>www.stellamariscollege.edu.in</code>) instead of numeric network addresses. It's the reason you can type a name into a browser instead of memorizing an IP address.</p>`)}
+
+  <h3>Why do we need a "name space" at all?</h3>
+  <p>Names must be assigned in an organized way so no two devices ever get a duplicate name — this organization is called a <strong>name space</strong>, and it can be structured in two ways:</p>
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>📃 Flat Name Space</h4>
+      <p style="font-size:14.5px;">A name is just one simple sequence of characters, with no structure. Fine for a small system, but doesn't scale — hard to guarantee uniqueness with millions of names.</p>
+    </div>
+    <div class="flow-card">
+      <h4>🌳 Hierarchical Name Space</h4>
+      <p style="font-size:14.5px;">Each name is made of several parts — the first can define the organization's nature, the second its name, and so on. A central authority only needs to guarantee the first part is unique; everything after that is managed locally. This is what DNS actually uses.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;">The Domain Name Space — an inverted tree</h3>
+  <p>DNS organizes its hierarchical space as an <strong>inverted tree</strong>, with the <strong>root</strong> at the top and the tree growing downward, allowed to go up to <strong>128 levels</strong> (level 0 = root, to level 127).</p>
+
+  <div class="imgcard">
+    <svg viewBox="0 0 420 190">
+      <circle cx="210" cy="20" r="16" fill="var(--rail)"/><text x="210" y="25" text-anchor="middle" font-size="9" fill="#fff">root</text>
+      <line x1="210" y1="36" x2="90" y2="70" stroke="var(--line)" stroke-width="2"/>
+      <line x1="210" y1="36" x2="210" y2="70" stroke="var(--line)" stroke-width="2"/>
+      <line x1="210" y1="36" x2="330" y2="70" stroke="var(--line)" stroke-width="2"/>
+      <rect x="55" y="70" width="70" height="24" rx="6" fill="var(--spark)"/><text x="90" y="86" text-anchor="middle" font-size="9" fill="#fff">edu</text>
+      <rect x="175" y="70" width="70" height="24" rx="6" fill="var(--spark)"/><text x="210" y="86" text-anchor="middle" font-size="9" fill="#fff">com</text>
+      <rect x="295" y="70" width="70" height="24" rx="6" fill="var(--spark)"/><text x="330" y="86" text-anchor="middle" font-size="9" fill="#fff">in (country)</text>
+      <line x1="90" y1="94" x2="90" y2="128" stroke="var(--line)" stroke-width="2"/>
+      <rect x="35" y="128" width="110" height="26" rx="6" fill="var(--volt)"/><text x="90" y="145" text-anchor="middle" font-size="8.5">stellamariscollege</text>
+      <line x1="90" y1="154" x2="90" y2="176" stroke="var(--line)" stroke-width="2"/>
+      <rect x="35" y="176" width="110" height="14" rx="4" fill="var(--bg)" stroke="var(--rail)"/><text x="90" y="187" text-anchor="middle" font-size="7.5" fill="var(--ink)">www (host label)</text>
+    </svg>
+    <p class="imgcaption">Reading node-to-root gives the full domain name: <code>www.stellamariscollege.edu.in</code> — read as label.label.label...label, separated by dots, always ending at the (unlabeled) root.</p>
+  </div>
+
+  <h3 style="margin-top:20px;">Labels, Domain Names, FQDN & PQDN</h3>
+  <div class="chiprow">
+    <span class="chip">🏷️ Label — each node's name, at most 63 characters</span>
+    <span class="chip">🔗 Domain Name — the full sequence of labels, separated by dots, read from the node up to the root</span>
+  </div>
+  <div class="tabbar" id="dnsTabs">
+    <button class="tabbtn active" data-tab="fqdn">✅ FQDN</button>
+    <button class="tabbtn" data-tab="pqdn">✂️ PQDN</button>
+  </div>
+  <div class="tabpanel active" data-tab="fqdn">
+    <div class="card"><p><strong>Fully Qualified Domain Name:</strong> a label that is terminated by a null string — meaning it contains the <em>complete</em> name of a host, all the way back to the root. e.g. <code>www.stellamariscollege.edu.in.</code> — this can be resolved anywhere on the Internet.</p></div>
+  </div>
+  <div class="tabpanel" data-tab="pqdn">
+    <div class="card"><p><strong>Partially Qualified Domain Name:</strong> a label that does NOT end with a null string — used when the name we're resolving belongs to the same site as the client asking. The resolver can then supply the missing suffix (the rest of the name) itself before resolving it.</p></div>
+  </div>
+
+  <h3 style="margin-top:20px;">Domains, Zones & Server Types</h3>
+  <p>A <strong>domain</strong> is any subtree of the domain name space — named by the domain name of the node at its top. Domains can be further divided into <strong>subdomains</strong>.</p>
+  <p>A <strong>zone</strong> is what a particular DNS server is actually responsible for. If a domain isn't divided any further, domain and zone mean the same thing. But if a server <em>delegates</em> part of its domain to other servers, the zone is smaller than the domain — the parent server keeps only what it hasn't delegated away.</p>
+
+  <div class="diagram">
+    <div class="node clickable" data-pop="Covers the whole tree; delegates authority to other servers below it. Several root servers exist worldwide for redundancy.">
+      <span class="emoji">🌍</span>Root Server
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Stores, creates, maintains and updates the zone file for its zone, kept on its own local disk.">
+      <span class="emoji">🗄️</span>Primary Server
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Loads all zone information from a primary (or another secondary) via zone transfer. Never creates or updates data itself — exists purely for redundancy.">
+      <span class="emoji">📋</span>Secondary Server
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Holds the OFFICIAL data for a zone — can be either a primary or a secondary server. (Every root server is authoritative, but not every authoritative server is a root server!)">
+      <span class="emoji">✔️</span>Authoritative Server
+      <div class="node-pop"></div>
+    </div>
+  </div>
+
+  ${analogy(`<p>Think of DNS servers like a college's administrative hierarchy. The root is like the University Grants Commission, generic domains are like different types of institutions (colleges, companies), and each college's own office is authoritative for its own records — it can look up (or delegate) the exact department or student, but the "top" doesn't need to know every student's name directly.</p>`)}
+
+  <p style="margin-top:10px;">Real-world example: looking up <code>stellamariscollege.edu.in</code> on <a href="https://lookup.icann.org/en/lookup" target="_blank" rel="noopener">ICANN's public lookup tool</a> shows a server such as <code>ns3.hostek.com</code> listed as authoritative for the zone — meaning that server holds the official DNS records (like the <code>www.stellamariscollege.edu.in</code> entry) for the college's domain.</p>
+
+  <h3 style="margin-top:20px;">DNS in the Internet — two big sections</h3>
+  <div class="flow-grid">
+    <div class="flow-card"><h4>🏢 Generic Domains</h4><p style="font-size:14.5px;">Hosts are registered according to their generic behaviour/purpose — e.g. <code>.com</code>, <code>.edu</code>, <code>.gov</code>, <code>.org</code>.</p></div>
+    <div class="flow-card"><h4>🌐 Country Domains</h4><p style="font-size:14.5px;">Uses two-character country abbreviations — e.g. <code>.in</code> for India, <code>.uk</code> for the United Kingdom.</p></div>
+  </div>
+
+  <h3 style="margin-top:20px;">Resolution — turning names into addresses (and back)</h3>
+  <p><strong>Resolution</strong> is the process of mapping a name to its address, or an address back to its name. This is done by a piece of software called a <strong>resolver</strong>, which can work in two ways:</p>
+  <div class="chiprow">
+    <span class="chip">🔄 Recursive Resolution — the client asks one server, and THAT server does all the further asking on the client's behalf, only returning the final answer</span>
+    <span class="chip">↔️ Iterative Resolution — the server gives the client its best current answer (or a referral to another server), and the client itself keeps asking until it gets a full answer</span>
+  </div>
+
+  <h3 style="margin-top:20px;">Caching &amp; TTL</h3>
+  <p>Every time a server gets an answer for a query, it can <strong>cache</strong> (store) that information for a while, so it doesn't need to ask again next time. Each cached mapping comes with a <strong>TTL (Time To Live)</strong> — the number of seconds it's allowed to stay cached — after which a counter purges it, since names-to-addresses can change over time.</p>
+
+  <h3 style="margin-top:20px;">Resource Records &amp; DNS Messages</h3>
+  <p>A server's zone information is stored as a set of <strong>resource records</strong> — with class <code>IN</code> meaning "Internet". DNS uses just <strong>two kinds of messages</strong>: <strong>Query</strong> (a request) and <strong>Response</strong> (the answer) — each with its own header and message sections.</p>
+
+  ${remember(["DNS = client/server application mapping names ⇄ addresses","Domain name space is an inverted tree, up to 128 levels","FQDN ends in a null string (fully resolvable) · PQDN doesn't (needs a suffix supplied)","Zone = what a server is actually responsible for; may be smaller than its whole domain if it delegated parts away","Primary server creates/updates zone data · Secondary server only copies it via zone transfer (redundancy)","Recursive resolution = server does the extra asking for you · Iterative = you keep asking yourself","TTL = how long a cached mapping is trusted before it expires"])}
+`;
+
+CONTENT.remotelog = `
+  ${explain(`<p>Sometimes a user needs to run a program that exists only on a remote computer. Rather than writing a brand-new custom program for every single case, <strong>remote logging</strong> gives us one general-purpose way to log onto ANY remote computer and use it as if we were sitting in front of it.</p>`)}
+
+  <h3>Local Log-in vs Remote Log-in</h3>
+  <div class="flow-grid">
+    <div class="flow-card"><h4>🖥️ Local Log-in</h4><p style="font-size:14.5px;">The user's keystrokes are accepted directly by the terminal driver on their own machine — no network involved.</p></div>
+    <div class="flow-card"><h4>🌐 Remote Log-in</h4><p style="font-size:14.5px;">The keystrokes are captured by a client application and sent over the network to the remote server, which acts on them as if they were typed locally.</p></div>
+  </div>
+
+  <h3 style="margin-top:20px;">TELNET — TErminaL NETwork</h3>
+  <p>TELNET, proposed by <strong>ISO</strong>, is one of the earliest and most well-known remote-logging protocols.</p>
+  ${mistake(`<p>TELNET is <strong>vulnerable to hacking</strong> — it sends everything, including the user's password, as plain, unencrypted text across the network. Anyone snooping on the connection can read it directly! This is exactly why <strong>SSH (Secure Shell)</strong>, which encrypts the entire session, is the favoured protocol today wherever remote log-in is needed.</p>`)}
+
+  <h3 style="margin-top:20px;">NVT — Network Virtual Terminal</h3>
+  <p>A big challenge for a "universal" remote-login protocol is that every computer system is different — different keyboards, different ways of representing characters. TELNET solves this using an intermediate, imaginary device called the <strong>Network Virtual Terminal (NVT)</strong>.</p>
+
+  <div class="imgcard">
+    <svg viewBox="0 0 400 110">
+      <rect x="10" y="35" width="90" height="40" rx="8" fill="var(--rail)"/><text x="55" y="59" text-anchor="middle" font-size="10" fill="#fff">Client's own<br/>keyboard/screen</text>
+      <text x="55" y="52" text-anchor="middle" font-size="9" fill="#fff">Client's own</text>
+      <text x="55" y="64" text-anchor="middle" font-size="9" fill="#fff">keyboard/screen</text>
+      <line x1="100" y1="55" x2="150" y2="55" stroke="var(--ink)" stroke-width="2" marker-end="url(#arr5)"/>
+      <rect x="150" y="35" width="100" height="40" rx="8" fill="var(--volt)"/><text x="200" y="52" text-anchor="middle" font-size="9">NVT</text><text x="200" y="64" text-anchor="middle" font-size="9">(universal format)</text>
+      <line x1="250" y1="55" x2="300" y2="55" stroke="var(--ink)" stroke-width="2" marker-end="url(#arr5)"/>
+      <rect x="300" y="35" width="90" height="40" rx="8" fill="var(--spark)"/><text x="345" y="52" text-anchor="middle" font-size="9" fill="#fff">Remote server's</text><text x="345" y="64" text-anchor="middle" font-size="9" fill="#fff">own format</text>
+      <defs><marker id="arr5" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--ink)"/></marker></defs>
+    </svg>
+    <p class="imgcaption">The client translates its own keystrokes into NVT's universal characters; the server translates FROM NVT into whatever its own local system expects — so neither side needs to know the other's native format.</p>
+  </div>
+
+  <p>NVT uses <strong>two character sets</strong>, each 8 bits wide:</p>
+  <div class="chiprow">
+    <span class="chip">🔤 Data characters — highest-order bit is 0, followed by 7-bit ASCII</span>
+    <span class="chip">🎛️ Control characters — highest-order bit is 1 (these carry NVT control/interface commands, not printable text)</span>
+  </div>
+
+  ${analogy(`<p>NVT is like a universal power adapter when travelling abroad — your own device's plug (keystrokes) doesn't need to match the wall socket (the remote system) directly; the adapter (NVT) sits in between and speaks a format both sides understand.</p>`)}
+
+  ${remember(["Remote logging lets a user run a program on a remote computer through one general-purpose protocol, instead of one program per case","TELNET (TErminaL NETwork) was proposed by ISO","TELNET is insecure — sends passwords in plaintext; SSH is preferred today because it encrypts everything","NVT (Network Virtual Terminal) is an imaginary universal device that both client and server translate to/from","NVT has Data characters (bit 0 + ASCII) and Control characters (bit 1 + command codes)"])}
+`;
+
+CONTENT.ftp = `
+  ${explain(`<p><strong>FTP (File Transfer Protocol)</strong> is the standard TCP/IP protocol for copying files from one host to another.</p>`)}
+
+  <h3>Why do we need FTP specifically?</h3>
+  <p>Although transferring files can technically be done using HTTP, FTP is more efficient at it — and it was built to smooth over some real, everyday obstacles between two different systems:</p>
+  <div class="chiprow">
+    <span class="chip">🏷️ Different file-naming conventions between systems</span>
+    <span class="chip">📄 Different ways of representing text and data</span>
+    <span class="chip">🗂️ Different directory structures</span>
+  </div>
+
+  <h3 style="margin-top:20px;">FTP's Basic Model</h3>
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>🙋 Client — 3 components</h4>
+      <p style="font-size:14.5px;">User Interface, Client Control Process, and Client Data Transfer Process.</p>
+    </div>
+    <div class="flow-card">
+      <h4>🖥️ Server — 2 components</h4>
+      <p style="font-size:14.5px;">Server Control Process, and Server Data Transfer Process.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;">TWO separate connections — and why</h3>
+  <p>Unlike most application protocols we've seen, FTP uses <strong>two entirely separate TCP connections</strong>: a <strong>control connection</strong> and a <strong>data connection</strong> — with very different lifetimes.</p>
+
+  <div class="imgcard">
+    <svg viewBox="0 0 400 140">
+      <rect x="20" y="20" width="90" height="34" rx="8" fill="var(--rail)"/><text x="65" y="41" text-anchor="middle" font-size="10" fill="#fff">FTP Client</text>
+      <rect x="290" y="20" width="90" height="34" rx="8" fill="var(--rail)"/><text x="335" y="41" text-anchor="middle" font-size="10" fill="#fff">FTP Server</text>
+      <line x1="110" y1="35" x2="290" y2="35" stroke="var(--spark)" stroke-width="3"/>
+      <text x="200" y="26" text-anchor="middle" font-size="9" fill="var(--spark-dark)">Control Connection — stays open the WHOLE session</text>
+      <line x1="110" y1="90" x2="290" y2="90" stroke="var(--volt)" stroke-width="3" stroke-dasharray="6 4"/>
+      <text x="200" y="80" text-anchor="middle" font-size="9" fill="var(--ink)">Data Connection — well-known port 20</text>
+      <text x="200" y="105" text-anchor="middle" font-size="9" fill="var(--ink-soft)">Opens fresh for EACH file transfer, then closes</text>
+      <text x="65" y="65" text-anchor="middle" font-size="8" fill="var(--ink-soft)">passive open, ephemeral port</text>
+      <text x="335" y="65" text-anchor="middle" font-size="8" fill="var(--ink-soft)">active open, port 20</text>
+    </svg>
+    <p class="imgcaption">The control connection carries commands/responses in NVT ASCII (just like TELNET). The data connection is created fresh for every single file transferred.</p>
+  </div>
+
+  <h3 style="margin-top:20px;">How the Data Connection actually gets created</h3>
+  <p>Creating the data connection is a little unusual — it's the <strong>client</strong>, not the server, that must go first:</p>
+  <ol style="padding-left:20px; line-height:1.9;">
+    <li>The client issues a <strong>passive open</strong> on an ephemeral (temporary, client-chosen) port number — because it's the client that issues the transfer commands, so it must be ready to accept the connection first.</li>
+    <li>The client sends this ephemeral port number to the server, using the <strong>PORT</strong> command over the control connection.</li>
+    <li>The server then issues an <strong>active open</strong>, using its own well-known port <strong>20</strong>, connecting out to the ephemeral port the client just gave it.</li>
+  </ol>
+
+  <h3 style="margin-top:20px;">Control Connection details</h3>
+  <p>Just like TELNET, it uses <strong>NVT ASCII</strong>: commands and responses are exchanged one at a time, and every line ends with <strong>CRLF</strong>. Commands sent from the client are always in ASCII UPPERCASE, and may or may not take an argument.</p>
+
+  <h3 style="margin-top:20px;">FTP Responses — reading the 3-digit code</h3>
+  <p>Every command triggers at least one response: a <strong>3-digit code</strong> plus optional text. Each digit tells you something specific:</p>
+  <table style="width:100%; border-collapse:collapse; margin:10px 0;">
+    <tr style="background:var(--bg);"><th style="text-align:left; padding:6px; border:1px solid var(--line);">Digit</th><th style="text-align:left; padding:6px; border:1px solid var(--line);">Meaning</th></tr>
+    <tr><td style="padding:6px; border:1px solid var(--line);">1st digit</td><td style="padding:6px; border:1px solid var(--line);">Overall status of the response</td></tr>
+    <tr><td style="padding:6px; border:1px solid var(--line);">2nd digit</td><td style="padding:6px; border:1px solid var(--line);">Which area of the system the response refers to</td></tr>
+    <tr><td style="padding:6px; border:1px solid var(--line);">3rd digit</td><td style="padding:6px; border:1px solid var(--line);">Extra/finer detail</td></tr>
+  </table>
+
+  <div class="diagram">
+    <div class="node clickable" data-pop="Positive Preliminary reply — more replies are still coming for this command.">
+      <span class="emoji">1️⃣</span>1xx
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Positive Completion — the command finished successfully.">
+      <span class="emoji">2️⃣</span>2xx
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Positive Intermediate — needs more information from the client (e.g. a password).">
+      <span class="emoji">3️⃣</span>3xx
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Transient Negative — a temporary failure; try the same command again later.">
+      <span class="emoji">4️⃣</span>4xx
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Permanent Negative — retrying the exact same command won't help; something needs to change first.">
+      <span class="emoji">5️⃣</span>5xx
+      <div class="node-pop"></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;">Communication Over the Data Connection</h3>
+  <p>FTP lets both sides agree on how the file itself is structured, using:</p>
+  <div class="chiprow">
+    <span class="chip">📄 File Type — ASCII, EBCDIC, or Image (raw binary)</span>
+    <span class="chip">🗂️ File Structure — stream of bytes, record structure, or page structure (with header + data + control info)</span>
+    <span class="chip">📦 Transmission Mode — stream, block, or compressed</span>
+  </div>
+
+  <h3 style="margin-top:20px;">Actually Transferring a File — 3 kinds</h3>
+  <div class="flow-grid">
+    <div class="flow-card"><h4>⬇️ Retrieving / Downloading</h4><p style="font-size:14.5px;">Server → Client, using the <code>RETR</code> command.</p></div>
+    <div class="flow-card"><h4>⬆️ Storing</h4><p style="font-size:14.5px;">Client → Server, using the <code>STOR</code> command.</p></div>
+    <div class="flow-card"><h4>📋 Directory Listing</h4><p style="font-size:14.5px;">Server → Client, using the <code>LIST</code> command, to see what files exist.</p></div>
+  </div>
+
+  ${remember(["FTP copies files between hosts, smoothing over naming/format/directory differences","Client has 3 parts (UI, control process, data process); Server has 2 (control process, data process)","TWO connections: Control (stays open all session, NVT ASCII) + Data (opens fresh per file, well-known port 20)","Data connection setup: client passive-opens an ephemeral port → sends it via PORT → server active-opens from port 20","Response codes: 1xx preliminary · 2xx success · 3xx need more info · 4xx temporary failure · 5xx permanent failure","RETR = download · STOR = upload · LIST = directory listing"])}
+`;
+
+CONTENT.email = `
+  ${explain(`<p>Electronic mail lets users exchange messages, and behind the scenes it relies on <strong>three major components</strong> working together: the <strong>User Agent</strong>, the <strong>Message Transfer Agent</strong>, and the <strong>Message Access Agent</strong>.</p>`)}
+
+  <div class="imgcard">
+    <svg viewBox="0 0 420 130">
+      <rect x="10" y="45" width="90" height="40" rx="8" fill="var(--rail)"/><text x="55" y="62" text-anchor="middle" font-size="9" fill="#fff">User Agent</text><text x="55" y="74" text-anchor="middle" font-size="8" fill="#fff">(compose/read)</text>
+      <line x1="100" y1="65" x2="150" y2="65" stroke="var(--ink)" stroke-width="2" marker-end="url(#arrE)"/>
+      <rect x="150" y="45" width="120" height="40" rx="8" fill="var(--spark)"/><text x="210" y="62" text-anchor="middle" font-size="9" fill="#fff">Message Transfer Agent</text><text x="210" y="74" text-anchor="middle" font-size="8" fill="#fff">SMTP — a PUSH protocol</text>
+      <line x1="270" y1="65" x2="320" y2="65" stroke="var(--ink)" stroke-width="2" marker-end="url(#arrE)"/>
+      <rect x="320" y="45" width="90" height="40" rx="8" fill="var(--volt)"/><text x="365" y="62" text-anchor="middle" font-size="9">Message Access</text><text x="365" y="74" text-anchor="middle" font-size="8">Agent (POP3/IMAP4)</text>
+      <defs><marker id="arrE" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--ink)"/></marker></defs>
+      <text x="55" y="105" text-anchor="middle" font-size="8" fill="var(--ink-soft)">Sender composes</text>
+      <text x="210" y="105" text-anchor="middle" font-size="8" fill="var(--ink-soft)">Server-to-server transfer (PUSH)</text>
+      <text x="365" y="105" text-anchor="middle" font-size="8" fill="var(--ink-soft)">Receiver PULLS mail down</text>
+    </svg>
+    <p class="imgcaption">The overall path a message takes — sending is a PUSH all the way to the recipient's mail server, then the recipient's own device PULLS it down using a Message Access Agent.</p>
+  </div>
+
+  <h3>Mailboxes: Inbox &amp; Outbox</h3>
+  <div class="chiprow">
+    <span class="chip">📥 Inbox — stores mail that has arrived, waiting to be read</span>
+    <span class="chip">📤 Outbox — stores mail waiting to be sent out</span>
+  </div>
+
+  <h3 style="margin-top:20px;">1️⃣ The User Agent (UA)</h3>
+  <p>This is the software package that makes sending and receiving mail easy — its core functions are <strong>Composing</strong>, <strong>Reading</strong>, <strong>Replying</strong>, <strong>Forwarding</strong> messages, and <strong>Handling Mailboxes</strong>. There are two types:</p>
+  <div class="flow-grid">
+    <div class="flow-card"><h4>⌨️ Command-Driven</h4><p style="font-size:14.5px;">Controlled entirely by typed commands — older style, but still used on some systems.</p></div>
+    <div class="flow-card"><h4>🖱️ GUI-Based</h4><p style="font-size:14.5px;">A modern graphical interface with menus, buttons and icons — what almost everyone uses today (Gmail, Outlook, etc).</p></div>
+  </div>
+  <p style="margin-top:12px;">A message the UA sends has two parts: an <strong>envelope</strong> (addressing/routing info) and the actual <strong>message</strong> content. On the receiving side, the UA is triggered either by the user or by a timer, and it informs the user of new mail and displays a summary list to read from.</p>
+
+  <h3 style="margin-top:20px;">Email Addresses — Two Parts</h3>
+  <div class="chiprow">
+    <span class="chip">👤 Local Part — a unique identifier chosen by the user or assigned by the provider; tells the mail server WHICH mailbox to deliver to</span>
+    <span class="chip">🏢 Domain Name — identifies the mail server, organisation, or provider, and often reveals the organisation's type or country</span>
+  </div>
+  <p style="margin-top:8px;">A <strong>Mailing List</strong> is essentially an <strong>alias</strong> — one address that actually fans a message out to many recipients.</p>
+
+  <h3 style="margin-top:20px;">2️⃣ Message Transfer Agent (MTA) — SMTP</h3>
+  <p><strong>SMTP (Simple Mail Transfer Protocol)</strong> is the protocol that actually does the mail transfer — and it's a <strong>PUSH protocol</strong>: the sending server pushes mail out to the receiving server, it's never pulled.</p>
+  <p>Commands are sent client→server in the format <code>Keyword: argument(s)</code>, each ending in CRLF. There are 14 SMTP commands in total — the first 5 are mandatory, the next few are commonly used/recommended, and the rest are rarely used. Responses come back server→client as a 3-digit code plus optional text — just like FTP's response codes.</p>
+  <p>Mail transfer under SMTP happens in <strong>3 phases</strong>: <strong>Connection Establishment</strong>, <strong>Mail Transfer</strong>, and <strong>Connection Termination</strong>.</p>
+
+  <h3 style="margin-top:20px;">3️⃣ Message Access Agent (MAA) — POP3 &amp; IMAP4</h3>
+  <p>SMTP can push mail as far as the recipient's mail SERVER — but it can't pull it onto the recipient's own device. That job belongs to a <strong>PULL protocol</strong>, and there are two common choices:</p>
+
+  <div class="tabbar" id="mailTabs">
+    <button class="tabbtn active" data-tab="pop3">📪 POP3</button>
+    <button class="tabbtn" data-tab="imap4">📬 IMAP4</button>
+  </div>
+  <div class="tabpanel active" data-tab="pop3">
+    <div class="card">
+      <p><strong>Post Office Protocol, version 3</strong> — simple client software on the recipient's computer talks to a POP3 server on the mail server. It works in one of two modes:</p>
+      <div class="chiprow">
+        <span class="chip">🗑️ Delete Mode — downloads mail, then removes it from the server (mail only exists locally now — not visible from any other device)</span>
+        <span class="chip">📌 Keep Mode — downloads mail but keeps a copy on the server too (multi-device access, but not fully synchronised)</span>
+      </div>
+    </div>
+  </div>
+  <div class="tabpanel" data-tab="imap4">
+    <div class="card">
+      <p><strong>Internet Mail Access Protocol, version 4</strong> — more effective and feature-rich than POP3:</p>
+      <ul style="padding-left:20px; line-height:1.9;">
+        <li>Check a message's headers before deciding to download it</li>
+        <li>Search a message's content for a specific string before downloading</li>
+        <li>Download only PART of a message</li>
+        <li>Create, delete, or rename mailboxes right on the server</li>
+        <li>Create a whole folder hierarchy on the server for organizing mail</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="imgcard">
+    <svg viewBox="0 0 400 100">
+      <text x="100" y="15" text-anchor="middle" font-size="10" font-weight="700" fill="var(--rail)">POP3</text>
+      <rect x="20" y="25" width="160" height="20" fill="var(--rail)"/><text x="100" y="39" text-anchor="middle" font-size="8" fill="#fff">Mail downloaded → stored locally</text>
+      <rect x="20" y="50" width="160" height="20" fill="var(--rail)"/><text x="100" y="64" text-anchor="middle" font-size="8" fill="#fff">Usually removed from server</text>
+      <line x1="200" y1="0" x2="200" y2="100" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="300" y="15" text-anchor="middle" font-size="10" font-weight="700" fill="var(--spark-dark)">IMAP4</text>
+      <rect x="220" y="25" width="160" height="20" fill="var(--spark)"/><text x="300" y="39" text-anchor="middle" font-size="8" fill="#fff">Mail stays ON the server</text>
+      <rect x="220" y="50" width="160" height="20" fill="var(--spark)"/><text x="300" y="64" text-anchor="middle" font-size="8" fill="#fff">Synced access across ALL devices</text>
+    </svg>
+    <p class="imgcaption">The core trade-off: POP3 = local, offline copies (server usually cleared). IMAP4 = mail lives on the server, kept in sync everywhere you check it.</p>
+  </div>
+
+  <h3 style="margin-top:20px;">MIME — sending more than plain text</h3>
+  <p>Plain SMTP was designed only for 7-bit ASCII text. <strong>MIME (Multipurpose Internet Mail Extensions)</strong> is a supplementary protocol that lets non-ASCII data — images, audio, video, attachments — travel through ordinary email, by adding extra headers:</p>
+  <div class="chiprow">
+    <span class="chip"><code>Content-Type</code> — the type of data in the message, e.g. <code>image/jpeg</code></span>
+    <span class="chip"><code>Content-Transfer-Encoding</code> — how the message is encoded into 0s and 1s for transport</span>
+    <span class="chip"><code>Content-Id</code> — uniquely identifies the whole message in a multi-message environment</span>
+    <span class="chip"><code>Content-Description</code> — says whether the body is an image, audio, or video</span>
+  </div>
+
+  <h3 style="margin-top:20px;">Web-Based Mail</h3>
+  <p>When you check mail through a browser (Gmail, Outlook.com, etc.), THREE different protocols are quietly at work across the journey:</p>
+  <ol style="padding-left:20px; line-height:1.9;">
+    <li><strong>HTTP</strong> — between your browser and your own mail server (composing/reading in the browser)</li>
+    <li><strong>SMTP</strong> — between the sending mail server and the receiving mail server</li>
+    <li><strong>HTTP</strong> again — between the receiving mail server and you, the receiver</li>
+  </ol>
+
+  ${remember(["3 major components: User Agent (compose/read) · Message Transfer Agent/SMTP (PUSH) · Message Access Agent/POP3-IMAP4 (PULL)","Email address = Local Part (mailbox identifier) + Domain Name (server/organisation)","SMTP transfers mail server-to-server; POP3/IMAP4 pull it onto YOUR device","POP3 Delete Mode = local only · POP3 Keep Mode = local + server copy · IMAP4 = stays synced on the server","MIME lets non-ASCII data (images/audio/video) travel through ordinary email","Web-based mail quietly uses HTTP + SMTP + HTTP across its full journey"])}
+`;
+
+CONTENT.wirelessbasics = `
+  ${explain(`<p><strong>Wireless communication</strong> is the transmission of information over a distance without using wires, cables, or any physical conductor — a broad term covering every way of connecting and communicating without a physical link.</p>`)}
+
+  <h3>The Building Blocks of a Wireless System</h3>
+  <div class="diagram">
+    <div class="node clickable" data-pop="Modulates/encodes the baseband (original) signal onto a high-frequency carrier wave, so it can be radiated and travel efficiently through the air, making efficient use of the available RF spectrum.">
+      <span class="emoji">📤</span>Transmitter
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Receives modulated signals and reverses whatever the transmitter did, to recover the original signal. Its antenna picks up EM waves from many sources across a broad frequency range.">
+      <span class="emoji">📥</span>Receiver
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="On the transmit side, converts an electrical signal into a propagating electromagnetic (RF) wave. On the receive side, does the reverse — converts the RF wave back into an electrical signal. A Transceiver = a co-located transmitter + receiver sharing one antenna, for full-duplex communication.">
+      <span class="emoji">📡</span>Antenna
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Present in every wireless transmitter and receiver. Rejects interfering signals from outside the system's operating frequency band, and rejects unwanted noise generated by the amplifiers.">
+      <span class="emoji">🚧</span>Filters
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Boosts the strength of a signal. Specified by its power gain AND its noise figure (how much extra noise it adds) — this matters most at the receiver's very first amplifier, which should have the lowest possible noise figure.">
+      <span class="emoji">📈</span>Amplifiers
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Used for frequency conversion at both transmitter and receiver — combining/modulating a carrier waveform with the baseband frequency, so the signal can be radiated more easily, with less noise and attenuation, and a longer, higher-quality transmission range.">
+      <span class="emoji">🔀</span>Mixers
+      <div class="node-pop"></div>
+    </div>
+  </div>
+
+  ${analogy(`<p>Think of a mixer like gearing up on a bicycle before a long ride — pedalling directly at low "gear" (low frequency) works, but it's inefficient over distance. Shifting to a higher "gear" (higher carrier frequency) via the mixer lets the same effort (signal) travel further, faster, and with less wobble (noise/attenuation).</p>`)}
+
+  <h3 style="margin-top:20px;">Wireless Networking Standards</h3>
+  <p>The most widely accepted family of wireless LAN standards is <strong>IEEE 802.11</strong>, with several variants refined over the years:</p>
+  <div class="imgcard">
+    <svg viewBox="0 0 400 130">
+      <rect x="10" y="10" width="60" height="24" fill="var(--rail)"/><text x="40" y="26" text-anchor="middle" font-size="9" fill="#fff">802.11a</text>
+      <rect x="80" y="10" width="60" height="24" fill="var(--rail)"/><text x="110" y="26" text-anchor="middle" font-size="9" fill="#fff">802.11b</text>
+      <rect x="150" y="10" width="60" height="24" fill="var(--spark)"/><text x="180" y="26" text-anchor="middle" font-size="9" fill="#fff">802.11g</text>
+      <rect x="220" y="10" width="60" height="24" fill="var(--spark)"/><text x="250" y="26" text-anchor="middle" font-size="9" fill="#fff">802.11n</text>
+      <rect x="290" y="10" width="50" height="24" fill="var(--volt)"/><text x="315" y="26" text-anchor="middle" font-size="9">802.11ac</text>
+      <rect x="345" y="10" width="45" height="24" fill="var(--volt)"/><text x="367" y="26" text-anchor="middle" font-size="8">802.11ax</text>
+      <text x="200" y="55" text-anchor="middle" font-size="9" fill="var(--ink-soft)">Each generation has increased maximum speed, range, and efficiency</text>
+      <text x="200" y="70" text-anchor="middle" font-size="9" fill="var(--ink-soft)">— this whole family is what most people simply call "Wi-Fi".</text>
+    </svg>
+    <p class="imgcaption">A simplified original comparison — for exact speed/frequency figures, standards bodies and vendor cheat-sheets publish detailed tables (not reproduced here, since those exact charts are third-party copyrighted material).</p>
+  </div>
+
+  ${remember(["Wireless communication = sending information through the air, with no physical conductor","Transmitter modulates data onto a carrier; Receiver reverses this to recover the data","Antenna converts electrical ↔ electromagnetic (RF) signals; a Transceiver combines Tx+Rx on one antenna","Filters reject unwanted out-of-band signals and noise; Amplifiers boost signal strength (watch the noise figure!)","Mixers shift signals to a higher, more efficient frequency for transmission","IEEE 802.11 (a/b/g/n/ac/ax) is the widely-used family of Wi-Fi standards"])}
+`;
+
+CONTENT.bluetooth = `
+  ${explain(`<p><strong>Bluetooth</strong> is a wireless technology that implements a <strong>PAN (Personal Area Network)</strong> — it interconnects computerized devices, supporting up to <strong>255 devices</strong> within roughly <strong>10 metres</strong> of each other.</p>`)}
+
+  <h3>Two Kinds of Bluetooth Networks</h3>
+  <div class="tabbar" id="btTabs">
+    <button class="tabbtn active" data-tab="pico">🔵 Piconet</button>
+    <button class="tabbtn" data-tab="scatter">🔗 Scatternet</button>
+  </div>
+  <div class="tabpanel active" data-tab="pico">
+    <div class="card">
+      <p>A Bluetooth network is literally called a "small net", or <strong>Piconet</strong> — it can have up to <strong>8 stations</strong>: exactly ONE <strong>Primary</strong> and the rest are <strong>Secondaries</strong>. A piconet can only ever have one primary.</p>
+      <p>Communication can flow one-to-one (primary ↔ one secondary) or one-to-many (primary ↔ several secondaries at once). Secondary stations can be in one of two states:</p>
+      <div class="chiprow">
+        <span class="chip">🟢 Active State — actively connected and communicating with the primary</span>
+        <span class="chip">🅿️ Parked State — still officially part of the piconet, but NOT currently communicating</span>
+      </div>
+      <div class="imgcard" style="margin-top:14px;">
+        <svg viewBox="0 0 300 160">
+          <circle cx="150" cy="80" r="20" fill="var(--rail)"/><text x="150" y="85" text-anchor="middle" font-size="9" fill="#fff">Primary</text>
+          <circle cx="60" cy="30" r="14" fill="var(--spark)"/><text x="60" y="34" text-anchor="middle" font-size="7" fill="#fff">Sec</text>
+          <circle cx="240" cy="30" r="14" fill="var(--spark)"/><text x="240" y="34" text-anchor="middle" font-size="7" fill="#fff">Sec</text>
+          <circle cx="60" cy="130" r="14" fill="var(--spark)"/><text x="60" y="134" text-anchor="middle" font-size="7" fill="#fff">Sec</text>
+          <circle cx="240" cy="130" r="14" fill="var(--volt)"/><text x="240" y="134" text-anchor="middle" font-size="7">Sec (parked)</text>
+          <line x1="150" y1="80" x2="60" y2="30" stroke="var(--line)" stroke-width="2"/>
+          <line x1="150" y1="80" x2="240" y2="30" stroke="var(--line)" stroke-width="2"/>
+          <line x1="150" y1="80" x2="60" y2="130" stroke="var(--line)" stroke-width="2"/>
+          <line x1="150" y1="80" x2="240" y2="130" stroke="var(--line)" stroke-width="2" stroke-dasharray="4 3"/>
+        </svg>
+        <p class="imgcaption">One Primary at the centre, up to 7 Secondaries around it (solid lines = active; dashed line = parked but still part of the piconet).</p>
+      </div>
+    </div>
+  </div>
+  <div class="tabpanel" data-tab="scatter">
+    <div class="card">
+      <p>A <strong>Scatternet</strong> is simply several piconets combined. A secondary station in ONE piconet is allowed to act as the <strong>primary of another</strong> piconet — meaning one single station can belong to two piconets at once, bridging them together.</p>
+      <div class="imgcard" style="margin-top:14px;">
+        <svg viewBox="0 0 320 130">
+          <circle cx="90" cy="60" r="18" fill="var(--rail)"/><text x="90" y="64" text-anchor="middle" font-size="8" fill="#fff">Primary A</text>
+          <circle cx="30" cy="20" r="12" fill="var(--spark)"/>
+          <circle cx="30" cy="100" r="12" fill="var(--spark)"/>
+          <circle cx="160" cy="30" r="14" fill="var(--volt)"/><text x="160" y="34" text-anchor="middle" font-size="7">Bridge</text>
+          <circle cx="240" cy="60" r="18" fill="var(--rail-bright)"/><text x="240" y="64" text-anchor="middle" font-size="8" fill="#fff">Primary B</text>
+          <circle cx="290" cy="20" r="12" fill="var(--spark)"/>
+          <circle cx="290" cy="100" r="12" fill="var(--spark)"/>
+          <line x1="90" y1="60" x2="30" y2="20" stroke="var(--line)" stroke-width="2"/>
+          <line x1="90" y1="60" x2="30" y2="100" stroke="var(--line)" stroke-width="2"/>
+          <line x1="90" y1="60" x2="160" y2="30" stroke="var(--line)" stroke-width="2"/>
+          <line x1="240" y1="60" x2="160" y2="30" stroke="var(--line)" stroke-width="2"/>
+          <line x1="240" y1="60" x2="290" y2="20" stroke="var(--line)" stroke-width="2"/>
+          <line x1="240" y1="60" x2="290" y2="100" stroke="var(--line)" stroke-width="2"/>
+        </svg>
+        <p class="imgcaption">The gold "Bridge" node is a secondary in Piconet A that also participates in Piconet B — linking the two piconets into one scatternet.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;">The Bluetooth Protocol Stack</h3>
+  <p>Bluetooth's functions are spread across several layers, from the physical radio all the way up to the user-facing application:</p>
+  <div class="imgcard">
+    <svg viewBox="0 0 400 210">
+      <rect x="130" y="5" width="140" height="22" fill="var(--rail)"/><text x="200" y="20" text-anchor="middle" font-size="9" fill="#fff">Application</text>
+      <rect x="130" y="30" width="140" height="22" fill="var(--rail)"/><text x="200" y="45" text-anchor="middle" font-size="9" fill="#fff">WAP &amp; OBEX</text>
+      <rect x="130" y="55" width="140" height="22" fill="var(--spark)"/><text x="200" y="70" text-anchor="middle" font-size="9" fill="#fff">RFCOMM</text>
+      <rect x="130" y="80" width="140" height="22" fill="var(--spark)"/><text x="200" y="95" text-anchor="middle" font-size="9" fill="#fff">TCS (Telephony Control)</text>
+      <rect x="130" y="105" width="140" height="24" fill="var(--volt)"/><text x="200" y="118" text-anchor="middle" font-size="9">L2CAP</text><text x="200" y="128" text-anchor="middle" font-size="7">"heart of the stack"</text>
+      <rect x="130" y="132" width="140" height="22" fill="var(--rail)"/><text x="200" y="147" text-anchor="middle" font-size="9" fill="#fff">Link Management Protocol</text>
+      <rect x="130" y="157" width="140" height="22" fill="var(--rail-bright)"/><text x="200" y="172" text-anchor="middle" font-size="9" fill="#fff">Baseband</text>
+      <rect x="130" y="182" width="140" height="22" fill="var(--rail-bright)"/><text x="200" y="197" text-anchor="middle" font-size="9" fill="#fff">Radio Layer</text>
+      <text x="285" y="45" font-size="8" fill="var(--ink-soft)">← Services Discovery Protocol (SDP)</text>
+      <text x="285" y="45" font-size="8" fill="transparent">.</text>
+      <line x1="280" y1="43" x2="130" y2="43" stroke="var(--ink-soft)" stroke-width="0" />
+    </svg>
+    <p class="imgcaption">The Bluetooth protocol stack, radio layer at the bottom to application at the top. SDP (Services Discovery Protocol) sits alongside these layers, letting devices discover what services each other offer.</p>
+  </div>
+
+  <div class="diagram">
+    <div class="node clickable" data-pop="Handles modulation/demodulation of data into radio-frequency signals, and defines the physical characteristics of the Bluetooth transceiver.">
+      <span class="emoji">📻</span>Radio Layer
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Structures signals into packets, and performs connection establishment within a piconet.">
+      <span class="emoji">🧱</span>Baseband
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Manages already-established links, including authentication, encryption, and other security processes.">
+      <span class="emoji">🔐</span>LMP
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Called the 'heart of the stack' — allows communication between the upper and lower layers, packaging upper-layer data into the form the lower layers expect. Also handles segmentation and multiplexing.">
+      <span class="emoji">❤️</span>L2CAP
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Provides telephony services — e.g. setting up and managing a voice call between Bluetooth devices, like controlling a Bluetooth headset or a hands-free car kit.">
+      <span class="emoji">📞</span>TCS
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Lets a device discover what services other Bluetooth-enabled devices offer — e.g. your phone checking whether a headset supports hands-free audio.">
+      <span class="emoji">🔍</span>SDP
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="A transport protocol on top of L2CAP, providing a serial-port-like interface used by the Application layer's WAP and OBEX.">
+      <span class="emoji">🔌</span>RFCOMM
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="WAP (Wireless Application Protocol) delivers internet content to wireless devices like phones, PDAs, and handhelds. OBEX (Object Exchange) is a protocol for exchanging binary objects — files, contacts, calendar entries — over a short-range wireless link like Bluetooth.">
+      <span class="emoji">📲</span>WAP &amp; OBEX
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Where the user actually interacts with the Bluetooth application itself.">
+      <span class="emoji">🙋</span>Application
+      <div class="node-pop"></div>
+    </div>
+  </div>
+
+  ${remember(["Bluetooth = wireless PAN, up to 255 devices within ~10 metres","Piconet = up to 8 stations, 1 Primary + up to 7 Secondaries (Active or Parked)","Scatternet = combined piconets, linked by a station that is secondary in one and primary in another","L2CAP is the 'heart of the stack' — packages data between upper and lower layers","TCS = telephony (calls) · SDP = service discovery · RFCOMM = serial-style transport · WAP/OBEX = content delivery & object exchange"])}
+`;
+
+CONTENT.wimax = `
+  ${explain(`<p><strong>WiMAX</strong> stands for <strong>Worldwide Interoperability for Microwave Access</strong>. It's based on the <strong>IEEE 802.16</strong> standard, also known as <strong>Wireless MAN</strong> (Metropolitan Area Network) — designed to cover a much larger area than Wi-Fi or Bluetooth.</p>`)}
+
+  <p>WiMAX itself is a non-profit organisation whose job is to promote the adoption of WiMAX-compatible products and services, and to ensure they interoperate smoothly with each other.</p>
+
+  <h3 style="margin-top:16px;">WiMAX's Two Main Components</h3>
+  <div class="flow-grid">
+    <div class="flow-card">
+      <h4>📡 Base Station</h4>
+      <p style="font-size:14.5px;">Broadcasts signals over a wide area, and is connected to the public network via fibre optics, radio links, or other high-speed point-to-point connections. It can theoretically cover up to a <strong>50 km radius</strong>, though real-world geography usually limits practical coverage to around <strong>10 km</strong>.</p>
+    </div>
+    <div class="flow-card">
+      <h4>📶 Receiver</h4>
+      <p style="font-size:14.5px;">Receives the signal from the base station — conceptually similar to how a Wi-Fi receiver works, but WiMAX allows communication over much longer distances.</p>
+    </div>
+  </div>
+
+  <div class="imgcard">
+    <svg viewBox="0 0 400 140">
+      <circle cx="200" cy="70" r="60" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <rect x="180" y="55" width="40" height="30" rx="6" fill="var(--rail)"/><text x="200" y="74" text-anchor="middle" font-size="8" fill="#fff">Base Station</text>
+      <circle cx="90" cy="30" r="10" fill="var(--spark)"/><text x="90" y="15" text-anchor="middle" font-size="7" fill="var(--ink-soft)">Home</text>
+      <circle cx="310" cy="30" r="10" fill="var(--spark)"/><text x="310" y="15" text-anchor="middle" font-size="7" fill="var(--ink-soft)">Office</text>
+      <circle cx="90" cy="115" r="10" fill="var(--spark)"/><text x="90" y="133" text-anchor="middle" font-size="7" fill="var(--ink-soft)">Rural site</text>
+      <circle cx="310" cy="115" r="10" fill="var(--spark)"/><text x="310" y="133" text-anchor="middle" font-size="7" fill="var(--ink-soft)">Business</text>
+    </svg>
+    <p class="imgcaption">One WiMAX base station can cover an entire neighbourhood or town, unlike Wi-Fi's much shorter range.</p>
+  </div>
+
+  ${analogy(`<p>If Wi-Fi is like a single lamp lighting one room, WiMAX is like a tower floodlight covering a whole stadium — same basic idea (broadcasting a signal that receivers pick up), just built for a much bigger area.</p>`)}
+
+  ${remember(["WiMAX = Worldwide Interoperability for Microwave Access, based on IEEE 802.16 (Wireless MAN)","Provides much wider-area coverage than Wi-Fi or Bluetooth","Base Station broadcasts and connects to the public network (fibre/radio links); theoretical range up to 50 km, practical range often ~10 km","Receiver picks up the signal, similar in concept to a Wi-Fi receiver but over longer distances"])}
+`;
+
+CONTENT.wpan = `
+  ${explain(`<p>Beyond Bluetooth, several other lightweight wireless protocols exist specifically for <strong>Personal Area Networks (PANs)</strong> — connecting small, often battery-powered devices like sensors, smart bulbs, and IoT gadgets.</p>`)}
+
+  <div class="diagram">
+    <div class="node clickable" data-pop="IEEE 802.15.4-based — a low-power, low-data-rate, close-proximity wireless ad hoc network. Uses: small low-power digital radios, home automation, medical device data collection, and other low-power/low-bandwidth small-scale projects. Pros: very low energy use, secure transmission, a common protocol across many smart-home devices. Cons: needs a central hub, and — since it's an open protocol — is more vulnerable to hackers.">
+      <span class="emoji">🐝</span>ZigBee
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="A wireless protocol mainly for residential/commercial building automation — a mesh network using low-energy radio waves, device-to-device. Allows wireless control of smart lights, security systems, thermostats, sensors, smart door locks, and garage door openers. Pros: secure transmission, low interference, compatible with a wide variety of devices. Cons: needs a central hub, has a max device limit per hub, and is a closed system.">
+      <span class="emoji">🌊</span>Z-Wave
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Established by Google Nest. Uses an actual IP network, which makes it much easier to communicate directly with Wi-Fi and cellular networks compared to protocols with their own separate addressing.">
+      <span class="emoji">🧵</span>Thread
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Designed and marketed by the Bluetooth SIG. Aimed at newer applications like healthcare, fitness tracking, beacons, security, and home entertainment — prioritising very low power use over high throughput.">
+      <span class="emoji">🔷</span>BLE
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="IPv6 over Low-Power Wireless Personal Area Networks — a low-power wireless mesh network where EVERY node gets its own IPv6 address. Built on the idea that IP could (and should) apply even to the smallest devices, letting low-power/limited-processing devices join the IoT directly. Used in home automation, industrial monitoring, smart grid, and smart-home applications.">
+      <span class="emoji">6️⃣</span>6LoWPAN
+      <div class="node-pop"></div>
+    </div>
+    <div class="node clickable" data-pop="Routing Protocol for Low-Power and Lossy Networks — a routing protocol built for low-power, packet-loss-prone wireless networks. It's a PROACTIVE protocol based on distance vectors, operating over IEEE 802.15.4. Optimised for multi-hop and many-to-one communication, but it also supports one-to-one messages.">
+      <span class="emoji">🗺️</span>RPL
+      <div class="node-pop"></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;">Quick Comparison</h3>
+  <table style="width:100%; border-collapse:collapse; margin:10px 0; font-size:13.5px;">
+    <tr style="background:var(--bg);"><th style="text-align:left; padding:6px; border:1px solid var(--line);">Protocol</th><th style="text-align:left; padding:6px; border:1px solid var(--line);">Best known for</th><th style="text-align:left; padding:6px; border:1px solid var(--line);">Needs a hub?</th></tr>
+    <tr><td style="padding:6px; border:1px solid var(--line);">ZigBee</td><td style="padding:6px; border:1px solid var(--line);">Home automation, medical data collection</td><td style="padding:6px; border:1px solid var(--line);">Yes</td></tr>
+    <tr><td style="padding:6px; border:1px solid var(--line);">Z-Wave</td><td style="padding:6px; border:1px solid var(--line);">Smart lights, locks, thermostats</td><td style="padding:6px; border:1px solid var(--line);">Yes</td></tr>
+    <tr><td style="padding:6px; border:1px solid var(--line);">Thread</td><td style="padding:6px; border:1px solid var(--line);">IP-native smart-home mesh (Google Nest)</td><td style="padding:6px; border:1px solid var(--line);">No (uses IP directly)</td></tr>
+    <tr><td style="padding:6px; border:1px solid var(--line);">BLE</td><td style="padding:6px; border:1px solid var(--line);">Fitness trackers, beacons, healthcare</td><td style="padding:6px; border:1px solid var(--line);">No</td></tr>
+    <tr><td style="padding:6px; border:1px solid var(--line);">6LoWPAN</td><td style="padding:6px; border:1px solid var(--line);">Giving tiny IoT devices their own IPv6 address</td><td style="padding:6px; border:1px solid var(--line);">No</td></tr>
+    <tr><td style="padding:6px; border:1px solid var(--line);">RPL</td><td style="padding:6px; border:1px solid var(--line);">Routing for low-power, lossy mesh networks</td><td style="padding:6px; border:1px solid var(--line);">— (it's a routing protocol, not a network type)</td></tr>
+  </table>
+
+  ${mistake(`<p>Don't mix up 6LoWPAN and RPL! 6LoWPAN is about giving small devices an <strong>address</strong> (IPv6) so they can join the internet of things. RPL is about how packets actually find their <strong>route</strong> across such a low-power, lossy network. They're complementary, not competitors.</p>`)}
+
+  ${remember(["ZigBee & Z-Wave: low-power home-automation mesh networks, both typically need a central hub","Thread: IP-native mesh from Google Nest — talks to Wi-Fi/cellular more easily since it already speaks IP","BLE (Bluetooth Low Energy): built for very low power in fitness, healthcare, beacon applications","6LoWPAN: gives every small IoT device its own IPv6 address, directly","RPL: a proactive, distance-vector ROUTING protocol built for low-power, lossy 802.15.4 networks"])}
+`;
+
+/* ================= READ ALOUD (Text-to-Speech) ================= */
 const RA_FEMALE_INDIAN_NAMES = ["heera","veena","lekha","neerja","priya","raveena","kalpana","isha","aditi","sangeeta"];
 
+const RA = { chunks:[], idx:0, playing:false, rate:1, rates:[1, 1.25, 1.5, 0.75], voice:null };
+
 function raScoreVoice(v){
-  const name = v.name.toLowerCase();
-  const lang = (v.lang || "").toLowerCase();
   let score = 0;
-  if(lang === "en-in") score += 50;                                   // Indian English locale
+  const lang = (v.lang||"").toLowerCase();
+  const name = (v.name||"").toLowerCase();
+  if(lang === "en-in") score += 50;
   else if(lang.startsWith("en-in")) score += 40;
-  if(RA_FEMALE_INDIAN_NAMES.some(n => name.includes(n))) score += 30; // known Indian female voice name
-  if(name.includes("india")) score += 15;                             // name explicitly says India
+  if(RA_FEMALE_INDIAN_NAMES.some(n=>name.includes(n))) score += 30;
+  if(name.includes("india")) score += 15;
   if(name.includes("female")) score += 8;
-  if(lang === "hi-in") score += 5;                                    // Hindi as a distant fallback
-  if(name.includes("male") && !name.includes("female")) score -= 20;  // avoid obviously-male voices
+  if(lang === "hi-in") score += 5;
+  if(name.includes("male") && !name.includes("female")) score -= 20;
   return score;
 }
 
 function raPickVoice(){
-  if(!window.speechSynthesis) return null;
-  const voices = speechSynthesis.getVoices();
-  if(!voices || voices.length === 0) return null;
-  let best = null, bestScore = -1;
+  if(!window.speechSynthesis) return;
+  const voices = speechSynthesis.getVoices() || [];
+  if(!voices.length) return;
+  let best = null, bestScore = -Infinity;
   voices.forEach(v=>{
     const s = raScoreVoice(v);
     if(s > bestScore){ bestScore = s; best = v; }
   });
-  // Only actually use a pick if it scored above "no signal at all"
-  RA.voice = bestScore > 0 ? best : null;
-  return RA.voice;
+  RA.voice = (bestScore > 0) ? best : null;
 }
 
 if(window.speechSynthesis){
-  raPickVoice();
   speechSynthesis.addEventListener("voiceschanged", raPickVoice);
-  // Some browsers report an empty voice list right after page load and never
-  // fire voiceschanged reliably — a couple of delayed re-checks catch that.
   setTimeout(raPickVoice, 400);
   setTimeout(raPickVoice, 1200);
+  raPickVoice();
 }
 
 function raExtractText(stationEl){
   const clone = stationEl.cloneNode(true);
-  clone.querySelectorAll(".code-block, .navfoot, .demo-tabs, .demo-label, .quiz-opts, .scorebar, .eyebrow").forEach(n=>n.remove());
-  const raw = clone.innerText || "";
-  return raw.split(/(?<=[.!?])\s+|\n+/).map(s=>s.trim()).filter(s=>s.length>1);
+  clone.querySelectorAll(".code-block, .navfoot, .demo-tabs, .demo-label, .quiz-opts, .scorebar, .eyebrow").forEach(el=>el.remove());
+  const text = clone.innerText || clone.textContent || "";
+  return text.split(/(?<=[.!?])\s+|\n+/).map(s=>s.trim()).filter(s=>s.length>0);
 }
 
 function raUpdateStatus(){
   const statusEl = document.getElementById("raStatus");
   if(!statusEl) return;
-  if(RA.chunks.length===0){ statusEl.textContent = "Ready to read this page aloud"; return; }
-  const voiceNote = RA.voice ? ` · Voice: ${RA.voice.name}` : " · Voice: this device's default (no Indian voice found)";
-  statusEl.textContent = `Reading part ${Math.min(RA.idx+1, RA.chunks.length)} of ${RA.chunks.length}${voiceNote}`;
+  if(!RA.chunks.length){ statusEl.textContent = "Nothing to read here."; return; }
+  const voiceInfo = RA.voice ? `Voice: ${RA.voice.name}` : "Voice: this device's default (no Indian voice found)";
+  statusEl.textContent = `Reading part ${RA.idx+1} of ${RA.chunks.length} · ${voiceInfo}`;
 }
 
 function raSpeakNext(){
+  if(!window.speechSynthesis) return;
   if(RA.idx >= RA.chunks.length){ raStopReading(); return; }
   const utter = new SpeechSynthesisUtterance(RA.chunks[RA.idx]);
   utter.rate = RA.rate;
-  if(RA.voice){
-    try{ utter.voice = RA.voice; } catch(e){ /* stale/invalid voice reference — just use the browser default */ }
-  }
+  try{ if(RA.voice) utter.voice = RA.voice; }catch(e){}
   utter.onend = ()=>{
     if(!RA.playing) return;
     RA.idx++;
     raUpdateStatus();
     raSpeakNext();
   };
-  utter.onerror = ()=>{ if(RA.playing){ RA.idx++; raSpeakNext(); } };
+  utter.onerror = ()=>{ RA.idx++; if(RA.playing) raSpeakNext(); };
   speechSynthesis.speak(utter);
 }
 
+function raIsReadableStation(i){
+  const s = STATIONS[i];
+  return !!s && s.kind === "topic";
+}
+
+function raRefreshButtonForStation(i){
+  const btn = document.getElementById("readAloudBtn");
+  if(!btn || !window.speechSynthesis) return;
+  if(raIsReadableStation(i)){
+    btn.disabled = false;
+    btn.textContent = "🔊 Listen to this page";
+    btn.title = "";
+  } else {
+    btn.disabled = true;
+    btn.textContent = "🔊 Listen to this page";
+    btn.title = "Read Aloud covers unit topic pages — not this page.";
+  }
+}
+
 function raStartReading(){
+  if(!window.speechSynthesis) return;
+  if(!raIsReadableStation(current)) return;
+  raPickVoice();
+  speechSynthesis.cancel();
   const stationEl = document.getElementById(`station-${current}`);
   if(!stationEl) return;
-  speechSynthesis.cancel();
-  raPickVoice();
   RA.chunks = raExtractText(stationEl);
   RA.idx = 0;
   RA.playing = true;
-  document.getElementById("readAloudPlayer").classList.add("show");
-  document.getElementById("raPlayPause").textContent = "⏸️";
+  document.getElementById("readAloudPlayer")?.classList.add("show");
+  document.getElementById("raPlayPause").textContent = "⏸️ Pause";
   raUpdateStatus();
-  if(RA.chunks.length===0){
-    document.getElementById("raStatus").textContent = "Nothing to read on this page.";
-    RA.playing = false;
-    return;
-  }
   raSpeakNext();
 }
 
 function raPause(){
+  if(!window.speechSynthesis) return;
   RA.playing = false;
   speechSynthesis.pause();
-  const btn = document.getElementById("raPlayPause");
-  if(btn) btn.textContent = "▶️";
+  document.getElementById("raPlayPause").textContent = "▶️ Resume";
 }
 
 function raResume(){
+  if(!window.speechSynthesis) return;
   RA.playing = true;
-  const btn = document.getElementById("raPlayPause");
-  if(btn) btn.textContent = "⏸️";
-  if(speechSynthesis.paused){ speechSynthesis.resume(); }
-  else { raSpeakNext(); }
+  speechSynthesis.resume();
+  document.getElementById("raPlayPause").textContent = "⏸️ Pause";
 }
 
 function raStopReading(){
+  if(window.speechSynthesis) speechSynthesis.cancel();
   RA.playing = false;
   RA.idx = 0;
-  RA.chunks = [];
-  speechSynthesis.cancel();
   document.getElementById("readAloudPlayer")?.classList.remove("show");
-  const btn = document.getElementById("raPlayPause");
-  if(btn) btn.textContent = "▶️";
-  raUpdateStatus();
 }
 
-if(window.speechSynthesis){
-  document.getElementById("readAloudBtn")?.addEventListener("click",()=>{
-    const playerShown = document.getElementById("readAloudPlayer").classList.contains("show");
-    if(!playerShown){ raStartReading(); }
-    else if(RA.playing){ raPause(); }
-    else { raResume(); }
-  });
-  document.getElementById("raPlayPause")?.addEventListener("click",()=>{
-    if(RA.playing) raPause(); else raResume();
-  });
-  document.getElementById("raStop")?.addEventListener("click", raStopReading);
-  document.getElementById("raSpeed")?.addEventListener("click",()=>{
-    const curIdx = RA.rates.indexOf(RA.rate);
-    RA.rate = RA.rates[(curIdx+1) % RA.rates.length];
-    document.getElementById("raSpeed").textContent = RA.rate + "×";
-  });
-} else {
-  const btn = document.getElementById("readAloudBtn");
-  if(btn){ btn.disabled = true; btn.innerHTML = "🔇 <span>Read aloud not supported here</span>"; }
+const readAloudBtn = document.getElementById("readAloudBtn");
+if(readAloudBtn){
+  if(!window.speechSynthesis){
+    readAloudBtn.textContent = "🔇 Read aloud not supported here";
+    readAloudBtn.disabled = true;
+  } else {
+    readAloudBtn.addEventListener("click", ()=>{
+      raStartReading();
+    });
+  }
 }
+document.getElementById("raPlayPause")?.addEventListener("click", ()=>{
+  if(RA.playing) raPause(); else raResume();
+});
+document.getElementById("raStop")?.addEventListener("click", raStopReading);
+document.getElementById("raSpeed")?.addEventListener("click", (e)=>{
+  const curIdx = RA.rates.indexOf(RA.rate);
+  RA.rate = RA.rates[(curIdx+1) % RA.rates.length];
+  e.target.textContent = `${RA.rate}x`;
+  if(RA.playing){
+    speechSynthesis.cancel();
+    raSpeakNext();
+  }
+});
 
 buildNav();
 render();
